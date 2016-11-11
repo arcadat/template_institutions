@@ -182,3 +182,8 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .slider .indicators .indicator-item.active {
   background-color: <?php echo $color_i; ?>;
 }
+
+.fc {
+  color: <?php echo $color_i; ?>;
+}
+
