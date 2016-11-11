@@ -205,7 +205,7 @@ jQuery(function($){
 	/* 10. BOTTOM TO UP
 	/* ----------------------------------------------------------- */
 
-	jQuery(".up-btn").click(function() {
+	jQuery(".up-btn, .brand-logo").click(function() {
     jQuery('html,body').animate({
         scrollTop: $("#header").offset().top},
         'slow');
