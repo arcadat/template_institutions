@@ -15,6 +15,9 @@
       <link href="css/pro-bars.css" rel="stylesheet" type="text/css" media="all" />
       <!-- Owl Carousel -->
       <link rel="stylesheet" href="css/owl.carousel.css">
+      <!-- Owl Carousel -->
+      <link href='css/fullcalendar.min.css' rel='stylesheet' />
+      <link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
       <!-- Default Theme CSS File-->
       <link id="switcher" href="css/theme.css.php?color_i=<?php echo urlencode($main_data->color_i); ?>" type="text/css" rel="stylesheet" media="screen,projection"/>
       <!-- Main css File -->
@@ -61,6 +64,7 @@
                   <li><a href="#about">Nosotros</a></li>
                   <li><a href="#resume">Historia</a></li>
                   <li><a href="#portfolio">Instalaciones</a></li>
+                  <li><a href="#calendar">Cronograma</a></li>
                   <li><a href="#footer">Contactenos</a></li>
                 </ul>
                 <!-- For Mobile View -->
@@ -68,6 +72,7 @@
                   <li><a href="#about">Nosotros</a></li>
                   <li><a href="#resume">Historia</a></li>
                   <li><a href="#portfolio">Instalaciones</a></li>
+                  <li><a href="#calendar">Cronograma</a></li>
                   <li><a href="#footer">Contactenos</a></li>
                 </ul>
                 <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
@@ -228,41 +233,21 @@
                   </div>
               </div>
           </section>
-          <!-- Start Facts -->
-          <section id="facts">
-            <div class="facts-overlay">
-              <div class="container">
-              <div class="row">
-                <div class="col s12">
-                  <div class="facts-inner">
-                    <div class="row">
-                      <div class="col s12 m4 l4">
-                        <div class="single-facts waves-effect waves-block waves-light">
-                          <i class="material-icons">work</i>
-                          <span class="counter">329</span>
-                          <span class="counter-text">Project Completed</span>
-                        </div>
-                      </div>
-                      <div class="col s12 m4 l4">
-                        <div class="single-facts waves-effect waves-block waves-light">
-                          <i class="material-icons">supervisor_account</i>
-                          <span class="counter">250</span>
-                          <span class="counter-text">Happy Clients</span>
-                        </div>
-                      </div>
-                      <div class="col s12 m4 l4">
-                        <div class="single-facts waves-effect waves-block waves-light">
-                          <i class="material-icons">redeem</i>
-                          <span class="counter">69</span>
-                          <span class="counter-text">Award Won</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+          <!-- Start Calendar -->
+          <section id="calendarioacademico">
+              <div class="portfolio-top">
+                <div class="container">
+                  <div class="portfolio-top-inner">
+                     <h2 class="title">Cronograma Académico</h2>
                 </div>
               </div>
-            </div>
-            </div>
+              </div>
+              <div class="portfolio-bottom">
+                  <div class="container">
+                    <div id='calendar'></div>
+                    <br>
+                  </div>
+              </div>
           </section>
           <!-- Start Footer -->
           <footer id="footer" role="contentinfo">
@@ -338,6 +323,10 @@
       <!-- counter -->
       <script src="js/waypoints.min.js"></script>
       <script src="js/jquery.counterup.min.js"></script>
+      <!-- FullCalendar -->
+      <script src='js/moment.min.js'></script>
+      <script src='js/fullcalendar.min.js'></script>
+      <script src='js/fullcalendar.locale.min.es.js'></script>
       <!-- Google Maps -->
       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6-_MBg2QXptawIOEdL7-k1doOfuYdm70"></script>
       <script src="js/gmaps.min.js"></script>
@@ -355,6 +344,9 @@
             .", ".ucfirst(strtolower($main_data->country_i));
             ?><br><br>Teléfonos: <font style="color: green"><?php echo $main_data->phone_i ?></font><br>Correo electrónico: <font style="color: <?php echo $main_data->color_i; ?>"><?php echo $main_data->email_i ?></font></p></div>';
           $(document).ready(function(){
+
+              $(".dropdown-button").dropdown();
+
               map = new GMaps({
                   el: '#mapa',
                   zoom: 15,
@@ -371,6 +363,15 @@
               });
               marker.infoWindow.open(map.map, marker);
               map.setCenter((latitud + 0.001), longitud);
+
+              $('#calendar').fullCalendar({
+                defaultDate: '<?php echo date('Y-m-d'); ?>',
+                locale: 'es',
+                height: 700,
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                events: <?php echo $data_schedule ?>
+              });
           });
       </script>
 
