@@ -30,10 +30,11 @@ $uri      = "http://arcadat.com/apps/json/data_basic_institution/?i_i=2b13572b-e
 $response = \Httpful\Request::get($uri)->send();
 
 if ($response->meta_data['http_code'] == 200) {
-    $main_data     = $response->body->main_data;
-    $covers        = $response->body->covers;
-    $installations = $response->body->installations;
-    $degree        = $response->body->degree;
+    $main_data         = $response->body->main_data;
+    $covers            = $response->body->covers;
+    $installations     = $response->body->installations;
+    $degree            = $response->body->degree;
+    $schedule_academic = $response->body->schedule_academic;
     if ($covers->covers) {
         $photos_covers = $covers->photos_covers;
     }
@@ -42,6 +43,16 @@ if ($response->meta_data['http_code'] == 200) {
     }
     if ($degree->degree) {
         $data_degree = $degree->data_degree;
+    }
+    if ($schedule_academic->schedule) {
+        foreach ($schedule_academic->data_schedule as $data) {
+            $array_data[] = [
+                'title' => $data->description_schedule,
+                'start' => date('Y-m-d', strtotime($data->init_schedule->date)),
+                'end'   => date('Y-m-d', strtotime($data->end_schedule->date))
+            ];
+        }
+        $data_schedule = json_encode($array_data);
     }
     $tiempoServicio = tiempoTranscurrido($main_data->date_foundation->date);
 } else {
