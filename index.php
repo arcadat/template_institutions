@@ -46,10 +46,14 @@ if ($response->meta_data['http_code'] == 200) {
     }
     if ($schedule_academic->schedule) {
         foreach ($schedule_academic->data_schedule as $data) {
+            $start        = new DateTime($data->init_schedule->date);
+            $end          = new DateTime($data->end_schedule->date);
+            $end->modify('+1 day');
             $array_data[] = [
                 'title' => $data->description_schedule,
-                'start' => date('Y-m-d', strtotime($data->init_schedule->date)),
-                'end'   => date('Y-m-d', strtotime($data->end_schedule->date))
+                'start' => $start->format('Y-m-d'),
+                'end'   => $end->format('Y-m-d'),
+                'color' => $data->color_schedule
             ];
         }
         $data_schedule = json_encode($array_data);
