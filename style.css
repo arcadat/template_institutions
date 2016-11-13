@@ -2099,7 +2099,7 @@ textarea.materialize-textarea {
 
   nav .brand-logo { font-size: 1.1rem; }
   nav .brand-logo img {height: 35px;margin-top: 12px;}
-  .side-nav {width: 200px;}
+  .side-nav {width: 200px; z-index: 999}
   .side-nav a {height: 45px;line-height: 50px;}
   .home-inner { padding: 0;}
   .home-title {font-size: 35px;}
