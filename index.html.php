@@ -77,7 +77,7 @@
                   <li><a href="#calendar">Cronograma</a></li>
                   <li><a href="#footer">Contactenos</a></li>
                 </ul>
-                <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
               </div>
             </div>
           </nav>
@@ -139,7 +139,7 @@
                             </ul>
                           </div>
                           <div class="resume-download col s12 m12 l6">
-                            <a href="#footer" class="hire-me-btn waves-effect waves-light btn btn-large resume-btn"><i class="mdi-content-send left"></i> Contactenos</a>
+                            <a href="#footer" class="hire-me-btn waves-effect waves-light btn btn-large resume-btn"><i class="material-icons">send</i> Contactenos</a>
                           </div>
                         </div>
                       </div>
@@ -303,7 +303,7 @@
                   <div class="col s12">
                     <div class="footer-inner">
                       <!-- Bottom to Up Btn -->
-                      <button class="btn-floating btn-large up-btn"><i class="mdi-navigation-expand-less"></i></button>
+                      <button class="btn-floating btn-large up-btn"><i class="material-icons">expand_less</i></button>
                      <p class="design-info">Servicio proporcionado por <a href="http://www.arcadat.com/"><img src="img/arcadat.png" height="20px" alt=""></a></p>
                     </div>
                   </div>
