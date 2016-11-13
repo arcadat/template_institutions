@@ -274,6 +274,8 @@ nav .brand-logo img {
 .resume-btn{
   margin-top: 160px;
   margin-left: 50px;
+  vertical-align: middle !important;
+  display: inline-flex;
 }
 
 
