@@ -63,6 +63,7 @@
                 <ul class="right hide-on-med-and-down custom-nav menu-scroll">
                   <li><a href="#about">Nosotros</a></li>
                   <li><a href="#resume">Historia</a></li>
+                  <li><a href="#edcuation">Etapas</a></li>
                   <li><a href="#portfolio">Instalaciones</a></li>
                   <li><a href="#calendar">Cronograma</a></li>
                   <li><a href="#footer">Contactenos</a></li>
@@ -71,6 +72,7 @@
                 <ul id="slide-out" class="side-nav menu-scroll">
                   <li><a href="#about">Nosotros</a></li>
                   <li><a href="#resume">Historia</a></li>
+                  <li><a href="#edcuation">Etapas</a></li>
                   <li><a href="#portfolio">Instalaciones</a></li>
                   <li><a href="#calendar">Cronograma</a></li>
                   <li><a href="#footer">Contactenos</a></li>
@@ -126,7 +128,7 @@
                           <p><?php echo ucfirst(strtolower($main_data->city_i)).' Estado '.ucfirst(strtolower($main_data->state_i)).'. '.ucfirst(strtolower($main_data->country_i)); ?>
                           </p>
                           <div class="personal-information col s12 m12 l6">
-                            <h3>Información</h3>
+                            <h3>DATOS OFICIALES</h3>
                             <ul>
                               <li><span>Código : </span><?php echo $main_data->code_i ?></li>
                               <li><span>Fundado : </span><?php echo strftime("%d de %B de %Y", strtotime($main_data->date_foundation->date)); ?></li>
@@ -179,13 +181,13 @@
                     if ($degree->degree):
                       foreach ($data_degree as $data): ?>
                     <div class="col s12 m6">
-                      <div class="card" style="background-color: <?php echo $data->color ?>;">
-                        <div class="card-content white-text">
-                          <span class="card-title"><?php echo $data->name ?></span>
-                          <p><?php echo str_replace("\\n", "<br/>", strip_tags($data->profile, '<strong><br><li>')) ?></p>
-                        </div>
-                        <div class="card-action white-text">
+                      <div class="card">
+                        <div class="card-content white-text" style="background-color: <?php echo $data->color ?>;">
+                          <span class="card-title"><b><?php echo $data->name ?></b></span>
                           <p><?php echo $data->levels ?></p>
+                        </div>
+                        <div class="card-action text-darken-2">
+                          <p><?php echo str_replace("\\n", "<br/>", strip_tags($data->profile, '<strong><br><li>')) ?></p>
                         </div>
                       </div>
                     </div>
@@ -302,7 +304,7 @@
                     <div class="footer-inner">
                       <!-- Bottom to Up Btn -->
                       <button class="btn-floating btn-large up-btn"><i class="mdi-navigation-expand-less"></i></button>
-                     <p class="design-info">Copyright &copy; <?php echo date('Y'); ?> <a href="http://www.arcadat.com/">Arcadat.com</a> - Todos los derechos reservados</p>
+                     <p class="design-info">Servicio proporcionado por <a href="http://www.arcadat.com/"><img src="img/arcadat.png" height="20px" alt=""></a></p>
                     </div>
                   </div>
                 </div>
@@ -345,8 +347,6 @@
             ?><br><br>Teléfonos: <font style="color: green"><?php echo $main_data->phone_i ?></font><br>Correo electrónico: <font style="color: <?php echo $main_data->color_i; ?>"><?php echo $main_data->email_i ?></font></p></div>';
           $(document).ready(function(){
 
-              $(".dropdown-button").dropdown();
-
               map = new GMaps({
                   el: '#mapa',
                   zoom: 15,
@@ -370,8 +370,17 @@
                 height: 700,
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
+                eventRender: function(event, element) {
+                    element.addClass('tooltipped');
+                    element.attr('data-position', 'top');
+                    element.attr('data-html', 'true');
+                    element.attr('data-tooltip', event.title + '<br/>Del: ' + moment(event.start).format('DD/MM/YYYY') + '<br/>Al: ' + moment(event.end).format('DD/MM/YYYY'));
+                },
                 events: <?php echo $data_schedule ?>
               });
+
+              $(".dropdown-button").dropdown();
+              $('.tooltipped').tooltip({delay: 50, html: 'true'});
           });
       </script>
 
