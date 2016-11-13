@@ -2,7 +2,10 @@
 header('Content-Type: text/css; charset=utf8');
 
 $color_i = $_GET['color_i'];
-// $color_i = '#093B6C';
+
+list($r, $g, $b) = sscanf($color_i, "#%02x%02x%02x");
+// echo "$hex -> $r $g $b";
+
 ?>
 
 a {
@@ -183,7 +186,15 @@ textarea.materialize-textarea:focus:not([readonly]) {
   background-color: <?php echo $color_i; ?>;
 }
 
+.backdrop{
+   background-color: rgba(<?php echo $r .', '. $g .', '. $b ?>, 0.5);
+   color: black;
+ }
+
 .fc {
   color: <?php echo $color_i; ?>;
 }
 
+.fc-unthemed .fc-today {
+    background-color: rgba(<?php echo $r .', '. $g .', '. $b ?>, 0.5);
+}
