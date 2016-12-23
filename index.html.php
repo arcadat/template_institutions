@@ -158,7 +158,7 @@
                                                 </ul>
                                             </div>
                                             <div class="resume-download col s12 m12 l6">
-                                                <a href="#footer" class="hire-me-btn waves-effect waves-light btn btn-large resume-btn"><i class="material-icons">send</i> Contactenos</a>
+                                                <a href="#footer" class="hire-me-btn waves-effect waves-light btn btn-large resume-btn"><i class="material-icons">send</i>&nbsp;&nbsp;Contactenos</a>
                                             </div>
                                         </div>
                                     </div>
@@ -395,7 +395,8 @@
                 el: '#mapa',
                 zoom: 15,
                 lat: latitud,
-                lng: longitud
+                lng: longitud,
+                scrollwheel: false
             });
             marker = map.addMarker({
                 lat: latitud,
