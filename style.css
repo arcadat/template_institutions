@@ -2094,6 +2094,9 @@ textarea.materialize-textarea {
 	}
 }
 
+@media(max-width:600px ){
+  .contact-map {height: 350px;margin-top: 30px;}
+}
 
 @media(max-width:480px ){
 
