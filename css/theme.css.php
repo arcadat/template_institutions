@@ -198,3 +198,8 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .fc-unthemed .fc-today {
     background-color: rgba(<?php echo $r .', '. $g .', '. $b ?>, 0.5);
 }
+
+.fc-state-down, .fc-state-hover, button:focus {
+    background-color:<?php echo $color_i; ?>;
+}
+
