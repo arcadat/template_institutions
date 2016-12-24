@@ -23,6 +23,8 @@
     <link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
     <!-- Default Theme CSS File-->
     <link id="switcher" href="css/theme.css.php?color_i=<?php echo urlencode($main_data->color_i); ?>" type="text/css" rel="stylesheet" media="screen,projection" />
+    <!-- LightGallery -->
+    <link type="text/css" rel="stylesheet" href="css/lightgallery.min.css" />
     <!-- Main css File -->
     <link href="style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 
@@ -232,15 +234,10 @@
                             <div id="portfolio-list">
                             <?php foreach ($photos_installations as $photo_installation):?>
                                 <div class="mix">
-                                    <a href="#" class="portfolio-thumbnill">
-                                        <img src="<?php echo $main_data->root_thumbs_installations . $photo_installation->installation ?>" alt="img"/>
+                                    <a class="portfolio-thumbnill" href="<?php echo $main_data->root_installations . $photo_installation->installation ?>" data-sub-html="<?php echo $photo_installation->ad_installation ?>">
+                                        <img src="<?php echo $main_data->root_thumbs_installations . $photo_installation->installation ?>" />
                                         <i class="material-icons view-icon">pageview</i>
                                     </a>
-                                    <div class="portfolio-detail">
-                                        <a href="#" class="modal-close-btn"><span class="fa fa-times"></span></a>
-                                        <img src="<?php echo $main_data->root_installations . $photo_installation->installation ?>" alt="img"/>
-                                        <h2><?php echo $photo_installation->ad_installation ?></h2>
-                                    </div>
                                 </div>
                             <?php endforeach;?>
                             </div>
@@ -346,6 +343,13 @@
     <!-- Google Maps -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6-_MBg2QXptawIOEdL7-k1doOfuYdm70"></script>
     <script type="text/javascript" src="js/gmaps.min.js"></script>
+    <!-- A jQuery plugin that adds cross-browser mouse wheel support. (Optional) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+    <script src="js/lightgallery.min.js"></script>
+
+    <!-- lightgallery plugins -->
+    <script src="js/lg-thumbnail.min.js"></script>
+    <script src="js/lg-fullscreen.min.js"></script>
 
     <!-- GmapsJs Config -->
     <script type="text/javascript">
