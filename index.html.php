@@ -350,6 +350,7 @@
     <!-- GmapsJs Config -->
     <script type="text/javascript">
         $(document).ready(function() {
+            var fuente = <?php echo $data_schedule ?>;
 
             $('#calendar').fullCalendar({
                 defaultDate: '<?php echo date('Y-m-d'); ?>',
@@ -357,13 +358,47 @@
                 height: 700,
                 editable: true,
                 eventLimit: true <?php if (isset($data_schedule) && !empty($data_schedule)): ?>,
-                eventRender: function(event, element) {
+                /* eventRender: function(event, element) {
                     element.addClass('tooltipped');
                     element.attr('data-position', 'top');
                     element.attr('data-html', 'true');
                     element.attr('data-tooltip', event.title + '<br/>Del: ' + moment(event.start).format('DD/MM/YYYY') + '<br/>Al: ' + moment(event.end).format('DD/MM/YYYY'));
+                }, */
+                eventMouseover: function (data, event, view) {
+                    tooltip = '<div class="tooltiptopicevent" style="color:#fff;width:auto;height:auto;background:<?php echo $main_data->color_i ?>;text-transform:uppercase;position:absolute;z-index:10001;padding:10px 10px 10px 10px;line-height:100%;">' + data.title + '</br>Del' + ': ' + moment(data.start).format('DD/MM/YYYY') + '<br/>Al: ' + moment(data.end).format('DD/MM/YYYY') + '</div>';
+
+
+                    $("body").append(tooltip);
+                    $(this).mouseover(function (e) {
+                        $(this).css('z-index', 10000);
+                        $('.tooltiptopicevent').fadeIn('500');
+                        $('.tooltiptopicevent').fadeTo('10', 1.9);
+                    }).mousemove(function (e) {
+                        $('.tooltiptopicevent').css('top', e.pageY + 15);
+                        $('.tooltiptopicevent').css('left', e.pageX - 70);
+                    });
+
+
                 },
-                events: <?php echo $data_schedule ?>
+                eventMouseout: function (data, event, view) {
+                    $(this).css('z-index', 8);
+
+                    $('.tooltiptopicevent').remove();
+
+                },
+                dayClick: function () {
+                    tooltip.hide()
+                },
+                eventResizeStart: function () {
+                    tooltip.hide()
+                },
+                eventDragStart: function () {
+                    tooltip.hide()
+                },
+                viewDisplay: function () {
+                    tooltip.hide()
+                },
+                events: fuente
                 <?php endif;?>
             });
 
