@@ -371,6 +371,7 @@ nav .brand-logo img {
   display: inline;
   float: left;
   width: 100%;
+  color: #fff;
 }
 
 
@@ -478,7 +479,10 @@ nav .brand-logo img {
   width: 100%;
 }
 
-
+.education-inner .card-action {
+    max-height: 450px;
+    overflow: scroll;
+}
 
 /*--------------------*/
 /* PORTFOLIO */
