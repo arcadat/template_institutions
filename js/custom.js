@@ -70,7 +70,7 @@ jQuery(function($){
     /* ----------------------------------------------------------- */
 	/*  4. LIGHTBOX ( FOR PORTFOLIO POPUP VIEW )
 	/* ----------------------------------------------------------- */
-
+    /*
 	$('body').append("<div id='portfolio-popup'><div class='portfolio-popup-area'><div class='portfolio-popup-inner'></div></div></div>");
 
 	// WHEN CLICK PLAY BUTTON
@@ -84,6 +84,11 @@ jQuery(function($){
       var portfolio_detailscontent = $(this).parent(".mix").find(".portfolio-detail").html();
 	  $(".portfolio-popup-inner").html(portfolio_detailscontent);
 
+    });
+    */
+    $("#portfolio-list").lightGallery({
+        selector: '.portfolio-thumbnill',
+        download: false
     });
 
     // WHEN CLICK CLOSE BUTTON
