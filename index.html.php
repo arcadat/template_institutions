@@ -314,7 +314,7 @@
                                     <!-- Bottom to Up Btn -->
                                     <button class="btn-floating btn-large up-btn"><i class="material-icons">expand_less</i></button>
                                     <p class="design-info">Servicio proporcionado por
-                                        <a href="http://www.arcadat.com/"><img src="img/arcadat.png" height="20px" alt=""></a>
+                                        <a href="http://www.arcadat.com/"><img src="<?php echo $main_data->logo_arcadat_footer ?>" alt=""></a>
                                     </p>
                                 </div>
                             </div>
@@ -369,7 +369,7 @@
                     element.attr('data-tooltip', event.title + '<br/>Del: ' + moment(event.start).format('DD/MM/YYYY') + '<br/>Al: ' + moment(event.end).format('DD/MM/YYYY'));
                 }, */
                 eventMouseover: function (data, event, view) {
-                    tooltip = '<div class="tooltiptopicevent" style="color:#fff;width:auto;height:auto;background:<?php echo $main_data->color_i ?>;text-transform:uppercase;position:absolute;z-index:10001;padding:10px 10px 10px 10px;line-height:100%;">' + data.title + '</br>Del' + ': ' + moment(data.start).format('DD/MM/YYYY') + '<br/>Al: ' + moment(data.end).format('DD/MM/YYYY') + '</div>';
+                    tooltip = '<div class="tooltiptopicevent" style="color:#fff;width:auto;height:auto;background:<?php echo $main_data->color_i ?>;text-transform:uppercase;position:absolute;z-index:10001;padding:10px 10px 10px 10px;line-height:100%;">' + data.title + '</br>Del' + ': ' + moment(data.start).format('DD/MM/YYYY') + '<br/>Al: ' + moment(data.end).subtract(1,'days').format('DD/MM/YYYY') + '</div>';
 
 
                     $("body").append(tooltip);
