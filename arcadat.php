@@ -55,14 +55,14 @@
             <div class="indeterminate"></div>
         </div>
         <div class="caja">
-            <img alt="Logo" src="img/logo_arcadat.png"/>
+            <img alt="Logo" src="http://www.arcadat.com/cfg/arcadat/logo/color.png"/>
         </div>
     </div>
     <!-- END PRELOADER -->
     <main>
         <div class="section"></div>
         <center>
-            <img class="responsive-img" src="img/logo_arcadat.png" style="width: 250px;"/>
+            <img class="responsive-img" src="http://www.arcadat.com/cfg/arcadat/logo/footer.png"/>
             <div class="section"></div>
             <h5 class="indigo-text">Por Favor Ingrese el Id del Colegio</h5>
             <div class="section"></div>
