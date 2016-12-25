@@ -54,14 +54,17 @@ if ($response->meta_data['http_code'] == 200) {
             $end          = new DateTime($data->end_schedule->date);
             $end->modify('+1 day');
             $array_data[] = [
-                'title' => $data->description_schedule,
-                'start' => $start->format('Y-m-d'),
-                'end'   => $end->format('Y-m-d'),
-                'color' => $data->color_schedule
+                'title'     => $data->description_schedule,
+                'start'     => $start->format('Y-m-d'),
+                'end'       => $end->format('Y-m-d'),
+                'color'     => $data->color_schedule,
+                'textColor' => ($data->color_schedule=='white') ? 'black' : 'white',
             ];
         }
-        $data_schedule = json_encode($array_data);
+    } else {
+        $array_data = [];
     }
+    $data_schedule = json_encode($array_data);
     $tiempoServicio = tiempoTranscurrido($main_data->date_foundation->date);
 } else {
     echo 'Error: '.$response->meta_data['http_code'].'<br/>';
