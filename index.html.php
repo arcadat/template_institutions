@@ -75,7 +75,7 @@
                             <li><a href="#portfolio">Instalaciones</a></li>
                             <?php endif;?>
                             <li><a href="#calendar">Cronograma</a></li>
-                            <li><a href="#footer">Contactenos</a></li>
+                            <li><a href="#footer">Contáctenos</a></li>
                         </ul>
                         <!-- For Mobile View -->
                         <ul id="slide-out" class="side-nav menu-scroll">
@@ -86,7 +86,7 @@
                             <li><a href="#portfolio">Instalaciones</a></li>
                             <?php endif;?>
                             <li><a href="#calendar">Cronograma</a></li>
-                            <li><a href="#footer">Contactenos</a></li>
+                            <li><a href="#footer">Contáctenos</a></li>
                         </ul>
                         <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
                     </div>
@@ -136,7 +136,7 @@
                                         <div class="about-inner-right">
                                             <h3><?php echo $main_data->name_i ?></h3>
                                             <p>
-                                                <?php echo ucfirst(strtolower($main_data->city_i)) . ' Estado ' . ucfirst(strtolower($main_data->state_i)) . '. ' . ucfirst(strtolower($main_data->country_i)); ?>
+                                                <?php echo strtoupper($main_data->city_i . ' '. $main_data->state_i . ', ' . $main_data->country_i); ?>
                                             </p>
                                             <div class="personal-information col s12 m12 l6">
                                                 <h3>DATOS OFICIALES</h3>
@@ -155,12 +155,12 @@
                                                         <?php echo $main_data->email_i ?>
                                                     </li>
                                                     <li><span>Dirección : </span>
-                                                        <?php echo $main_data->address_i . ', ' . ucfirst(strtolower($main_data->city_i)) . ' Estado ' . ucfirst(strtolower($main_data->state_i)) . ', ' . ucfirst(strtolower($main_data->country_i)); ?>
+                                                        <?php echo $main_data->address_i . ', ' . strtoupper($main_data->city_i . ' ' . $main_data->state_i . ', ' . $main_data->country_i); ?>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="resume-download col s12 m12 l6">
-                                                <a href="#footer" class="hire-me-btn waves-effect waves-light btn btn-large resume-btn"><i class="material-icons">send</i>&nbsp;&nbsp;Contactenos</a>
+                                                <a href="#footer" class="hire-me-btn waves-effect waves-light btn btn-large resume-btn"><i class="material-icons">send</i>&nbsp;&nbsp;Contáctenos</a>
                                             </div>
                                         </div>
                                     </div>
@@ -269,7 +269,7 @@
                         <div class="row">
                             <div class="col s12">
                                 <div class="footer-top-inner">
-                                    <h2 class="title">Contactenos</h2>
+                                    <h2 class="title">Contáctenos</h2>
                                     <div class="contact">
                                         <div class="row">
                                             <div class="col s12 m6 l6">
@@ -313,7 +313,7 @@
                                 <div class="footer-inner">
                                     <!-- Bottom to Up Btn -->
                                     <button class="btn-floating btn-large up-btn"><i class="material-icons">expand_less</i></button>
-                                    <p class="design-info">Servicio proporcionado por
+                                    <p class="design-info">Servicio proporcionado por<br/>
                                         <a href="http://www.arcadat.com/"><img src="<?php echo $main_data->logo_arcadat_footer ?>" alt=""></a>
                                     </p>
                                 </div>
