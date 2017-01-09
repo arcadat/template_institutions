@@ -416,11 +416,11 @@
                 . '</h6><p id="bodyContent" style="font-family: arial; font-size:12px">Dirección: '
                 . $main_data->address_i
                 . ', '
-                . ucfirst(strtolower($main_data->city_i))
-                . ' Estado '
-                . ucfirst(strtolower($main_data->state_i))
+                . strtoupper($main_data->city_i
+                . ' '
+                . $main_data->state_i
                 . ', '
-                . ucfirst(strtolower($main_data->country_i))
+                . $main_data->country_i)
                 . '<br><br> Teléfonos: <font style = "color: green">'
                 . $main_data->phone_i
                 .'</font><br>Correo electrónico: <font style="color: '
