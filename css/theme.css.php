@@ -203,3 +203,19 @@ textarea.materialize-textarea:focus:not([readonly]) {
     background-color:<?php echo $color_i; ?>;
 }
 
+.tabs .tab a.active, .tabs .tab a:hover {
+    color: <?php echo $color_i; ?>;
+}
+
+.tabs .indicator {
+    background-color: <?php echo $color_i; ?>;
+}
+
+.tabs .tab.disabled a, .tabs .tab.disabled a:hover, .tabs .tab a {
+    color: rgba(<?php echo $r .', '. $g .', '. $b ?>, 0.5);
+}
+
+#userInfo {
+    background-color: rgba(<?php echo $r .', '. $g .', '. $b ?>, 0.05);
+    border-radius: 10px;
+}

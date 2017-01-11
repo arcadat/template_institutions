@@ -26,10 +26,12 @@ function tiempoTranscurrido($fechaInit)
     return $res . ' de servicio';
 }
 
-if (isset($_POST['id_col']) && $colegioID = $_POST['id_col'])
-    $uri      = "http://arcadat.com/apps/json/web_service/data_basic_institution/?i_i=".$colegioID;
-else
-    $uri      = "http://arcadat.com/apps/json/web_service/data_basic_institution/?i_i=2b13572b-e506-4bf6-b908-8d228a6cc01f";
+$colegioID = '2b13572b-e506-4bf6-b908-8d228a6cc01f';
+
+if (isset($_POST['id_col']))
+    $colegioID = $_POST['id_col'];
+
+$uri      = "http://arcadat.com/apps/json/web_service/data_basic_institution/?i_i=".$colegioID;
 
 $response = \Httpful\Request::get($uri)->send();
 

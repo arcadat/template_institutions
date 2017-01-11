@@ -138,30 +138,69 @@
                                             <p>
                                                 <?php echo strtoupper($main_data->city_i . ' '. $main_data->state_i . ', ' . $main_data->country_i); ?>
                                             </p>
-                                            <div class="personal-information col s12 m12 l6">
-                                                <h3>DATOS OFICIALES</h3>
-                                                <ul>
-                                                    <li><span>Código : </span>
-                                                        <?php echo $main_data->code_i ?>
-                                                    </li>
-                                                    <li><span>Fundado : </span>
-                                                        <?php echo strftime("%d de %B de %Y", strtotime($main_data->date_foundation->date)); ?>
-                                                    </li>
-                                                    <li><b><?php echo $tiempoServicio ?></b></li>
-                                                    <li><span>Teléfono : </span>
-                                                        <?php echo $main_data->phone_i ?>
-                                                    </li>
-                                                    <li><span>Email : </span>
-                                                        <?php echo $main_data->email_i ?>
-                                                    </li>
-                                                    <li><span>Dirección : </span>
-                                                        <?php echo $main_data->address_i . ', ' . strtoupper($main_data->city_i . ' ' . $main_data->state_i . ', ' . $main_data->country_i); ?>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="resume-download col s12 m12 l6">
-                                                <a href="#footer" class="hire-me-btn waves-effect waves-light btn btn-large resume-btn"><i class="material-icons">send</i>&nbsp;&nbsp;Contáctenos</a>
-                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <ul class="tabs">
+                                            <li class="tab col s3"><a class="active" href="#tab_institucion">LA INSTITUCIÓN</a></li>
+                                            <li class="tab col s3 disabled"><a href="#tab_autoridades">AUTORIDADES</a></li>
+                                            <li class="tab col s3 disabled"><a href="#tab_facilitadores">FACILITADORES</a></li>
+                                            <li class="tab col s3 disabled"><a href="#tab_personal">PERSONAL</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col s12 m12 l12" id="tab_institucion">
+                                        <div class="personal-information col s12 m12 l8">
+                                            <h3>DATOS OFICIALES</h3>
+                                            <ul>
+                                                <li><span>Código : </span>
+                                                    <?php echo $main_data->code_i ?>
+                                                </li>
+                                                <li><span>Fundado : </span>
+                                                    <?php echo strftime("%d de %B de %Y", strtotime($main_data->date_foundation->date)); ?>
+                                                </li>
+                                                <li><b><?php echo $tiempoServicio ?></b></li>
+                                                <li><span>Teléfono : </span>
+                                                    <?php echo $main_data->phone_i ?>
+                                                </li>
+                                                <li><span>Email : </span>
+                                                    <?php echo $main_data->email_i ?>
+                                                </li>
+                                                <li><span>Dirección : </span>
+                                                    <?php echo $main_data->address_i . ', ' . strtoupper($main_data->city_i . ' ' . $main_data->state_i . ', ' . $main_data->country_i); ?>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div id="userInfo" class="personal-information col s12 m12 l4">
+                                            <h3 class="center">LOGIN</h3>
+                                            <form id="login_frm">
+                                                <div class="input-field">
+                                                    <input type="email" class="input-box validate" name="loginEmail" id="login_email" title="El correo electrónico es requerido." required>
+                                                    <label class="input-label" for="login_email">Correo Electrónico</label>
+                                                </div>
+                                                <div class="input-field">
+                                                    <input type="password" class="input-box validate" name="loginPass" id="login_pass" title="La contraseña es requerida." required>
+                                                    <label class="input-label" for="login_pass">Contraseña</label>
+                                                </div>
+                                                <div class="input-field">
+                                                    <input type="checkbox" class="input-box" name="loginCheck" id="login_check">
+                                                    <label class="input-label" for="login_check">No cerrar sesión</label>
+                                                </div>
+                                                <div class="input-field">
+                                                    <button class="waves-effect btn-flat brand-text submit-btn col s12 m12 l12" type="submit">Iniciar sesión</button><br/><br/>
+                                                </div>
+                                                <a href="#" class="col s12 m12 l12">¿Olvidó su contraseña?</a><br/><br/>
+                                                <a href="#" class="col s12 m12 l12">Abrir nueva cuenta</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m12 l12" id="tab_autoridades"></div>
+                                    <div class="col s12 m12 l12" id="tab_facilitadores"></div>
+                                    <div class="col s12 m12 l12" id="tab_personal"></div>
+                                    <div class="row">
+                                        <div class="center col s12 m12 l12">
+                                            <a href="#footer" class="hire-me-btn waves-effect waves-light btn btn-large resume-btn"><i class="material-icons">send</i>&nbsp;&nbsp;Contáctenos</a>
                                         </div>
                                     </div>
                                 </div>
@@ -328,6 +367,8 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- Materialize js -->
     <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- Validate js -->
+    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
     <!-- Skill Progress Bar -->
     <script type="text/javascript" src="js/appear.min.js"></script>
     <script type="text/javascript" src="js/pro-bars.min.js"></script>
@@ -453,6 +494,40 @@
                 delay: 50,
                 html: 'true'
             });
+
+            $('#login_frm').validate({
+                errorClass: 'invalid',
+                errorPlacement: function(error, element) {
+                    element.next("label").attr("data-error", error.contents().text())
+                },
+                submitHandler: function(form) {
+                    var formData = {
+                        'user'     : $('#login_email').val(),
+                        'pass'     : $('#login_pass').val(),
+                        'cole'     : '<?php echo $colegioID ?>'
+                    };
+                    $.ajax({
+                        type        : 'POST',
+                        url         : 'login.php',
+                        data        : formData,
+                        dataType    : 'json',
+                        encode      : true
+                    })
+                    .done(function(data) {
+                        console.log(data);
+                        if (data.result.number_error != 0) {
+                            Materialize.toast('Error<br/> '+data.result.msg_error, 5000, 'rounded');
+                            $('#login_pass').focus();
+                        } else {
+                            Materialize.toast('Bienvenido<br/> '+data.person.first_name, 5000, 'rounded');
+                            $('ul.tabs li').removeClass('disabled');
+                        }
+
+                    });
+                    return false;
+                }
+            });
+            $('ul.tabs').tabs();
         });
     </script>
 

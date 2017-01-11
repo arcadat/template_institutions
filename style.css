@@ -193,7 +193,7 @@ nav .brand-logo img {
   background-color: #fafafa;
   float: left;
   display: inline;
-  padding: 80px 0px;
+  padding: 80px 0px 0px 0px;
   width: 100%;
 }
 
@@ -224,7 +224,7 @@ nav .brand-logo img {
 
 
 .about-inner-right{
-  min-height: 250px;
+  min-height: 100px;
   display: inline;
   float: left;
   width: 100%;
@@ -273,7 +273,7 @@ nav .brand-logo img {
 
 
 .resume-btn{
-  margin-top: 160px;
+  margin-top: 50px;
   margin-left: 50px;
   vertical-align: middle !important;
   display: inline-flex;
@@ -284,6 +284,10 @@ nav .brand-logo img {
   background-color: #eee;
 }
 
+.tabs {
+    margin-bottom: 30px;
+    background-color: #fafafa;
+}
 
 /*--------------------*/
 /* RESUME */
@@ -300,7 +304,7 @@ nav .brand-logo img {
 #skill{
   background-color: #fff;
   display: inline;
-  padding: 60px 0;
+  padding: 5px 0px 60px 0px;
   float: left;
   width: 100%;
 }
@@ -2071,6 +2075,7 @@ textarea.materialize-textarea {
   .home-title {font-size: 55px;}
   .call-to-about {bottom: -95px;}
   .resume-btn { margin-top: 30px;}
+  .submit-btn { margin-top: 30px;}
   .prev {margin-top: 28%;}
   .next {margin-top: 28%;}
   .prev1 {margin-top: 28%;}
@@ -2219,6 +2224,7 @@ textarea.materialize-textarea {
 
   nav .brand-logo img {height: 27px;margin-top: 16px;}
   .resume-btn { margin-left: 0;}
+  .submit-btn { margin-left: 0;}
   .prev { margin-top: 55%;}
   .next{margin-top: 55%;}
   .prev1 { margin-top: 55%;}
