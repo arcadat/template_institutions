@@ -145,9 +145,9 @@
                                     <div class="col s12">
                                         <ul class="tabs">
                                             <li class="tab col s3"><a class="active" href="#tab_institucion">LA INSTITUCIÓN</a></li>
-                                            <li class="tab col s3 disabled"><a href="#tab_autoridades">AUTORIDADES</a></li>
-                                            <li class="tab col s3 disabled"><a href="#tab_facilitadores">FACILITADORES</a></li>
-                                            <li class="tab col s3 disabled"><a href="#tab_personal">PERSONAL</a></li>
+                                            <li class="tab col s3 disabled"><a href="#tab_authorities">AUTORIDADES</a></li>
+                                            <li class="tab col s3 disabled"><a href="#tab_teachers">FACILITADORES</a></li>
+                                            <li class="tab col s3 disabled"><a href="#tab_administrative_staff">PERSONAL</a></li>
                                         </ul>
                                     </div>
                                     <div class="col s12 m12 l12" id="tab_institucion">
@@ -195,13 +195,13 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="col s12 m12 l12" id="tab_autoridades"></div>
-                                    <div class="col s12 m12 l12" id="tab_facilitadores"></div>
-                                    <div class="col s12 m12 l12" id="tab_personal"></div>
-                                    <div class="row">
-                                        <div class="center col s12 m12 l12">
-                                            <a href="#footer" class="hire-me-btn waves-effect waves-light btn btn-large resume-btn"><i class="material-icons">send</i>&nbsp;&nbsp;Contáctenos</a>
-                                        </div>
+                                    <div class="col s12 m12 l12" id="tab_authorities"></div>
+                                    <div class="col s12 m12 l12" id="tab_teachers"></div>
+                                    <div class="col s12 m12 l12" id="tab_administrative_staff"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="center col s12 m12 l12">
+                                        <a href="#footer" class="hire-me-btn waves-effect waves-light btn btn-large resume-btn"><i class="material-icons">send</i>&nbsp;&nbsp;Contáctenos</a>
                                     </div>
                                 </div>
                             </div>
@@ -257,6 +257,8 @@
                 </div>
             </section>
             <?php endif;?>
+            <section id="honor_roll" style="display: none;"></section>
+            <section id="birthdays_week" style="display: none;"></section>
             <?php if ($installations->installations): ?>
             <!-- Start Portfolio -->
             <section id="portfolio">
@@ -503,7 +505,8 @@
                 submitHandler: function(form) {
                     var formData = {
                         'user'     : $('#login_email').val(),
-                        'pass'     : $('#login_pass').val()
+                        'pass'     : $('#login_pass').val(),
+                        'check'    : $('#login_check').val()
                     };
                     $.ajax({
                         type        : 'POST',
@@ -518,9 +521,15 @@
                             Materialize.toast('Error<br/> '+data.result.msg_error, 5000, 'rounded');
                             $('#login_pass').focus();
                         } else {
-                            Materialize.toast('Bienvenido<br/> '+data.person.first_name, 5000, 'rounded');
-                            $('#userInfo').load('partials/user', data);
                             $('ul.tabs li').removeClass('disabled');
+                            Materialize.toast('Bienvenido<br/> '+data.person.first_name, 5000, 'rounded');
+                            $('#userInfo').load('partials/user', {"person": data.person, "settings": data.settings});
+                            $('#tab_authorities').load('partials/authorities', data.workers.authorities);
+                            $('#tab_teachers').load('partials/teachers', data.workers.teachers);
+                            $('#tab_administrative_staff').load('partials/administrative', data.workers.administrative_staff);/*
+                            $('#honor_roll').load('partials/honor', data.workers.honor_roll).show();
+                            $('#birthdays_week').load('partials/birthdays', data.workers.birthdays_week).show();*/
+                            $('ul.tabs').tabs();
                         }
 
                     });
