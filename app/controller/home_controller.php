@@ -16,7 +16,14 @@ class HomeController extends Controller
         // Log message
         $this->container->logger->info("Arcadat Template '/' route");
 
-        $uri = $this->container->config->api->url_basic . $this->container->config->api->colegioId;
+        if ($req->isPost()) {
+            $data = $req->getParsedBody();
+            $data = $data['id_col'];
+        } else {
+            $data = $this->container->config->api->colegioId;
+        }
+
+        $uri = $this->container->config->api->url_basic . $data;
 
         $response = Request::get($uri)->send();
 
@@ -79,6 +86,15 @@ class HomeController extends Controller
         return $this->container->renderer->render($res, $file, $args);
     }
 
+    public function colegio($req, $res, $args)
+    {
+        // Log message
+        $this->container->logger->info("Arcadat Template '/colegio' route");
+
+        // Render view
+        return $this->container->renderer->render($res, 'frm_col_id.phtml', $args);
+    }
+
     public function signin($req, $res, $args)
     {
         // Log message
@@ -89,7 +105,8 @@ class HomeController extends Controller
         $data = [
             'i_i' => $this->container->config->api->colegioId,
             'u' => $data['user'],
-            'p' => $data['pass']
+            'p' => $data['pass'],
+            'ncs' => $data['check']
         ];
 
         $uri = $this->container->config->api->url_login;
@@ -106,18 +123,43 @@ class HomeController extends Controller
         return $res->withHeader('Content-type', 'application/json')->write($response);
     }
 
-    public function user($req, $res, $args)
+    public function partials($req, $res, $args)
     {
         // Log message
-        $this->container->logger->info("Arcadat Template '/partials/user' route");
+        $this->container->logger->info("Arcadat Template '/partials/{$args['workers']}' route");
+
+        switch ($args['workers']) {
+            case 'administrative':
+                $file = 'partials/administrative.phtml';
+                break;
+            case 'authorities':
+                $file = 'partials/authorities.phtml';
+                break;
+            case 'birthdays':
+                $file = 'partials/birthdays.phtml';
+                break;
+            case 'honor':
+                $file = 'partials/honor.phtml';
+                break;
+            case 'teachers':
+                $file = 'partials/teachers.phtml';
+                break;
+            case 'user':
+                $file = 'partials/user.phtml';
+                break;
+
+            default:
+                $file = '404.phtml';
+                break;
+        }
 
         $data = $req->getParsedBody();
 
         $args = [
-            'datos' => $data['person'],
+            'datos' => $data,
         ];
 
         // Render view
-        return $this->container->renderer->render($res, 'user.phtml', $args);
+        return $this->container->renderer->render($res, $file, $args);
     }
 }
