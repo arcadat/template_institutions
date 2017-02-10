@@ -1,0 +1,67 @@
+<div class="personal-information">
+    <h3 class="title">
+        <?php echo $datos['label_teachers'] ?>
+    </h3>
+
+    <?php if ($datos['numbers_teachers'] > 0): ?>
+        <div id="owl-carousel-teachers" class="experience-slider row">
+        <?php for ($i=1; $i <= $datos['numbers_teachers']; $i++): ?>
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <h2 class="experience-title"><?php echo $datos['details_teachers']["$i"]['type_teacher'] ?>&nbsp;</h2>
+                        <img class="activator" src="<?php echo $datos['details_teachers']["$i"]['photo_teacher'] ?>"></img>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator">
+                            <?php echo $datos['details_teachers']["$i"]['name_teacher'] ?>&nbsp;
+                            <i class="material-icons right">more_vert</i>
+                        </span>
+                    </div>
+                    <div class="card-reveal">
+                        <span class="card-title">
+                            <?php echo $datos['details_teachers']["$i"]['type_teacher'] ?>&nbsp;
+                            <i class="material-icons right">close</i>
+                        </span>
+                        <span class="card-subtitle">
+                            <?php echo $datos['details_teachers']["$i"]['name_teacher'] ?>&nbsp;
+                        </span>
+                        <p>
+                            <?php echo $datos['details_teachers']["$i"]['profile_teacher'] ?>&nbsp;
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <?php endfor ?>
+
+        </div>
+        <!-- owl navigation -->
+        <div class="customNavigation">
+            <a class="btn prev btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_left</i></a>
+            <a class="btn next btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_right</i></a>
+        </div>
+        <script type="text/javascript">
+            var owl = $("#owl-carousel-teachers");
+            owl.owlCarousel({
+                items : <?php echo ($datos['numbers_teachers'] >= 4) ? 4 : 3; ?>, //3 items above 1024px browser width
+                itemsDesktop : [1024, 3], //3 items between 1024px and 901px
+                itemsDesktopSmall : [900,2], // betweem 900px and 601px
+                itemsTablet: [600,1], //1 items between 600 and 0
+                itemsMobile : 1 // itemsMobile disabled - inherit from itemsTablet option
+            });
+            // Slide Navigation
+            jQuery(".next").click(function(){
+                owl.trigger('owl.next');
+            });
+
+            jQuery(".prev").click(function(){
+                owl.trigger('owl.prev');
+            });
+        </script>
+    <?php else: ?>
+        <div class="skill-inner center-align col s12 m12 l12">
+            <p>SIN DATOS REGISTRADOS</p>
+        </div>
+    <?php endif ?>
+</div>
+
