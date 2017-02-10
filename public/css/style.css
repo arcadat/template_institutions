@@ -135,7 +135,7 @@ nav .brand-logo img {
 
 
 #home .overlay-section {
-  background: url(img/pattern-overlay.png) repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+  background: url("../img/pattern-overlay.png") repeat scroll 0 0 rgba(0, 0, 0, 0.3);
   /* background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0; */
   height: 100%;
   /* width: 100%;*/
@@ -786,7 +786,7 @@ display: flex;
 
 
 #facts {
-  background-image: url("img/home-img3.jpg");
+  background-image: url("../img/home-img3.jpg");
   background-position: center center;
   background-size: 100% 100%;
   display: inline;
