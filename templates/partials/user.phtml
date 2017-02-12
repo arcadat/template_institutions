@@ -7,42 +7,7 @@
             <?php echo $datos['person']['first_name'] . ' ' . $datos['person']['last_name'] ?>
         </span>
         <p>
-            <a href="#" data-activates="slide-out-user" class="btn button-collapse">Menú de Aplicaciones</a>
+            <a href="#" data-activates="slide-out-user" class="btn button-collapse">Aplicaciones Arcadat</a>
         </p>
     </div>
 </div>
-
-<div class="fixed-action-btn horizontal">
-    <a class="btn-floating btn-large button-collapse tooltipped" data-position="left" data-delay="50" data-tooltip="Menú de aplicaciones" data-activates="slide-out-user">
-        <i class="material-icons">menu</i>
-    </a>
-</div>
-
-<ul id="slide-out-user" class="side-nav">
-    <li>
-        <div class="userView">
-            <div class="background">
-                <img class="responsive-img" src="<?php echo $datos['person']['photo_person'] ?>"/>
-            </div>
-            <a href="#!user"><img class="circle" src="<?php echo $datos['person']['photo_person'] ?>"></a>
-            <a href="#!name"><span class="white-text name"><?php echo $datos['person']['first_name'] . ' ' . $datos['person']['last_name'] ?></span></a>
-        </div>
-    </li>
-    <?php if ($datos['settings']['is_user_admin'] == 'true'): ?>
-    <li><a class="waves-effect" href="<?php echo $datos['settings']['link_admin']; ?>">Administración</a></li>
-    <?php endif ?>
-    <?php if ($datos['settings']['is_user_academic'] == 'true'): ?>
-    <li><a class="waves-effect" href="<?php echo $datos['settings']['link_academic']; ?>">Coordinación Académica</a></li>
-    <?php endif ?>
-    <?php if ($datos['settings']['is_user_paysheet'] == 'true'): ?>
-    <li><a class="waves-effect" href="<?php echo $datos['settings']['link_paysheet']; ?>">Nómina</a></li>
-    <?php endif ?>
-    <li><div class="divider"></div></li>
-    <li><a class="waves-effect" href="#!">Cerrar Sesión</a></li>
-</ul>
-
-
-<script type='text/javascript'>
-    $(".button-collapse").sideNav();
-    $('.tooltipped').tooltip();
-</script>

@@ -1,7 +1,5 @@
 <div class="personal-information">
-    <h3 class="title">
-        <?php echo $datos['label_authorities'] ?>
-    </h3>
+    <h3 class="title"><?php echo $datos['label_authorities'] ?></h3>
 
     <?php if ($datos['numbers_authorities'] > 0): ?>
         <div id="owl-carousel-authorities" class="experience-slider row">
@@ -15,7 +13,7 @@
                     <div class="card-content">
                         <span class="card-title activator">
                             <?php echo $datos['details_authorities']["$i"]['name_authority'] ?>&nbsp;
-                            <i class="material-icons right">more_vert</i>
+                            <i class="material-icons right">keyboard_arrow_up</i>
                         </span>
                     </div>
                     <div class="card-reveal">
@@ -37,12 +35,12 @@
         </div>
         <!-- owl navigation -->
         <div class="customNavigation">
-            <a class="btn prev btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_left</i></a>
-            <a class="btn next btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_right</i></a>
+            <a id="aut_prev" class="btn prev btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_left</i></a>
+            <a id="aut_next" class="btn next btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_right</i></a>
         </div>
         <script type="text/javascript">
-            var owl = $("#owl-carousel-authorities");
-            owl.owlCarousel({
+            var owl_aut = $("#owl-carousel-authorities");
+            owl_aut.owlCarousel({
                 items : <?php echo ($datos['numbers_authorities'] >= 4) ? 4 : 3; ?>, //3 items above 1024px browser width
                 itemsDesktop : [1024, 3], //3 items between 1024px and 901px
                 itemsDesktopSmall : [900,2], // betweem 900px and 601px
@@ -50,12 +48,12 @@
                 itemsMobile : 1 // itemsMobile disabled - inherit from itemsTablet option
             });
             // Slide Navigation
-            jQuery(".next").click(function(){
-                owl.trigger('owl.next');
+            jQuery("#aut_next").click(function(){
+                owl_aut.trigger('owl.next');
             });
 
-            jQuery(".prev").click(function(){
-                owl.trigger('owl.prev');
+            jQuery("#aut_prev").click(function(){
+                owl_aut.trigger('owl.prev');
             });
         </script>
     <?php else: ?>

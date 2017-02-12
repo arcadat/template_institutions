@@ -15,7 +15,7 @@
                     <div class="card-content">
                         <span class="card-title activator">
                             <?php echo $datos['details_administrative_staff']["$i"]['name'] ?>&nbsp;
-                            <i class="material-icons right">more_vert</i>
+                            <i class="material-icons right">keyboard_arrow_up</i>
                         </span>
                     </div>
                     <div class="card-reveal">
@@ -34,12 +34,12 @@
         </div>
         <!-- owl navigation -->
         <div class="customNavigation">
-            <a class="btn prev btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_left</i></a>
-            <a class="btn next btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_right</i></a>
+            <a id="adm_prev" class="btn prev btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_left</i></a>
+            <a id="adm_next" class="btn next btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_right</i></a>
         </div>
         <script type="text/javascript">
-            var owl = $("#owl-carousel-staff");
-            owl.owlCarousel({
+            var owl_adm = $("#owl-carousel-staff");
+            owl_adm.owlCarousel({
                 items : <?php echo ($datos['numbers_staff'] >= 4) ? 4 : 3; ?>, //3 items above 1024px browser width
                 itemsDesktop : [1024, 3], //3 items between 1024px and 901px
                 itemsDesktopSmall : [900,2], // betweem 900px and 601px
@@ -47,12 +47,12 @@
                 itemsMobile : 1 // itemsMobile disabled - inherit from itemsTablet option
             });
             // Slide Navigation
-            jQuery(".next").click(function(){
-                owl.trigger('owl.next');
+            jQuery("#adm_next").click(function(){
+                owl_adm.trigger('owl.next');
             });
 
-            jQuery(".prev").click(function(){
-                owl.trigger('owl.prev');
+            jQuery("#adm_prev").click(function(){
+                owl_adm.trigger('owl.prev');
             });
         </script>
     <?php else: ?>
