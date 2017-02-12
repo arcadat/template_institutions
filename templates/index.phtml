@@ -70,7 +70,7 @@
                         <ul class="right hide-on-med-and-down custom-nav menu-scroll">
                             <li><a href="#about">Nosotros</a></li>
                             <li><a href="#resume">Historia</a></li>
-                            <li><a href="#edcuation"><?php echo $degree->label_degree ?></a></li>
+                            <li><a href="#education"><?php echo $degree->label_degree ?></a></li>
                             <?php if ($installations->installations): ?>
                             <li><a href="#portfolio">Instalaciones</a></li>
                             <?php endif;?>
@@ -81,7 +81,7 @@
                         <ul id="slide-out" class="side-nav menu-scroll">
                             <li><a href="#about">Nosotros</a></li>
                             <li><a href="#resume">Historia</a></li>
-                            <li><a href="#edcuation"><?php echo $degree->label_degree ?></a></li>
+                            <li><a href="#education"><?php echo $degree->label_degree ?></a></li>
                             <?php if ($installations->installations): ?>
                             <li><a href="#portfolio">Instalaciones</a></li>
                             <?php endif;?>
@@ -144,10 +144,10 @@
                                 <div class="row">
                                     <div class="col s12">
                                         <ul class="tabs">
-                                            <li class="tab col s3"><a class="active" href="#tab_institucion">LA INSTITUCIÓN</a></li>
-                                            <li class="tab col s3 disabled"><a href="#tab_authorities">AUTORIDADES</a></li>
-                                            <li class="tab col s3 disabled"><a href="#tab_teachers">FACILITADORES</a></li>
-                                            <li class="tab col s3 disabled"><a href="#tab_administrative_staff">PERSONAL</a></li>
+                                            <li class="tab col s3"><a class="active" href="#tab_institucion"><?php echo $main_data->label_tab1 ?></a></li>
+                                            <li class="tab col s3 disabled"><a href="#tab_authorities"><?php echo $main_data->label_tab2 ?></a></li>
+                                            <li class="tab col s3 disabled"><a href="#tab_teachers"><?php echo $main_data->label_tab3 ?></a></li>
+                                            <li class="tab col s3 disabled"><a href="#tab_administrative_staff"><?php echo $main_data->label_tab4 ?></a></li>
                                         </ul>
                                     </div>
                                     <div class="col s12 m12 l12" id="tab_institucion">
@@ -173,7 +173,7 @@
                                             </ul>
                                         </div>
                                         <div id="userInfo" class="col s12 m12 l4">
-                                            <h3 class="center">LOGIN</h3>
+                                            <h3 class="center">ARCADAT</h3>
                                             <form id="login_frm">
                                                 <div class="input-field">
                                                     <input type="email" class="input-box validate" name="loginEmail" id="login_email" title="El correo electrónico es requerido." required>
@@ -183,15 +183,15 @@
                                                     <input type="password" class="input-box validate" name="loginPass" id="login_pass" title="La contraseña es requerida." required>
                                                     <label class="input-label" for="login_pass">Contraseña</label>
                                                 </div>
-                                                <div class="input-field">
+                                                <div class="input-field check">
                                                     <input type="checkbox" class="input-box" name="loginCheck" id="login_check">
                                                     <label class="input-label" for="login_check">No cerrar sesión</label>
                                                 </div>
                                                 <div class="input-field">
-                                                    <button class="waves-effect btn-flat brand-text submit-btn col s12 m12 l12" type="submit">Iniciar sesión</button><br/><br/>
+                                                    <button class="waves-effect btn-large brand-text col s12 m12 l12" type="submit">Iniciar sesión</button>
                                                 </div>
-                                                <a href="#" class="col s12 m12 l12">¿Olvidó su contraseña?</a><br/><br/>
-                                                <a href="#" class="col s12 m12 l12">Abrir nueva cuenta</a>
+                                                <a href="#" class="link col s12 m12 l12">¿Olvidó su contraseña?</a>
+                                                <a href="#" class="link col s12 m12 l12">Abrir nueva cuenta</a>
                                             </form>
                                         </div>
                                     </div>
@@ -203,6 +203,7 @@
                                     <div class="center col s12 m12 l12">
                                         <a href="#footer" class="hire-me-btn waves-effect waves-light btn btn-large resume-btn"><i class="material-icons">send</i>&nbsp;&nbsp;Contáctenos</a>
                                     </div>
+                                    <div id="appmenu"></div>
                                 </div>
                             </div>
                         </div>
@@ -232,7 +233,7 @@
             </section>
             <!-- Start Education -->
             <?php if ($degree->degree): ?>
-            <section id="edcuation">
+            <section id="education">
                 <div class="container">
                     <div class="education-inner">
                         <h2 class="title"><?php echo $degree->label_degree ?></h2>
@@ -433,18 +434,6 @@
                     $('.tooltiptopicevent').remove();
 
                 },
-                dayClick: function () {
-                    tooltip.hide()
-                },
-                eventResizeStart: function () {
-                    tooltip.hide()
-                },
-                eventDragStart: function () {
-                    tooltip.hide()
-                },
-                viewDisplay: function () {
-                    tooltip.hide()
-                },
                 events: fuente
                 <?php endif;?>
             });
@@ -524,6 +513,7 @@
                             $('ul.tabs li').removeClass('disabled');
                             Materialize.toast('Bienvenido<br/> '+data.person.first_name, 5000, 'rounded');
                             $('#userInfo').load('partials/user', {"person": data.person, "settings": data.settings});
+                            $('#appmenu').load('partials/appmenu', {"person": data.person, "settings": data.settings});
                             $('#tab_authorities').load('partials/authorities', data.workers.authorities);
                             $('#tab_teachers').load('partials/teachers', data.workers.teachers);
                             $('#tab_administrative_staff').load('partials/administrative', data.workers.administrative_staff);/*
