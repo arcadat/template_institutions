@@ -132,6 +132,9 @@ class HomeController extends Controller
             case 'administrative':
                 $file = 'partials/administrative.phtml';
                 break;
+            case 'appmenu':
+                $file = 'partials/apps.phtml';
+                break;
             case 'authorities':
                 $file = 'partials/authorities.phtml';
                 break;
