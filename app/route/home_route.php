@@ -8,4 +8,6 @@ $app->get('/colegio', 'App\Controller\HomeController:colegio');
 
 $app->post('/signin', 'App\Controller\HomeController:signin');
 
+$app->get('/signout', 'App\Controller\HomeController:signout');
+
 $app->post('/partials/{workers}', 'App\Controller\HomeController:partials');
