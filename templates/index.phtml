@@ -395,6 +395,9 @@
     <script src="js/lg-thumbnail.min.js"></script>
     <script src="js/lg-fullscreen.min.js"></script>
 
+    <!-- Custom Js -->
+    <script type="text/javascript" src="js/utils.js"></script>
+
     <!-- GmapsJs Config -->
     <script type="text/javascript">
         $(document).ready(function() {
@@ -492,40 +495,13 @@
                     element.next("label").attr("data-error", error.contents().text())
                 },
                 submitHandler: function(form) {
-                    var formData = {
-                        'user'     : $('#login_email').val(),
-                        'pass'     : $('#login_pass').val(),
-                        'check'    : $('#login_check').val()
-                    };
-                    $.ajax({
-                        type        : 'POST',
-                        url         : '/signin',
-                        data        : formData,
-                        dataType    : 'json',
-                        encode      : true
-                    })
-                    .done(function(data) {
-                        console.log(data);
-                        if (data.result.number_error != 0) {
-                            Materialize.toast('Error<br/> '+data.result.msg_error, 5000, 'rounded');
-                            $('#login_pass').focus();
-                        } else {
-                            $('ul.tabs li').removeClass('disabled');
-                            Materialize.toast('Bienvenido<br/> '+data.person.first_name, 5000, 'rounded');
-                            $('#userInfo').load('partials/user', {"person": data.person, "settings": data.settings});
-                            $('#appmenu').load('partials/appmenu', {"person": data.person, "settings": data.settings});
-                            $('#tab_authorities').load('partials/authorities', data.workers.authorities);
-                            $('#tab_teachers').load('partials/teachers', data.workers.teachers);
-                            $('#tab_administrative_staff').load('partials/administrative', data.workers.administrative_staff);/*
-                            $('#honor_roll').load('partials/honor', data.workers.honor_roll).show();
-                            $('#birthdays_week').load('partials/birthdays', data.workers.birthdays_week).show();*/
-                            $('ul.tabs').tabs();
-                        }
-
-                    });
+                    ajaxSigin();
                     return false;
                 }
             });
+            <?php if (isset($_SESSION['idco'])): ?>
+            ajaxSigin();
+            <?php endif; ?>
             $('ul.tabs').tabs();
         });
     </script>
