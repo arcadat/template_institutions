@@ -20,7 +20,7 @@ class HomeController extends Controller
             $data = $req->getParsedBody();
             $data = $data['id_col'];
         } else {
-            $data = $this->container->config->api->colegioId;
+            $data = (isset($_SESSION['idco'])) ? $_SESSION['idco'] : $this->container->config->api->colegioId;
         }
 
         $uri = $this->container->config->api->url_basic . $data;
@@ -101,11 +101,24 @@ class HomeController extends Controller
         $this->container->logger->info("Arcadat Template '/signin' route");
 
         $data = $req->getParsedBody();
+        $data['idco'] = $this->container->config->api->colegioId;
+
+        if (isset($_SESSION['idco'])) {
+            $data['idco']  = $_SESSION['idco'];
+            $data['user']  = $_SESSION['user'];
+            $data['pass']  = $_SESSION['pass'];
+            $data['check'] = $_SESSION['check'];
+        } elseif ($data['check']=='true') {
+            $_SESSION['idco']  = $data['idco'];
+            $_SESSION['user']  = $data['user'];
+            $_SESSION['pass']  = $data['pass'];
+            $_SESSION['check'] = $data['check'];
+        }
 
         $data = [
-            'i_i' => $this->container->config->api->colegioId,
-            'u' => $data['user'],
-            'p' => $data['pass'],
+            'i_i' => $data['idco'],
+            'u'   => $data['user'],
+            'p'   => $data['pass'],
             'ncs' => $data['check']
         ];
 
@@ -121,6 +134,12 @@ class HomeController extends Controller
 
         // Render Json view
         return $res->withHeader('Content-type', 'application/json')->write($response);
+    }
+
+    public function signout($req, $res, $args)
+    {
+        session_destroy();
+        return $res->withRedirect('/');
     }
 
     public function partials($req, $res, $args)
