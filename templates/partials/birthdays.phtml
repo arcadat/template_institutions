@@ -1,0 +1,75 @@
+<?php
+$dia_sem = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+?><div class="container">
+    <div class="education-inner">
+        <h2 class="title"><?php echo $datos['label_birthdays_week'] ?></h2>
+        <ul id="birthdays_collapsible" class="collapsible" data-collapsible="accordion">
+        <?php for ($i=1; $i<=7; $i++) : ?>
+            <li>
+                <div class="collapsible-header <?php echo (date('N')==$i) ? 'active' : '' ?>"><i class="material-icons">folder</i><?php echo $dia_sem[ $i - 1 ]; ?></div>
+                <div class="collapsible-body">
+
+                <?php
+                    $persons_day = $datos['list_persons_birthday_week']['day_'.$i]['persons_day_'.$i];
+                    if ($persons_day > 0):
+                        $list_persons_day = $datos['list_persons_birthday_week']['day_'.$i]['list_persons_day_'.$i];
+                ?>
+                    <div id="owl-carousel-day-<?php echo $i ?>" class="experience-slider row">
+                    <?php for ($j=1; $j <= $persons_day; $j++): ?>
+                        <div class="col s12">
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <h2 class="experience-title"><?php echo $list_persons_day[$j]['title_person_birthday'] ?>&nbsp;</h2>
+                                    <img class="activator" src="<?php echo $list_persons_day[$j]['photo'] ?>"></img>
+                                </div>
+                                <div class="card-content">
+                                    <p class="center-align">
+                                        <b><?php echo $list_persons_day[$j]['full_name'] ?></b>&nbsp;<br/>
+                                        Edad: <?php echo $list_persons_day[$j]['age'] ?>&nbsp;
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endfor ?>
+
+                    </div>
+                    <!-- owl navigation -->
+                    <div class="customNavigation">
+                        <a id="prev_day_<?php echo $i; ?>" class="btn prev btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_left</i></a>
+                        <a id="next_<?php echo $i; ?>" class="btn next btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_right</i></a>
+                    </div>
+                    <script type="text/javascript">
+                        var owl_day_<?php echo $i ?> = $("#owl-carousel-day-<?php echo $i ?>");
+                        owl_day_<?php echo $i ?>.owlCarousel({
+                            items : 3, //4 items above 1024px browser width
+                            itemsDesktop : [1024, 3], //3 items between 1024px and 901px
+                            itemsDesktopSmall : [900,3], // betweem 900px and 601px
+                            itemsTablet: [600,1], //1 items between 600 and 0
+                            itemsMobile : 1 // itemsMobile disabled - inherit from itemsTablet option
+                        });
+                        // Slide Navigation
+                        jQuery("#next_<?php echo $i; ?>").click(function(){
+                            owl_day_<?php echo $i ?>.trigger('owl.next');
+                        });
+
+                        jQuery("#prev_day_<?php echo $i; ?>").click(function(){
+                            owl_day_<?php echo $i ?>.trigger('owl.prev');
+                        });
+                    </script>
+                <?php else: ?>
+                    <div class="skill-inner center-align col s12 m12 l12">
+                        <p>SIN DATOS REGISTRADOS</p>
+                    </div>
+                <?php endif ?>
+
+                </div>
+            </li>
+        <?php endfor; ?>
+        </ul>
+    </div>
+</div>
+
+<script type='text/javascript'>
+    $('#birthdays_collapsible').collapsible();
+</script>
+
