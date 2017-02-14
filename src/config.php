@@ -8,9 +8,9 @@ $config = [
         'url_basic' => 'http://arcadat.com/apps/json/web_service/data_basic_institution/?i_i=',
         'url_login' => 'http://arcadat.com/apps/json/web_service/login/',
         // ASIGNADOS
-        'colegioId' => '2b13572b-e506-4bf6-b908-8d228a6cc01f',
+        // 'colegioId' => '2b13572b-e506-4bf6-b908-8d228a6cc01f',
         // 'colegioId' => 'e0aef592-5ed5-4f20-a8cc-29c10d9a2db2',
-        // 'colegioId' => '07b7c9b3-2c31-42ae-9ef1-21591733f8fe',
+        'colegioId' => '07b7c9b3-2c31-42ae-9ef1-21591733f8fe',
         // 'colegioId' => 'b1359b3a-9210-4d7e-a353-e8a0c3506ba0',
         // SIN ASIGNAR
         // 'colegioId' => 'b6b4fc42-8252-4535-8f05-ffce89fb7b5d',
