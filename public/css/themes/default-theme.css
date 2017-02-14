@@ -12,7 +12,7 @@ a {
 
 
 .side-nav li:hover{
-  background-color: #ba68c8;  
+  background-color: #ba68c8;
 }
 .btn ,.btn-large{
   background-color: #ba68c8;
@@ -85,13 +85,13 @@ a {
   color: #ba68c8;
 }
 #testimonial{
-  background-color: #ba68c8;  
+  background-color: #ba68c8;
 }
 .testimonial-content h3 {
   color: #ba68c8;
 }
 .footer-top{
-  background-color:#ba68c8; 
+  background-color:#ba68c8;
 }
 input[type="text"]:focus:not([readonly]) + label,
 input[type="password"]:focus:not([readonly]) + label,
@@ -121,7 +121,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
   box-shadow: 0 1px 0 0 #ba68c8;
 }
 .submit-btn{
-  color: #ba68c8;  
+  color: #ba68c8;
 }
 .submit-btn:hover,
 .submit-btn:focus{
@@ -145,13 +145,13 @@ textarea.materialize-textarea:focus:not([readonly]) {
   background-color: #ba68c8 !important;
 }
 .reply-btn:hover{
-  background-color: #ba68c8; 
+  background-color: #ba68c8;
 }
 .pagination li.active{
   background-color: #ba68c8;
 }
 .card .card-action a {
-  color: #ba68c8;  
+  color: #ba68c8;
 }
 .tagcloud a:hover,
 .tagcloud a:focus{
@@ -166,11 +166,11 @@ textarea.materialize-textarea:focus:not([readonly]) {
   background-color: #ba68c8;
 }
 .submit-btn{
-  color: #ba68c8;  
+  color: #ba68c8;
 }
 .side-nav li:hover,
 .side-nav li.active {
-  background-color: #ba68c8; 
+  background-color: #ba68c8;
 }
 .progress .indeterminate {
   background-color: #ba68c8;
