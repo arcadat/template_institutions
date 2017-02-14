@@ -1,0 +1,106 @@
+<div class="portfolio-top">
+    <div class="container">
+        <div class="portfolio-top-inner">
+            <h2 class="title"><?php echo $datos['label_honor_roll'] ?></h2>
+        </div>
+    </div>
+</div>
+<div class="portfolio-bottom">
+    <div class="container">
+        <span class="card-subtitle"><?php echo $datos['label_period'] ?></span>
+        <div class="row">
+            <div class="col s12">
+                <ul id="tab_honor" class="tabs">
+                <?php for ($i=1; $i <= $datos['numbers_lapses_period'] ; $i++) : ?>
+                    <li class="tab col s3">
+                        <a class="<?php echo ($datos['lapse_default_show_data'] == $i) ? 'active' : ''; ?>" href="#tab_honor_<?php echo $i?>"><?php echo $datos['description_lapses_period'][$i]; ?></a>
+                    </li>
+                <?php endfor; ?>
+                </ul>
+            </div>
+            <?php for ($i=1; $i <= $datos['numbers_lapses_period'] ; $i++) : ?>
+            <div class="col s12" id="tab_honor_<?php echo $i?>">
+            <?php
+                $lapses_honor_roll = $datos['lapses_honor_roll'][$i];
+                $numbers_sections = $lapses_honor_roll['numbers_sections_lapse_honor_roll'];
+                if ($numbers_sections > 0):
+                    $list_sections_lapse_honor_roll = $lapses_honor_roll['list_sections_lapse_honor_roll']; ?>
+
+                <ul id="list_sections_collapsible" class="collapsible" data-collapsible="accordion">
+                    <?php for ($j=1; $j <= $numbers_sections; $j++) : ?>
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">folder</i><?php echo $list_sections_lapse_honor_roll[$j]['descripcion_section_honor_roll']; ?></div>
+                        <div class="collapsible-body">
+                            <?php
+                            $numbers_students = $list_sections_lapse_honor_roll[$j]['numbers_students_section_honor_roll'];
+                            if ($numbers_students > 0) :
+                                $list_students = $list_sections_lapse_honor_roll[$j]['list_students_section_honor_roll'];?>
+
+                                <div id="owl-carousel-honor-section-<?php echo $i.'-'.$j ?>" class="experience-slider row">
+                                <?php for ($k=1; $k <= $numbers_students; $k++): ?>
+                                    <div class="col s12">
+                                        <div class="card">
+                                            <div class="card-image waves-effect waves-block waves-light">
+                                                <img class="medal_honor" src="<?php echo $list_students[$k]['medal_honor_roll'] ?>"></img>
+                                                <img class="activator" src="<?php echo $list_students[$k]['photo_student_honor_roll'] ?>"></img>
+                                            </div>
+                                            <div class="card-content">
+                                                <p class="center-align">
+                                                    <b><?php echo $list_students[$k]['first_name'].' '.$list_students[$k]['last_name'] ?></b>&nbsp;<br/>
+                                                    Promedio: <?php echo $list_students[$k]['average_honor_roll'] ?>&nbsp;
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endfor ?>
+
+                                </div>
+                                <!-- owl navigation -->
+                                <div class="customNavigation">
+                                    <a id="prev_honor_section_<?php echo $i.'_'.$j; ?>" class="btn prev btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_left</i></a>
+                                    <a id="next_honor_section_<?php echo $i.'_'.$j; ?>" class="btn next btn-floating waves-effect waves-light btn-large white"><i class="material-icons brand-text">chevron_right</i></a>
+                                </div>
+                                <script type="text/javascript">
+                                    var owl_honor_section_<?php echo $i.'_'.$j ?> = $("#owl-carousel-honor-section-<?php echo $i.'-'.$j ?>");
+                                    owl_honor_section_<?php echo $i.'_'.$j ?>.owlCarousel({
+                                        items : 4, //4 items above 1024px browser width
+                                        itemsDesktop : [1024, 3], //3 items between 1024px and 901px
+                                        itemsDesktopSmall : [900,3], // betweem 900px and 601px
+                                        itemsTablet: [600,1], //1 items between 600 and 0
+                                        itemsMobile : 1 // itemsMobile disabled - inherit from itemsTablet option
+                                    });
+                                    // Slide Navigation
+                                    jQuery("#next_honor_section_<?php echo $i.'_'.$j; ?>").click(function(){
+                                        owl_honor_section_<?php echo $i.'_'.$j ?>.trigger('owl.next');
+                                    });
+
+                                    jQuery("#prev_honor_section_<?php echo $i.'_'.$j; ?>").click(function(){
+                                        owl_honor_section_<?php echo $i.'_'.$j ?>.trigger('owl.prev');
+                                    });
+                                </script>
+
+
+                            <?php else: ?>
+                            <div class="skill-inner center-align col s12 m12 l12">
+                                <p>SIN DATOS REGISTRADOS</p>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endfor; ?>
+                </ul>
+
+                <?php else: ?>
+                <div class="skill-inner center-align col s12 m12 l12">
+                    <p><?php echo $lapses_honor_roll['txt_no_items_honor_roll'] ?></p>
+                </div>
+                <?php endif; ?>
+            </div>
+            <?php endfor; ?>
+        </div>
+    </div>
+</div>
+
+<script type='text/javascript'>
+    $('#tab_honor').tabs();
+    $('#list_sections_collapsible').collapsible();
+</script>
