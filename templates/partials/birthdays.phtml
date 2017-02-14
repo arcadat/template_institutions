@@ -1,8 +1,16 @@
 <?php
 $dia_sem = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
-?><div class="container">
+?>
+<div class="portfolio-top">
+    <div class="container">
+        <div class="portfolio-top-inner">
+            <h2 class="title"><?php echo $datos['label_birthdays_week'] ?></h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
     <div class="education-inner">
-        <h2 class="title"><?php echo $datos['label_birthdays_week'] ?></h2>
         <ul id="birthdays_collapsible" class="collapsible" data-collapsible="accordion">
         <?php for ($i=1; $i<=7; $i++) : ?>
             <li>
