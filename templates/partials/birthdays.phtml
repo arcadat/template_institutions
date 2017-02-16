@@ -14,7 +14,7 @@ $dia_sem = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'
         <ul id="birthdays_collapsible" class="collapsible" data-collapsible="accordion">
         <?php for ($i=1; $i<=7; $i++) : ?>
             <li>
-                <div class="collapsible-header <?php echo (date('N')==$i) ? 'active' : '' ?>"><i class="material-icons">folder</i><?php echo $dia_sem[ $i - 1 ]; ?></div>
+                <div class="collapsible-header <?php echo (date('N')==$i) ? 'active' : '' ?>"><i class="material-icons">date_range</i><?php echo $dia_sem[ $i - 1 ]; ?></div>
                 <div class="collapsible-body">
 
                 <?php
@@ -33,7 +33,7 @@ $dia_sem = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'
                                 <div class="card-content">
                                     <p class="center-align">
                                         <b><?php echo $list_persons_day[$j]['full_name'] ?></b>&nbsp;<br/>
-                                        Edad: <?php echo $list_persons_day[$j]['age'] ?>&nbsp;
+                                        <b><?php echo $list_persons_day[$j]['age'] ?> AÑOS</b>
                                     </p>
                                 </div>
                             </div>
