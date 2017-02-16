@@ -28,8 +28,8 @@ function ajaxSigin() {
             $('#tab_authorities').load('partials/authorities', data.workers.authorities);
             $('#tab_teachers').load('partials/teachers', data.workers.teachers);
             $('#tab_administrative_staff').load('partials/administrative', data.workers.administrative_staff);
-            $('#honor_roll').load('partials/honor', data.workers.honor_roll).show();
-            $('#birthdays_week').load('partials/birthdays', data.workers.birthdays_week).show();
+            $('#tab_honor_roll').load('partials/honor', data.workers.honor_roll);
+            $('#tab_birthdays_week').load('partials/birthdays', data.workers.birthdays_week);
             $('ul.tabs').tabs();
         }
     });
