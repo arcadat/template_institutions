@@ -1,27 +1,24 @@
 <?php
 $dia_sem = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
 ?>
-<div class="portfolio-top">
-    <div class="container">
-        <div class="portfolio-top-inner">
-            <h2 class="title"><?php echo $datos['label_birthdays_week'] ?></h2>
-        </div>
-    </div>
+<div class="personal-information">
+    <h3 class="title skill-inner center-align">
+        <?php echo $datos['label_birthdays_week'] ?>
+    </h3>
 </div>
+<div>
+    <ul id="birthdays_collapsible" class="collapsible" data-collapsible="accordion">
+    <?php for ($i=1; $i<=7; $i++) : ?>
+        <li>
+            <div class="collapsible-header <?php echo (date('N')==$i) ? 'active' : '' ?>"><i class="material-icons">date_range</i><?php echo $dia_sem[ $i - 1 ]; ?></div>
+            <div class="collapsible-body">
 
-<div class="container">
-    <div class="education-inner">
-        <ul id="birthdays_collapsible" class="collapsible" data-collapsible="accordion">
-        <?php for ($i=1; $i<=7; $i++) : ?>
-            <li>
-                <div class="collapsible-header <?php echo (date('N')==$i) ? 'active' : '' ?>"><i class="material-icons">date_range</i><?php echo $dia_sem[ $i - 1 ]; ?></div>
-                <div class="collapsible-body">
-
-                <?php
-                    $persons_day = $datos['list_persons_birthday_week']['day_'.$i]['persons_day_'.$i];
-                    if ($persons_day > 0):
-                        $list_persons_day = $datos['list_persons_birthday_week']['day_'.$i]['list_persons_day_'.$i];
-                ?>
+            <?php
+                $persons_day = $datos['list_persons_birthday_week']['day_'.$i]['persons_day_'.$i];
+                if ($persons_day > 0):
+                    $list_persons_day = $datos['list_persons_birthday_week']['day_'.$i]['list_persons_day_'.$i];
+            ?>
+                <div class="collapsible-body-owl">
                     <div id="owl-carousel-day-<?php echo $i ?>" class="experience-slider row">
                     <?php for ($j=1; $j <= $persons_day; $j++): ?>
                         <div class="col s12">
@@ -32,7 +29,7 @@ $dia_sem = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'
                                 </div>
                                 <div class="card-content">
                                     <p class="center-align">
-                                        <b><?php echo $list_persons_day[$j]['full_name'] ?></b>&nbsp;<br/>
+                                        <b><?php echo $list_persons_day[$j]['first_name'].'<br/>'.$list_persons_day[$j]['last_name'] ?></b>&nbsp;<br/>
                                         <b><?php echo $list_persons_day[$j]['age'] ?> AÑOS</b>
                                     </p>
                                 </div>
@@ -49,7 +46,7 @@ $dia_sem = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'
                     <script type="text/javascript">
                         var owl_day_<?php echo $i ?> = $("#owl-carousel-day-<?php echo $i ?>");
                         owl_day_<?php echo $i ?>.owlCarousel({
-                            items : 3, //4 items above 1024px browser width
+                            items : 4, //4 items above 1024px browser width
                             itemsDesktop : [1024, 3], //3 items between 1024px and 901px
                             itemsDesktopSmall : [900,3], // betweem 900px and 601px
                             itemsTablet: [600,1], //1 items between 600 and 0
@@ -64,18 +61,17 @@ $dia_sem = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'
                             owl_day_<?php echo $i ?>.trigger('owl.prev');
                         });
                     </script>
-                <?php else: ?>
-                    <div class="skill-inner center-align col s12 m12 l12">
-                        <p>SIN DATOS REGISTRADOS</p>
-                    </div>
-                <?php endif ?>
-
                 </div>
-            </li>
-        <?php endfor; ?>
-        </ul>
-    </div>
-</div>
+            <?php else: ?>
+                <div class="skill-inner center-align col s12 m12 l12">
+                    <p>SIN DATOS REGISTRADOS</p>
+                </div>
+            <?php endif ?>
+
+            </div>
+        </li>
+    <?php endfor; ?>
+    </ul>
 
 <script type='text/javascript'>
     $('#birthdays_collapsible').collapsible();

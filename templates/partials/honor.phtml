@@ -1,14 +1,10 @@
-<div class="portfolio-top">
-    <div class="container">
-        <div class="portfolio-top-inner">
-            <h2 class="title"><?php echo $datos['label_honor_roll'] ?></h2>
-        </div>
-    </div>
+<div class="personal-information">
+    <h3 class="title skill-inner center-align">
+        <?php echo $datos['label_honor_roll'] ?>
+    </h3>
+    <span class="card-subtitle center-align"><?php echo $datos['label_period'] ?></span>
 </div>
-<div class="portfolio-bottom">
-    <div class="container">
-        <span class="card-subtitle"><?php echo $datos['label_period'] ?></span>
-        <div class="row">
+
             <div class="col s12">
                 <ul id="tab_honor" class="tabs">
                 <?php for ($i=1; $i <= $datos['numbers_lapses_period'] ; $i++) : ?>
@@ -36,6 +32,7 @@
                             if ($numbers_students > 0) :
                                 $list_students = $list_sections_lapse_honor_roll[$j]['list_students_section_honor_roll'];?>
 
+                            <div class="collapsible-body-owl">
                                 <div id="owl-carousel-honor-section-<?php echo $i.'-'.$j ?>" class="experience-slider row">
                                 <?php for ($k=1; $k <= $numbers_students; $k++): ?>
                                     <div class="col s12">
@@ -81,7 +78,7 @@
                                         owl_honor_section_<?php echo $i.'_'.$j ?>.trigger('owl.prev');
                                     });
                                 </script>
-
+                            </div>
 
                             <?php else: ?>
                             <div class="skill-inner center-align col s12 m12 l12">
@@ -99,9 +96,6 @@
                 <?php endif; ?>
             </div>
             <?php endfor; ?>
-        </div>
-    </div>
-</div>
 
 <script type='text/javascript'>
     $('#tab_honor').tabs();
