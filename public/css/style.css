@@ -4,6 +4,8 @@
   #BASIC TYPOGRAPHY
   #HOME
   #ABOUT SECTION
+  #HONOR ROLL
+  #BIRTHDAYS WEEK
   #RESUME SECTION
   #PORTFOLIO SECTION
   #FACTS SECTION
@@ -320,14 +322,40 @@ nav .brand-logo img {
 #education .card .card-content .card-title, .card .card-reveal .card-title {
     font-size: 16px;
 }
+
+#slide-out-user>li>a, #slide-out-user .userView .name {
+    font-size: 12px;
+}
+
+/*--------------------*/
+/* CUADRO DE HONOR */
+/*--------------------*/
+
+.card .card-image .medal_honor_image{
+    position: relative;
+}
+
 .card .card-image .medal_honor{
     position: absolute;
     z-index: 1;
     width: 25%;
 }
 
-#slide-out-user>li>a, #slide-out-user .userView .name {
+.card .card-image .tooltip_medal{
     font-size: 12px;
+    white-space: normal;
+}
+
+/*--------------------*/
+/* BIRTHDAYS WEEK */
+/*--------------------*/
+
+#birthdays_collapsible{
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+.collapsible-body{
+    display: flex;
 }
 
 /*--------------------*/
@@ -436,7 +464,7 @@ nav .brand-logo img {
 .experience-slider{
   display: inline;
   float: left;
-  margin-top: 55px;
+  margin-top: 5px;
   padding-left: 20px;
   width: 100%;
 }
@@ -452,6 +480,8 @@ nav .brand-logo img {
   margin-top: 0;
   padding: 15px 20px;
   text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 
