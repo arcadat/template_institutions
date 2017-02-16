@@ -4,6 +4,7 @@ function ajaxSigin() {
         'pass': $('#login_pass').val(),
         'check': $('#login_check').is(':checked')
     };
+    $('#btnsubmit').addClass('disabled').html('POR FAVOR ESPERE...');
     $.ajax({
         type: 'POST',
         url: '/signin',
@@ -13,6 +14,7 @@ function ajaxSigin() {
     }).done(function(data) {
         console.log(data);
         if (data.result.number_error != 0) {
+            $('#btnsubmit').removeClass('disabled').html('INICIAR SESIÓN');
             Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
             $('#login_pass').focus();
         } else {
