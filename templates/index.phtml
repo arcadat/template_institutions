@@ -144,10 +144,12 @@
                                 <div class="row">
                                     <div class="col s12">
                                         <ul class="tabs">
-                                            <li class="tab col s3"><a class="active" href="#tab_institucion"><?php echo $main_data->label_tab1 ?></a></li>
-                                            <li class="tab col s3 disabled"><a href="#tab_authorities"><?php echo $main_data->label_tab2 ?></a></li>
-                                            <li class="tab col s3 disabled"><a href="#tab_teachers"><?php echo $main_data->label_tab3 ?></a></li>
-                                            <li class="tab col s3 disabled"><a href="#tab_administrative_staff"><?php echo $main_data->label_tab4 ?></a></li>
+                                            <li class="tab col s2"><a class="tooltipped active" href="#tab_institucion" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab1 ?>"><i class="material-icons">business</i></a></li>
+                                            <li class="tab col s2 disabled"><a href="#tab_authorities" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab2 ?>"><i class="material-icons">gavel</i></a></li>
+                                            <li class="tab col s2 disabled"><a href="#tab_teachers" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab3 ?>"><i class="material-icons">school</i></a></li>
+                                            <li class="tab col s2 disabled"><a href="#tab_administrative_staff" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab4 ?>"><i class="material-icons">folder_shared</i></a></li>
+                                            <li class="tab col s2 disabled"><a href="#tab_birthdays_week" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab5 ?>"><i class="material-icons">cake</i></a></li>
+                                            <li class="tab col s2 disabled"><a href="#tab_honor_roll" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab6 ?>"><i class="material-icons">folder_shared</i></a></li>
                                         </ul>
                                     </div>
                                     <div class="col s12 m12 l12" id="tab_institucion">
@@ -198,6 +200,8 @@
                                     <div class="col s12 m12 l12" id="tab_authorities"></div>
                                     <div class="col s12 m12 l12" id="tab_teachers"></div>
                                     <div class="col s12 m12 l12" id="tab_administrative_staff"></div>
+                                    <div class="col s12 m12 l12" id="tab_birthdays_week"></div>
+                                    <div class="col s12 m12 l12" id="tab_honor_roll"></div>
                                 </div>
                                 <div class="row">
                                     <div class="center col s12 m12 l12">
@@ -258,8 +262,6 @@
                 </div>
             </section>
             <?php endif;?>
-            <section id="honor_roll" style="display: none;"></section>
-            <section id="birthdays_week" style="display: none;"></section>
             <?php if ($installations->installations): ?>
             <!-- Start Portfolio -->
             <section id="portfolio">
