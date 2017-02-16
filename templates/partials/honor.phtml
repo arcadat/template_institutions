@@ -29,7 +29,7 @@
                 <ul id="list_sections_collapsible" class="collapsible" data-collapsible="accordion">
                     <?php for ($j=1; $j <= $numbers_sections; $j++) : ?>
                     <li>
-                        <div class="collapsible-header"><i class="material-icons">folder</i><?php echo $list_sections_lapse_honor_roll[$j]['descripcion_section_honor_roll']; ?></div>
+                        <div class="collapsible-header"><i class="material-icons">group</i><?php echo $list_sections_lapse_honor_roll[$j]['descripcion_section_honor_roll']; ?></div>
                         <div class="collapsible-body">
                             <?php
                             $numbers_students = $list_sections_lapse_honor_roll[$j]['numbers_students_section_honor_roll'];
@@ -41,13 +41,16 @@
                                     <div class="col s12">
                                         <div class="card">
                                             <div class="card-image waves-effect waves-block waves-light">
-                                                <img class="medal_honor" src="<?php echo $list_students[$k]['medal_honor_roll'] ?>"></img>
-                                                <img class="activator" src="<?php echo $list_students[$k]['photo_student_honor_roll'] ?>"></img>
+                                                <h2 class="experience-title tooltip_medal"><?php echo $list_students[$k]['tooltip_medal_honor_roll'] ?>&nbsp;</h2>
+                                                <div class="medal_honor_image">
+                                                    <img class="medal_honor" src="<?php echo $list_students[$k]['medal_honor_roll'] ?>"></img>
+                                                    <img class="activator" src="<?php echo $list_students[$k]['photo_student_honor_roll'] ?>"></img>
+                                                </div>
                                             </div>
                                             <div class="card-content">
                                                 <p class="center-align">
-                                                    <b><?php echo $list_students[$k]['first_name'].' '.$list_students[$k]['last_name'] ?></b>&nbsp;<br/>
-                                                    Promedio: <?php echo $list_students[$k]['average_honor_roll'] ?>&nbsp;
+                                                    <b><?php echo $list_students[$k]['first_name'].'<br/>'.$list_students[$k]['last_name'] ?></b>&nbsp;<br/>
+                                                    Calificación: <br/> <b><?php echo $list_students[$k]['average_honor_roll'] ?></b>
                                                 </p>
                                             </div>
                                         </div>
