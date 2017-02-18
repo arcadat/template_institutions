@@ -5,8 +5,9 @@ $config = [
         'lc_time' => 'es_ES.UTF-8',
     ],
     'api'        => [
-        'url_basic' => 'http://arcadat.com/apps/json/web_service/data_basic_institution/?i_i=',
-        'url_login' => 'http://arcadat.com/apps/json/web_service/login/',
+        'url_basic'   => 'http://arcadat.com/apps/json/web_service/data_basic_institution/?i_i=',
+        'url_login'   => 'http://arcadat.com/apps/json/web_service/login/',
+        'url_contact' => 'http://arcadat.com/apps/json/web_service/contact_us/default.php',
         // ASIGNADOS
         // 'colegioId' => '2b13572b-e506-4bf6-b908-8d228a6cc01f',
         // 'colegioId' => 'e0aef592-5ed5-4f20-a8cc-29c10d9a2db2',
@@ -26,13 +27,9 @@ $config = [
         // 'colegioId' => '07b7c9b3-2c31-42ae-9ef1-21591733f8fe',
 
     ],
-    'mail'       => [
-        'Host'       => '',
-        'SMTPAuth'   => '',
-        'Username'   => '',
-        'Password'   => '',
-        'SMTPSecure' => '',
-        'Port'       => '',
+    'api_recaptcha' => [
+        'sitekey' => '6LdJ-xUUAAAAAJ8dcUtN1PUEHf1gjWxiNJGC5zoO',
+        'secret' => '6LdJ-xUUAAAAAB9QWlgv18IOsZtn_5eYw7ztJeka',
     ],
 ];
 
