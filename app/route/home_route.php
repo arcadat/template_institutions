@@ -11,3 +11,5 @@ $app->post('/signin', 'App\Controller\HomeController:signin');
 $app->get('/signout', 'App\Controller\HomeController:signout');
 
 $app->post('/partials/{workers}', 'App\Controller\HomeController:partials');
+
+$app->post('/contact', 'App\Controller\HomeController:contact');
