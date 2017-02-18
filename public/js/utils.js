@@ -17,7 +17,7 @@ function ajaxSigin() {
     }).done(function(data) {
         console.log(data);
         if (data.result.number_error != 0) {
-            if (try_numbers >= 3) {
+            if (try_numbers >= 2) {
                 $('#signin_reCaptcha').show();
             }
             $('#btnsubmit').removeClass('disabled').html('INICIAR SESIÓN');
