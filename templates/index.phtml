@@ -414,6 +414,20 @@
 
     <!-- GmapsJs Config -->
     <script type="text/javascript">
+
+        var try_numbers = 0;
+        var contact_reCaptcha;
+        var signin_reCaptcha;
+        var myCallBack = function() {
+            contact_reCaptcha = grecaptcha.render('contact_reCaptcha', {
+                'sitekey' : '<?php echo $recaptcha_sitekey ?>'
+            });
+            signin_reCaptcha = grecaptcha.render('signin_reCaptcha', {
+                'sitekey' : '<?php echo $recaptcha_sitekey ?>',
+                'size' : 'compact'
+            });
+        };
+
         $(document).ready(function() {
             var fuente = <?php echo $data_schedule ?>;
 
@@ -502,19 +516,6 @@
             <?php endif; ?>
             $('ul.tabs').tabs();
         });
-
-        var try_numbers = 0;
-        var contact_reCaptcha;
-        var signin_reCaptcha;
-        var myCallBack = function() {
-            contact_reCaptcha = grecaptcha.render('contact_reCaptcha', {
-                'sitekey' : '<?php echo $recaptcha_sitekey ?>'
-            });
-            signin_reCaptcha = grecaptcha.render('signin_reCaptcha', {
-                'sitekey' : '<?php echo $recaptcha_sitekey ?>',
-                'size' : 'compact'
-            });
-        };
     </script>
 
     <!-- Custom Js -->
