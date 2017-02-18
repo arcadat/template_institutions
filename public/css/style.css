@@ -1233,7 +1233,7 @@ textarea.materialize-textarea {
 
 
 .textarea-input textarea{
-  min-height: 116px;
+  min-height: 73px;
 }
 
 
@@ -1248,7 +1248,7 @@ textarea.materialize-textarea {
 .contact-map{
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   border-radius: 4px;
-  height: 500px;
+  height: 638px;
   display: inline;
   float: left;
   width: 100%;
@@ -2128,7 +2128,7 @@ textarea.materialize-textarea {
 	}
   .prev2 {margin-top: 13.5%;}
   .next2 {margin-top: 13.5%;}
-  .contact-map{height: 492px;}
+  .contact-map{height: 631px;}
 
   /*   portfolio plugin */
 
@@ -2157,10 +2157,16 @@ textarea.materialize-textarea {
   .blog-post-content h2, .blog-post-content h2 a {font-size: 16px;}
   .card .card-content p {font-size: 13px;}
   .card .card-action a {margin-right: 0px;}
-  .contact-map{height: 484px;}
+  .contact-map{height: 651px;}
   .call-to-about {left: 45.5%;}
   .up-btn {left: 45.5%;}
   .custom-nav li a { padding: 25px 20px;}
+  #rc-imageselect, .g-recaptcha{
+    transform:scale(0.8);
+    -webkit-transform:scale(0.8);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+  }
 
 }
 
@@ -2201,7 +2207,12 @@ textarea.materialize-textarea {
   .author-name {font-size: 18px;}
   .pagination li {height: 25px;width: 25px;}
   .custom-pagination li a {font-size: 12px;line-height: 25px;}
-
+  #rc-imageselect, .g-recaptcha{
+    transform:scale(0.7);
+    -webkit-transform:scale(0.7);
+    transform-origin:0 0;
+    -webkit-transform-origin:0 0;
+  }
 }
 
 @media(max-width:640px ){

@@ -12,7 +12,9 @@
 	9. CALL TO ABOUT
 	10. BOTTOM TO UP
 	11. PARALLAX HEADER
-	12. HIRE ME SCROLL
+    12. HIRE ME SCROLL
+    13. LOGIN FORM
+	14. CONTACT FORM
 **/
 
 jQuery(function($){
@@ -240,6 +242,34 @@ jQuery(function($){
 	/* ----------------------------------------------------------- */
 	/* 13. SLIDER
 	/* ----------------------------------------------------------- */
-    $('.slider').slider({full_width: true});
+    jQuery('.slider').slider({full_width: true});
+
+    /* ----------------------------------------------------------- */
+    /* 14. LOGIN FORM
+    /* ----------------------------------------------------------- */
+    jQuery('#login_frm').validate({
+        errorClass: 'invalid',
+        errorPlacement: function(error, element) {
+            element.next("label").attr("data-error", error.contents().text())
+        },
+        submitHandler: function(form) {
+            ajaxSigin();
+            return false;
+        }
+    });
+
+    /* ----------------------------------------------------------- */
+    /* 15. CONTACT FORM
+    /* ----------------------------------------------------------- */
+    jQuery('#contact_frm').validate({
+        errorClass: 'invalid',
+        errorPlacement: function(error, element) {
+            element.next("label").attr("data-error", error.contents().text())
+        },
+        submitHandler: function(form) {
+            ajaxContact();
+            return false;
+        }
+    });
 
 });

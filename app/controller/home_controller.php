@@ -71,6 +71,7 @@ class HomeController extends Controller
                 'data_degree'          => $data_degree,
                 'data_schedule'        => $data_schedule,
                 'tiempoServicio'       => $tiempoServicio,
+                'recaptcha_sitekey'    => $this->container->config->api_recaptcha->sitekey,
             ];
 
             $file = 'index.phtml';
@@ -79,7 +80,6 @@ class HomeController extends Controller
             echo '<pre>';
             var_dump($response);
             die();
-            $file = 'index.phtml';
         }
 
         // Render view
@@ -101,7 +101,21 @@ class HomeController extends Controller
         $this->container->logger->info("Arcadat Template '/signin' route");
 
         $data = $req->getParsedBody();
-        $data['idco'] = $this->container->config->api->colegioId;
+        $data['idco'] = (isset($_SESSION['idco'])) ? $_SESSION['idco'] : $this->container->config->api->colegioId;
+
+        if ($data['tn'] >= 3) {
+            $recaptcha = new \ReCaptcha\ReCaptcha($this->container->config->api_recaptcha->secret);
+            $resp = $recaptcha->verify($data['rcode'], $_SERVER['REMOTE_ADDR']);
+            if (!$resp->isSuccess()) {
+                $response = json_encode([
+                        'result' => [
+                            'number_error' => 70,
+                            'msg_error' => 'Falló el cheque de seguridad reCaptcha'
+                        ]
+                    ]);
+                return $res->withHeader('Content-type', 'application/json')->write($response);
+            }
+        }
 
         if (isset($_SESSION['idco'])) {
             $data['idco']  = $_SESSION['idco'];
@@ -183,5 +197,48 @@ class HomeController extends Controller
 
         // Render view
         return $this->container->renderer->render($res, $file, $args);
+    }
+
+    public function contact($req, $res, $args)
+    {
+        // Log message
+        $this->container->logger->info("Arcadat Template '/contact' route");
+
+        $recaptcha = new \ReCaptcha\ReCaptcha($this->container->config->api_recaptcha->secret);
+
+        $data = $req->getParsedBody();
+        $resp = $recaptcha->verify($data['recaptcha'], $_SERVER['REMOTE_ADDR']);
+
+        if ($resp->isSuccess()) {
+            $data['idco'] = (isset($_SESSION['idco'])) ? $_SESSION['idco'] : $this->container->config->api->colegioId;
+            $data = [
+                'i_i'     => $data['idco'],
+                'name'    => $data['name'],
+                'email'   => $data['email'],
+                'subject' => $data['subject'],
+                'message' => $data['message'],
+                'send_to' => $data['send_to']
+            ];
+
+            $uri = $this->container->config->api->url_contact;
+
+            $response = Request::post($uri)
+                ->method(Http::POST)
+                ->withoutStrictSsl()
+                ->expectsJson()
+                ->sendsType(Mime::FORM)
+                ->body($data)
+                ->send();
+        } else{
+            $response = json_encode([
+                    'result' => [
+                        'number_error' => 70,
+                        'msg_error' => 'Falló el cheque de seguridad reCaptcha'
+                    ]
+                ]);
+        }
+
+        // Render Json view
+        return $res->withHeader('Content-type', 'application/json')->write($response);
     }
 }

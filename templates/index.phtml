@@ -189,6 +189,7 @@
                                                     <input type="checkbox" class="input-box" name="loginCheck" id="login_check">
                                                     <label class="input-label" for="login_check">No cerrar sesión</label>
                                                 </div>
+                                                <div id="signin_reCaptcha" style="margin: 15px; display: none;"></div>
                                                 <div class="input-field">
                                                     <button id="btnsubmit" class="waves-effect btn-large brand-text col s12 m12 l12" type="submit">Iniciar sesión</button>
                                                 </div>
@@ -318,24 +319,33 @@
                                         <div class="row">
                                             <div class="col s12 m6 l6">
                                                 <div class="contact-form">
-                                                    <form>
+                                                    <form id="contact_frm">
                                                         <div class="input-field">
-                                                            <input type="text" class="input-box" name="contactName" id="contact-name">
+                                                            <input type="text" class="input-box validate" name="contactName" id="contact-name" title="Nombre es requerido."  required>
                                                             <label class="input-label" for="contact-name">Nombre</label>
                                                         </div>
                                                         <div class="input-field">
-                                                            <input type="email" class="input-box" name="contactEmail" id="email">
-                                                            <label class="input-label" for="email">Email</label>
+                                                            <input type="email" class="input-box validate" name="contactEmail" id="contact-email" title="Correo electrónico es requerido."  required>
+                                                            <label class="input-label" for="contact-email">Email</label>
                                                         </div>
                                                         <div class="input-field">
-                                                            <input type="text" class="input-box" name="contactSubject" id="subject">
-                                                            <label class="input-label" for="subject">Asunto</label>
+                                                            <input type="text" class="input-box validate" name="contactSubject" id="contact-subject" title="Asunto es requerido."  required>
+                                                            <label class="input-label" for="contact-subject">Asunto</label>
                                                         </div>
                                                         <div class="input-field textarea-input">
-                                                            <textarea class="materialize-textarea" name="contactMessage" id="textarea1"></textarea>
-                                                            <label class="input-label" for="textarea1">Mensaje</label>
+                                                            <textarea class="materialize-textarea validate" name="contactMessage" id="contact-message" title="Mensaje es requerido."  required></textarea>
+                                                            <label class="input-label" for="contact-message">Mensaje</label>
                                                         </div>
-                                                        <button class="left waves-effect btn-flat brand-text submit-btn" type="submit">enviar mensaje</button>
+                                                        <p>
+                                                            <input class="input-box validate" name="send_to" type="radio" id="send_to_1" value="1" checked="checked">
+                                                            <label for="send_to_1">Coordinación Académica</label>
+                                                        </p>
+                                                        <p>
+                                                            <input class="input-box validate" name="send_to" type="radio" id="send_to_2" value="2">
+                                                            <label for="send_to_2">Administración</label>
+                                                        </p>
+                                                        <div id="contact_reCaptcha" class="g-recaptcha"></div>
+                                                        <button id="contact-btn" class="left waves-effect btn-flat brand-text submit-btn" type="submit">enviar mensaje</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -368,6 +378,8 @@
             </footer>
         </main>
     </div>
+    <!-- Google reCaptcha -->
+    <script src='https://www.google.com/recaptcha/api.js?onload=myCallBack&render=explicit' async defer></script>
     <!-- jQuery Library -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- Materialize js -->
@@ -411,12 +423,6 @@
                 height: 700,
                 editable: true,
                 eventLimit: true <?php if (isset($data_schedule) && !empty($data_schedule)): ?>,
-                /* eventRender: function(event, element) {
-                    element.addClass('tooltipped');
-                    element.attr('data-position', 'top');
-                    element.attr('data-html', 'true');
-                    element.attr('data-tooltip', event.title + '<br/>Del: ' + moment(event.start).format('DD/MM/YYYY') + '<br/>Al: ' + moment(event.end).format('DD/MM/YYYY'));
-                }, */
                 eventMouseover: function (data, event, view) {
                     tooltip = '<div class="tooltiptopicevent" style="color:#fff;width:auto;height:auto;background:<?php echo $main_data->color_i ?>;text-transform:uppercase;position:absolute;z-index:10001;padding:10px 10px 10px 10px;line-height:100%;">' + data.title + '</br>Del' + ': ' + moment(data.start).format('DD/MM/YYYY') + '<br/>Al: ' + moment(data.end).subtract(1,'days').format('DD/MM/YYYY') + '</div>';
 
@@ -491,21 +497,24 @@
                 html: 'true'
             });
 
-            $('#login_frm').validate({
-                errorClass: 'invalid',
-                errorPlacement: function(error, element) {
-                    element.next("label").attr("data-error", error.contents().text())
-                },
-                submitHandler: function(form) {
-                    ajaxSigin();
-                    return false;
-                }
-            });
             <?php if (isset($_SESSION['idco'])): ?>
             ajaxSigin();
             <?php endif; ?>
             $('ul.tabs').tabs();
         });
+
+        var try_numbers = 0;
+        var contact_reCaptcha;
+        var signin_reCaptcha;
+        var myCallBack = function() {
+            contact_reCaptcha = grecaptcha.render('contact_reCaptcha', {
+                'sitekey' : '<?php echo $recaptcha_sitekey ?>'
+            });
+            signin_reCaptcha = grecaptcha.render('signin_reCaptcha', {
+                'sitekey' : '<?php echo $recaptcha_sitekey ?>',
+                'size' : 'compact'
+            });
+        };
     </script>
 
     <!-- Custom Js -->
