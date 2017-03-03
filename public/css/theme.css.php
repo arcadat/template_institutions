@@ -232,3 +232,6 @@ textarea.materialize-textarea:focus:not([readonly]) {
     background-color: <?php echo $color_i; ?>;
 }
 
+.message {
+    background-color: rgba(<?php echo $r .', '. $g .', '. $b ?>, 0.05);
+}

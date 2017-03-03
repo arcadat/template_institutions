@@ -1,0 +1,48 @@
+<div class="modal-content personal-information">
+    <h3>Registro de Usuario</h3>
+    <form id="register_frm">
+        <div class="input-field">
+            <input type="text" class="input-box validate" name="register_nip" id="register_nip" title="Número de identificación personal es requerido." required>
+            <label class="input-label" for="register_nip">Número de identificación personal</label>
+        </div>
+        <div class="input-field">
+            <input type="date" class="" name="register_date" id="register_date" title="La fecha de nacimiento es requerida." required>
+            <label class="input-label" for="register_date">Fecha de nacimiento</label>
+        </div>
+        <div class="input-field center-align">
+            <div id="register_reCaptcha" data-callback="registerCallBack" style="margin: 15px;"></div>
+        </div>
+        <div class="input-field center-align">
+            <input id="register_option" name="register_option" type="hidden" value="1" />
+            <button id="register_btn" class="waves-effect btn brand-text col s12 m12 l12" type="submit">Siguiente</button>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <a href="#!" onclick="$('#modal_process').modal('close');" class="waves-effect waves-green btn-flat">Salir</a>
+</div>
+
+<script type='text/javascript'>
+    var register_reCaptcha = grecaptcha.render('register_reCaptcha', {
+        'sitekey' : siteKey,
+    });
+
+    $('#register_date').pickadate({
+        max: new Date(),
+        format: 'dd-mm-yyyy',
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 85, // Creates a dropdown of 15 years to control year
+        container: 'body',
+    });
+
+    $('#register_frm').validate({
+        errorClass: 'invalid',
+        errorPlacement: function(error, element) {
+            element.next("label").attr("data-error", error.contents().text())
+        },
+        submitHandler: function(form) {
+            ajaxRegister();
+            return false;
+        }
+    });
+</script>

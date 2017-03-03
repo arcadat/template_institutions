@@ -172,6 +172,26 @@
                                                 <li><span>Dirección : </span>
                                                     <?php echo $main_data->address_i . ', ' . strtoupper($main_data->city_i . ' ' . $main_data->state_i . ', ' . $main_data->country_i); ?>
                                                 </li>
+                                                <?php if (!empty($main_data->url_blog) || !empty($main_data->facebook_account) || !empty($main_data->instagram_account) || !empty($main_data->twitter_account) ): ?>
+
+                                                <li><span>Redes Sociales : </span>
+                                                    <?php if (!empty($main_data->facebook_account)): ?>
+                                                    <a class="btn" href=""><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                                                    <?php endif ?>
+
+                                                    <?php if (!empty($main_data->twitter_account)): ?>
+                                                    <a class="btn" href=""><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                                                    <?php endif ?>
+
+                                                    <?php if (!empty($main_data->instagram_account)): ?>
+                                                    <a class="btn" href=""><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                                                    <?php endif ?>
+
+                                                    <?php if (!empty($main_data->url_blog)): ?>
+                                                    <a class="btn" href=""><i class="fa fa-rss-square fa-2x" aria-hidden="true"></i></a>
+                                                    <?php endif ?>
+                                                </li>
+                                                <?php endif ?>
                                             </ul>
                                         </div>
                                         <div id="userInfo" class="col s12 m12 l4">
@@ -193,8 +213,8 @@
                                                 <div class="input-field">
                                                     <button id="btnsubmit" class="waves-effect btn-large brand-text col s12 m12 l12" type="submit">Iniciar sesión</button>
                                                 </div>
-                                                <a href="#" class="link col s12 m12 l12">¿Olvidó su contraseña?</a>
-                                                <a href="#" class="link col s12 m12 l12">Abrir nueva cuenta</a>
+                                                <a href="#modal_process" onclick="loadModal('recovery')" class="modal-trigger link col s12 m12 l12">¿Olvidó su contraseña?</a>
+                                                <a href="#modal_process" onclick="loadModal('register','<?php echo $recaptcha_sitekey ?>')" class="modal-trigger link col s12 m12 l12">Abrir nueva cuenta</a>
                                             </form>
                                         </div>
                                     </div>
@@ -378,6 +398,16 @@
             </footer>
         </main>
     </div>
+    <!-- Modal Structure -->
+    <div id="modal_process" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+        </div>
+    </div>
     <!-- jQuery Library -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <!-- Materialize js -->
@@ -396,6 +426,7 @@
     <script type="text/javascript" src='js/moment.min.js'></script>
     <script type="text/javascript" src='js/fullcalendar.min.js'></script>
     <script type="text/javascript" src='js/fullcalendar.locale.min.es.js'></script>
+    <script type="text/javascript" src='js/pickadate_es_ES.js'></script>
     <!-- Google Maps -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6-_MBg2QXptawIOEdL7-k1doOfuYdm70"></script>
     <script type="text/javascript" src="js/gmaps.min.js"></script>
@@ -416,12 +447,13 @@
         var try_numbers = 0;
         var contact_reCaptcha;
         var signin_reCaptcha;
+        var siteKey = '<?php echo $recaptcha_sitekey ?>';
         var myCallBack = function() {
             contact_reCaptcha = grecaptcha.render('contact_reCaptcha', {
-                'sitekey' : '<?php echo $recaptcha_sitekey ?>'
+                'sitekey' : siteKey
             });
             signin_reCaptcha = grecaptcha.render('signin_reCaptcha', {
-                'sitekey' : '<?php echo $recaptcha_sitekey ?>',
+                'sitekey' : siteKey,
                 'size' : 'compact'
             });
         };

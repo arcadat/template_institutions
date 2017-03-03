@@ -1,0 +1,43 @@
+<div class="modal-content personal-information">
+    <h3>Registro de Usuario</h3>
+
+    <div id="register2-content">
+        <div class="center-align">
+            <img class="circle responsive-img" height="10" src="<?php echo $datos['photo_person'] ?>"/>
+        </div>
+        <div class="center-align">
+            <span class="card-title"><?php echo $datos['name_person'] ?></span>
+        </div>
+
+        <form id="register2_frm">
+            <div class="input-field center">
+                <input type="email" class="center validate" name="register2_email" id="register2_email" title="La fecha de nacimiento es requerida." required>
+                <label class="input-label" for="register2_email">Correo electrónico</label>
+            </div>
+            <div class="input-field center-align">
+                <input id="register2_id_person" name="register2_id_person" type="hidden" value="<?php echo $datos['id_person'] ?>" />
+                <input id="register2_option" name="register2_option" type="hidden" value="2" />
+                <button id="register2_btn" class="waves-effect btn brand-text col s12 m12 l12" type="submit">Siguiente</button>
+            </div>
+        </form>
+    </div>
+    <div id="register2-message" class="message" style="display: none;">
+        <h5 class="center-align">Fue enviado un email a su dirección de correo electrónico con las instrucciones para activar su cuenta.</h5>
+    </div>
+</div>
+<div class="modal-footer">
+    <a href="#!" onclick="$('#modal_process').modal('close');" class="waves-effect waves-green btn-flat">Salir</a>
+</div>
+
+<script type='text/javascript'>
+    $('#register2_frm').validate({
+        errorClass: 'invalid',
+        errorPlacement: function(error, element) {
+            element.next("label").attr("data-error", error.contents().text())
+        },
+        submitHandler: function(form) {
+            ajaxRegister2();
+            return false;
+        }
+    });
+</script>

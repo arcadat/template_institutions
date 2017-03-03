@@ -82,8 +82,109 @@ function ajaxContact() {
             $('#contact-subject').val('').focus();
             $('#contact-message').val('').focus();
             $('#contact-name').focus();
-            grecaptcha.reset(contact_reCaptcha);
             Materialize.toast(data.result.msg_error, 5000, 'rounded');
         }
+        grecaptcha.reset(contact_reCaptcha);
     });
+}
+
+
+function ajaxRecovery() {
+
+    var formData = {
+        'email': $('#recovery_email').val(),
+    };
+    $('#recovery_email').addClass('disabled');
+    $('#recovery_btn').addClass('disabled').html('POR FAVOR ESPERE...');
+
+    $.ajax({
+        type: 'POST',
+        url: '/recovery',
+        data: formData,
+        dataType: 'json',
+        encode: true
+    }).done(function(data) {
+        console.log(data);
+        $('#recovery_email').removeClass('disabled');
+        $('#recovery_btn').removeClass('disabled').html('ENVIAR MENSAJE');
+        if (data.result.number_error != 0) {
+            Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
+            $('#recovery_email').focus();
+        } else {
+            $('#recovery-content').hide('slow');
+            $('#recovery-message').show('slow');
+        }
+    });
+}
+
+
+function ajaxRegister() {
+
+    var formData = {
+        'op': $('#register_option').val(),
+        'id': $('#register_nip').val(),
+        'date': $('#register_date').val(),
+        'recaptcha': $("#register_frm [name='g-recaptcha-response']").val(),
+    };
+    $('#register_nip').addClass('disabled');
+    $('#register_date').addClass('disabled');
+    $('#register_btn').addClass('disabled').html('POR FAVOR ESPERE...');
+
+    $.ajax({
+        type: 'POST',
+        url: '/register',
+        data: formData,
+        dataType: 'json',
+        encode: true
+    }).done(function(data) {
+        console.log(data);
+        grecaptcha.reset(register_reCaptcha);
+        $('#register_nip').removeClass('disabled');
+        $('#register_date').removeClass('disabled');
+        $('#register_btn').removeClass('disabled').html('ENVIAR MENSAJE');
+        if (data.result.number_error != 0) {
+            Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
+            $('#register_nip').focus();
+        } else {
+            $('#modal_process').load('partials/register2', data.data_person);
+        }
+    });
+}
+
+function ajaxRegister2() {
+
+    var formData = {
+        'op': $('#register2_option').val(),
+        'id': $('#register2_id_person').val(),
+        'email': $('#register2_email').val(),
+    };
+    $('#register2_email').addClass('disabled');
+    $('#register2_btn').addClass('disabled').html('POR FAVOR ESPERE...');
+
+    $.ajax({
+        type: 'POST',
+        url: '/register2',
+        data: formData,
+        dataType: 'json',
+        encode: true
+    }).done(function(data) {
+        console.log(data);
+        grecaptcha.reset(register_reCaptcha);
+        $('#register2_email').removeClass('disabled');
+        $('#register2_btn').removeClass('disabled').html('ENVIAR MENSAJE');
+        if (data.result.number_error != 0) {
+            Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
+            $('#register2_email').focus();
+        } else {
+            $('#register2-content').hide('slow');
+            $('#register2-message').show('slow');
+        }
+    });
+}
+
+
+function loadModal(proc) {
+
+    $('#modal_process').load('partials/'+proc, {'process': proc});
+
 }

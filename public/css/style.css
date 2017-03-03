@@ -327,6 +327,16 @@ nav .brand-logo img {
     font-size: 12px;
 }
 
+#recovery_frm {
+    margin-top: 30px;
+}
+.message {
+    margin-top: 30px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 15px;
+    border: solid 1px #aaa;
+}
+
 /*--------------------*/
 /* CUADRO DE HONOR */
 /*--------------------*/

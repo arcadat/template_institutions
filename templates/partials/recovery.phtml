@@ -1,0 +1,34 @@
+<div class="modal-content personal-information">
+    <h3>Restablecer su contraseña</h3>
+    <div id="recovery-content">
+        <p>Ingrese su dirección de correo electrónico y le enviaremos un enlace para restablecer su contraseña.</p>
+        <form id="recovery_frm">
+            <div class="input-field center">
+                <input type="email" class="input-box center validate" name="recovery_email" id="recovery_email" title="Correo electrónico es requerido." required>
+                <label class="input-label" for="recovery_email">Correo electrónico</label>
+            </div>
+            <div class="input-field center-align">
+                 <button id="recovery_btn" class="waves-effect btn brand-text col s12 m12 l12" type="submit">Enviar email</button>
+            </div>
+        </form>
+    </div>
+    <div class="message" id="recovery-message" style="display: none;">
+        <h5 class="center-align">Fue enviado un email a su dirección de correo electrónico con las instrucciones para restablecer su contraseña.</h5>
+    </div>
+</div>
+<div class="modal-footer">
+    <a href="#!" onclick="$('#modal_process').modal('close');" class="waves-effect waves-green btn-flat">Salir</a>
+</div>
+
+<script type="text/javascript">
+    $('#recovery_frm').validate({
+        errorClass: 'invalid',
+        errorPlacement: function(error, element) {
+            element.next("label").attr("data-error", error.contents().text())
+        },
+        submitHandler: function(form) {
+            ajaxRecovery();
+            return false;
+        }
+    });
+</script>

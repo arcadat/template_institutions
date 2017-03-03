@@ -177,6 +177,15 @@ class HomeController extends Controller
             case 'honor':
                 $file = 'partials/honor.phtml';
                 break;
+            case 'recovery':
+                $file = 'partials/recovery.phtml';
+                break;
+            case 'register':
+                $file = 'partials/register.phtml';
+                break;
+            case 'register2':
+                $file = 'partials/register2.phtml';
+                break;
             case 'teachers':
                 $file = 'partials/teachers.phtml';
                 break;
@@ -237,6 +246,100 @@ class HomeController extends Controller
                     ]
                 ]);
         }
+
+        // Render Json view
+        return $res->withHeader('Content-type', 'application/json')->write($response);
+    }
+
+    public function recovery($req, $res, $args)
+    {
+        // Log message
+        $this->container->logger->info("Arcadat Template '/recovery' route");
+
+        $data = $req->getParsedBody();
+        $data = [
+            'em'     => $data['email'],
+        ];
+
+        $uri = $this->container->config->api->url_recovery;
+
+        $response = Request::post($uri)
+            ->method(Http::POST)
+            ->withoutStrictSsl()
+            ->expectsJson()
+            ->sendsType(Mime::FORM)
+            ->body($data)
+            ->send();
+
+        // Render Json view
+        return $res->withHeader('Content-type', 'application/json')->write($response);
+    }
+
+    public function register($req, $res, $args)
+    {
+        // Log message
+        $this->container->logger->info("Arcadat Template '/register' route");
+
+        $recaptcha = new \ReCaptcha\ReCaptcha($this->container->config->api_recaptcha->secret);
+
+        $data = $req->getParsedBody();
+        $resp = $recaptcha->verify($data['recaptcha'], $_SERVER['REMOTE_ADDR']);
+
+        if ($resp->isSuccess()) {
+            $data['idco'] = (isset($_SESSION['idco'])) ? $_SESSION['idco'] : $this->container->config->api->colegioId;
+            $data = [
+                'i_i'     => $data['idco'],
+                'id'     => $data['id'],
+                'db'     => $data['date'],
+                'option' => $data['op'],
+            ];
+
+            $uri = $this->container->config->api->url_register;
+
+            $response = Request::post($uri)
+                ->method(Http::POST)
+                ->withoutStrictSsl()
+                ->expectsJson()
+                ->sendsType(Mime::FORM)
+                ->body($data)
+                ->send();
+        } else {
+            $response = json_encode([
+                    'result' => [
+                        'number_error' => 70,
+                        'msg_error' => 'Falló el cheque de seguridad reCaptcha'
+                    ]
+                ]);
+        }
+
+        // Render Json view
+        return $res->withHeader('Content-type', 'application/json')->write($response);
+    }
+
+    public function register2($req, $res, $args)
+    {
+        // Log message
+        $this->container->logger->info("Arcadat Template '/register2' route");
+
+        $data = $req->getParsedBody();
+
+        $data['idco'] = (isset($_SESSION['idco'])) ? $_SESSION['idco'] : $this->container->config->api->colegioId;
+        $data = [
+            'i_i'       => $data['idco'],
+            'id_person' => $data['id'],
+            'em'        => $data['email'],
+            'option'    => $data['op'],
+        ];
+
+        $uri = $this->container->config->api->url_register;
+
+        $response = Request::post($uri)
+            ->method(Http::POST)
+            ->withoutStrictSsl()
+            ->expectsJson()
+            ->sendsType(Mime::FORM)
+            ->body($data)
+            ->send();
 
         // Render Json view
         return $res->withHeader('Content-type', 'application/json')->write($response);
