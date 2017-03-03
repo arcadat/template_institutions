@@ -19,6 +19,7 @@ class HomeController extends Controller
         if ($req->isPost()) {
             $data = $req->getParsedBody();
             $data = $data['id_col'];
+            $_SESSION['idco'] = $data;
         } else {
             $data = (isset($_SESSION['idco'])) ? $_SESSION['idco'] : $this->container->config->api->colegioId;
         }
@@ -88,6 +89,7 @@ class HomeController extends Controller
 
     public function colegio($req, $res, $args)
     {
+        session_destroy();
         // Log message
         $this->container->logger->info("Arcadat Template '/colegio' route");
 
@@ -117,7 +119,7 @@ class HomeController extends Controller
             }
         }
 
-        if (isset($_SESSION['idco'])) {
+        if (isset($_SESSION['user'])) {
             $data['idco']  = $_SESSION['idco'];
             $data['user']  = $_SESSION['user'];
             $data['pass']  = $_SESSION['pass'];
