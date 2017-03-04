@@ -75,7 +75,7 @@ class HomeController extends Controller
                 'recaptcha_sitekey'    => $this->container->config->api_recaptcha->sitekey,
             ];
 
-            $file = 'index.phtml';
+            $file = 'home/index.phtml';
         } else {
             echo 'Error: ' . $response->meta_data['http_code'] . '<br/>';
             echo '<pre>';
@@ -94,7 +94,7 @@ class HomeController extends Controller
         $this->container->logger->info("Arcadat Template '/colegio' route");
 
         // Render view
-        return $this->container->renderer->render($res, 'frm_col_id.phtml', $args);
+        return $this->container->renderer->render($res, 'home/frm_col_id.phtml', $args);
     }
 
     public function signin($req, $res, $args)
@@ -161,38 +161,38 @@ class HomeController extends Controller
     public function partials($req, $res, $args)
     {
         // Log message
-        $this->container->logger->info("Arcadat Template '/partials/{$args['workers']}' route");
+        $this->container->logger->info("Arcadat Template '/home/partials/{$args['workers']}' route");
 
         switch ($args['workers']) {
             case 'administrative':
-                $file = 'partials/administrative.phtml';
+                $file = 'home/partials/administrative.phtml';
                 break;
             case 'appmenu':
-                $file = 'partials/apps.phtml';
+                $file = 'home/partials/apps.phtml';
                 break;
             case 'authorities':
-                $file = 'partials/authorities.phtml';
+                $file = 'home/partials/authorities.phtml';
                 break;
             case 'birthdays':
-                $file = 'partials/birthdays.phtml';
+                $file = 'home/partials/birthdays.phtml';
                 break;
             case 'honor':
-                $file = 'partials/honor.phtml';
+                $file = 'home/partials/honor.phtml';
                 break;
             case 'recovery':
-                $file = 'partials/recovery.phtml';
+                $file = 'home/partials/recovery.phtml';
                 break;
             case 'register':
-                $file = 'partials/register.phtml';
+                $file = 'home/partials/register.phtml';
                 break;
             case 'register2':
-                $file = 'partials/register2.phtml';
+                $file = 'home/partials/register2.phtml';
                 break;
             case 'teachers':
-                $file = 'partials/teachers.phtml';
+                $file = 'home/partials/teachers.phtml';
                 break;
             case 'user':
-                $file = 'partials/user.phtml';
+                $file = 'home/partials/user.phtml';
                 break;
 
             default:
