@@ -235,3 +235,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .message {
     background-color: rgba(<?php echo $r .', '. $g .', '. $b ?>, 0.05);
 }
+
+.dropdown-content li > a, .dropdown-content li > span {
+    color: <?php echo $color_i; ?>;
+}
