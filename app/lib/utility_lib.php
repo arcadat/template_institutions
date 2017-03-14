@@ -6,6 +6,28 @@ use DateTime;
 
 class UtilityLib
 {
+    private $coin_symbol;
+    private $decimal_separator;
+    private $thousands_separator;
+    private $decimal;
+
+    function __construct($coin_symbol = '$', $decimal = 2, $decimal_separator=',', $thousands_separator = '.')
+    {
+        $this->coin_symbol         = $coin_symbol;
+        $this->decimal             = $decimal;
+        $this->decimal_separator   = $decimal_separator;
+        $this->thousands_separator = $thousands_separator;
+    }
+
+    public function formatNumber($value='0', $money=false)
+    {
+        $number = number_format($value, $this->decimal, $this->decimal_separator, $this->thousands_separator);
+        if ($money) {
+            $number = $this->coin_symbol .' '. $number;
+        }
+        return $number;
+    }
+
     public function tiempoTranscurrido($fechaInit)
     {
         $fechaInit = new DateTime($fechaInit);
