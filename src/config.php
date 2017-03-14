@@ -10,12 +10,14 @@ $config = [
         'url_contact'  => 'http://arcadat.com/apps/json/web_service/contact_us/default.php',
         'url_recovery' => 'http://arcadat.com/apps/json/web_service/recover_password/',
         'url_register' => 'http://arcadat.com/apps/json/web_service/register_user/',
+        'url_fathers'  => 'http://arcadat.com/apps/json/web_service/fathers/',
+        'url_results'  => 'http://arcadat.com/apps/json/web_service/results_evaluations/',
         // ASIGNADOS
         // 'colegioId' => '2b13572b-e506-4bf6-b908-8d228a6cc01f',
         // 'colegioId' => 'e0aef592-5ed5-4f20-a8cc-29c10d9a2db2',
         // 'colegioId' => '07b7c9b3-2c31-42ae-9ef1-21591733f8fe',
-        // 'colegioId' => 'b1359b3a-9210-4d7e-a353-e8a0c3506ba0',
-        'colegioId' => 'ccc9747b-3a46-4367-a641-46cc97f2a747',
+        'colegioId' => 'b1359b3a-9210-4d7e-a353-e8a0c3506ba0',
+        // 'colegioId' => 'ccc9747b-3a46-4367-a641-46cc97f2a747',
         // 'colegioId'    => '99b23e45-376b-4afd-acb1-78bda55b3968',
         // SIN ASIGNAR
         // 'colegioId' => 'b6b4fc42-8252-4535-8f05-ffce89fb7b5d',
