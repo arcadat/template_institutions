@@ -23,6 +23,17 @@
     <?php if ($datos['settings']['is_user_paysheet'] == 'true'): ?>
     <li><a class="waves-effect" href="<?php echo $datos['settings']['link_paysheet']; ?>">Nómina</a></li>
     <?php endif ?>
+    <?php if ($datos['settings']['is_father'] == 'true' && $datos['request'] != 'fathers'): ?>
+    <li><a class="waves-effect" href="/fathers<?php
+        if (!isset($_SESSION['user'])) {
+            $kv = [
+                'token' => $datos['settings']['token'],
+                'idper' => $datos['person']['id_person'],
+            ];
+            echo '?'. http_build_query($kv);
+        }
+        ?>" target="_blank">Padres</a></li>
+    <?php endif ?>
     <li><div class="divider"></div></li>
     <li><a class="waves-effect" href="/signout">Cerrar Sesión</a></li>
 </ul>
