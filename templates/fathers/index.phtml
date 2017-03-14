@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>
+        <?php echo $settings->name_i ?>
+    </title>
+
+    <!-- Favicon -->
+    <link rel='shortcut icon' type='image/x-icon' href='<?php echo $settings->favicon_i ?>' />
+    <!-- CSS  -->
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <!-- Font Awesome -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- Skill Progress Bar -->
+    <link href="css/pro-bars.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <!-- Owl Carousel -->
+    <link href='css/fullcalendar.min.css' rel='stylesheet' />
+    <link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <!-- Default Theme CSS File-->
+    <link id="switcher" href="css/theme.css.php?color_i=<?php echo urlencode($settings->color_i); ?>" type="text/css" rel="stylesheet" media="screen,projection" />
+    <!-- LightGallery -->
+    <link type="text/css" rel="stylesheet" href="css/lightgallery.min.css" />
+    <!-- Main css File -->
+    <link href="css/style.app.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- BEGAIN PRELOADER -->
+    <div id="preloader">
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+        <div class="caja">
+            <h6>Bienvenido a nuestro sitio web</h6><br><br>
+            <img src="<?php echo $settings->logo_i ?>" alt="Logo">
+            <p><b><?php echo $settings->name_i ?></b><br>
+                <?php echo $settings->slogan_i ?>
+            </p>
+        </div>
+    </div>
+    <!-- END PRELOADER -->
+    <header id="header" role="banner">
+        <div class="navbar-fixed">
+
+            <!-- For dropdown_sons_debt -->
+            <ul class="dropdown-content" id="dropdown_sons_debt">
+                <?php
+                $badge = false;
+                if ($sons->expired_debt_sons == '0' && $sons->unexpired_debt_sons == '0'):
+                ?>
+                <li>
+                    <p class="center"><?php echo $sons->txt_no_due_sons ?></p>
+                </li>
+                <?php endif; ?>
+                <?php
+                if ($sons->expired_debt_sons != '0'):
+                    $badge = true;?>
+                <li class="red darken-4">
+                    <p class="center white-text"><b>Total deuda vencida: <?php echo $settings->coin_symbol . number_format($sons->expired_debt_sons,2,$settings->decimal_separator, $settings->thousands_separator) ?></b></p>
+                </li>
+                <?php endif; ?>
+                <?php if ($sons->unexpired_debt_sons != '0'):
+                    $badge = true;?>
+                <li class="deep-orange lighten-1">
+                    <p class="center white-text"><b>Total deuda no vencida: <?php echo $settings->coin_symbol . number_format($sons->unexpired_debt_sons,2,$settings->decimal_separator, $settings->thousands_separator) ?></b></p>
+                </li>
+                <?php endif; ?>
+            </ul>
+
+            <!-- For dropdown_sons_list -->
+            <ul class="dropdown-content collection" id="dropdown_sons_list">
+            <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
+                <li class="collection-item avatar" onclick="loadInfo('<?php echo $i ?>');">
+                    <img src="<?php echo $sons->list_sons->$i->photo_student ?>" alt="" class="circle">
+                    <span class="title"><?php echo $sons->list_sons->$i->first_name_son ?></span>
+                    <p>
+                        <small><?php echo $sons->list_sons->$i->last_level_inscription_academic ?>
+                        <?php if ($sons->list_sons->$i->expired_debt_son): ?>
+                            <br><span class="red-text text-darken-4">Deuda vencida: <?php echo $utility->formatNumber($sons->list_sons->$i->expired_debt_son, true) ?></span>
+                        <?php endif ?>
+                        <?php if ($sons->list_sons->$i->unexpired_debt_son): ?>
+                            <br><span class="deep-orange-text text-lighten-1">Deuda no vencida: <?php echo $utility->formatNumber($sons->list_sons->$i->unexpired_debt_son, true) ?></span>
+                        <?php endif ?>
+                        </small>
+                    </p>
+                </li>
+            <?php endfor; ?>
+            </ul>
+
+            <nav>
+                <div class="nav-wrapper">
+
+                    <!-- LOGO -->
+                    <!-- TEXT BASED LOGO -->
+                    <a href="#" class="brand-logo" style="padding-left: 15px;">
+                        <?php if (!empty($settings->logo_top_i)): ?>
+                        <img src="<?php echo $settings->logo_top_i ?>" alt="<?php echo $settings->name_i ?>">
+                        <?php else: ?>
+                        <?php echo $settings->name_i ?>
+                        <?php endif;?>
+                    </a>
+
+                    <!-- Image Based Logo -->
+                    <ul class="right hide-on-med-and-down menu-scroll">
+                        <li><a href="#modal_reports"><i class="material-icons">print</i></a></li>
+                        <li><a href="#modal_download" class="badge-notification"><i class="material-icons">file_download</i></a></li>
+                        <li><a class="dropdown-button badge-notification" <?php echo ($badge) ? 'data-badge="!"' : ''; ?> href="#" data-beloworigin="true" data-activates="dropdown_sons_debt"><i class="fa fa-money" aria-hidden="true"></i></a></li>
+                        <li>
+                            <a id="dropdown_sons_list_btn" class="dropdown-button" href="#" data-beloworigin="true" data-activates="dropdown_sons_list">
+                                <span id="son_name_nav"><?php echo $sons->list_sons->{1}->first_name_son ?></span>
+                                <img id="son_img_nav" src="<?php echo $sons->list_sons->{1}->photo_student ?>" class="circle profile-img-nav" alt=""/>
+                            </a>
+                        </li>
+                    </ul>
+                    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                </div>
+                <!-- For Mobile View -->
+                <ul id="slide-out" class="side-nav menu-scroll">
+                    <li class="title">Estudiantes:</li>
+                <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
+                    <li>
+                        <a href="#" onclick="loadInfo('<?php echo $i ?>');">
+                        <img src="<?php echo $sons->list_sons->$i->photo_student ?>" alt="" class="circle profile-img-nav">
+                        <span><?php echo $sons->list_sons->$i->first_name_son ?></span>
+                        </a>
+                    </li>
+                <?php endfor; ?>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main role="main">
+        <div class="main-wrapper">
+            <div class="row">
+                <div class="col s12 m2">
+                    <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
+                    <div id="perfil_data_<?php echo $i ?>" <?php echo ($i > 1) ? 'style="display:none"' : "" ?>>
+                        <div class="card hoverable hide-on-small-only">
+                            <div class="card-content">
+                                <div class="center-align">
+                                    <img class="circle responsive-img" src="<?php echo $sons->list_sons->$i->photo_student ?>"/>
+                                </div>
+                                <div class="center-align">
+                                    <span class="card-title"><?php echo $sons->list_sons->$i->first_name_son; ?></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hide-on-med-and-up">
+                            <div class="col s4">
+                                <img src="<?php echo $sons->list_sons->$i->photo_student ?>" alt="" class="circle responsive-img">
+                            </div>
+                            <div class="col s8">
+                                <p>
+                                    <span class="title"><?php echo $sons->list_sons->$i->first_name_son ?></span><br>
+                                    <small><?php echo $sons->list_sons->$i->last_level_inscription_academic ?>
+                                    <?php if ($sons->list_sons->$i->expired_debt_son): ?>
+                                        <br><span class="red-text text-darken-4">Deuda vencida: <?php echo $utility->formatNumber($sons->list_sons->$i->expired_debt_son, true) ?></span>
+                                    <?php endif ?>
+                                    <?php if ($sons->list_sons->$i->unexpired_debt_son): ?>
+                                        <br><span class="deep-orange-text text-lighten-1">Deuda no vencida: <?php echo $utility->formatNumber($sons->list_sons->$i->unexpired_debt_son, true) ?></span>
+                                    <?php endif ?>
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endfor; ?>
+                </div>
+                <div class="col s12 m10">
+                    <ul class="tabs">
+                        <li class="tab col s2"><a href="#tab_0" class="tooltipped active" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab0 ?>"><i class="fa fa-id-card fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab0 ?></span></a></li>
+                        <li class="tab col s2"><a href="#tab_1" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab1 ?>"><i class="fa fa-bullhorn fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab1 ?></span></a></li>
+                        <li class="tab col s2"><a href="#tab_2" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab2 ?>"><i class="fa fa-file-text fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab2 ?></span></a></li>
+                        <li class="tab col s2"><a href="#tab_3" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab3 ?>"><i class="fa fa-exclamation-circle fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab3 ?></span></a></li>
+                        <li class="tab col s2"><a href="#tab_4" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab4 ?>"><i class="fa fa-book fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab4 ?></span></a></li>
+                        <li class="tab col s2"><a href="#tab_5" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab5 ?>"><i class="fa fa-history fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab5 ?></span></a></li>
+                    </ul>
+                </div>
+
+                <!-- TAB 0 -> DATOS DEL ESTUDIANTE -->
+                <div class="personal-information col s12 m10" id="tab_0">
+                    <h3><?php echo $settings->title_label_tab0 ?></h3>
+                    <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
+                    <div id="alumno_data_<?php echo $i ?>" <?php echo ($i > 1) ? 'style="display:none"' : "" ?>>
+                        <div class=" col s12 m6">
+                            <ul>
+                                <li><span>Nro. Identificación : </span>
+                                    <?php echo $sons->list_sons->$i->number_id_son; ?>
+                                </li>
+                                <li><span>Nombre : </span>
+                                    <?php echo $sons->list_sons->$i->first_name_son .' '.$sons->list_sons->$i->last_name_son; ?>
+                                </li>
+                                <li><span>Sexo : </span>
+                                    <?php echo ($sons->list_sons->$i->sex_son == '1') ? 'Hombre' : 'Mujer'; ?>
+                                </li>
+                                <li><span>Fecha de Nacimiento : </span>
+                                    <?php echo strftime("%d de %B de %Y", strtotime($sons->list_sons->$i->date_birthday_son->date)); ?>
+                                </li>
+                                <li><span>Lugar de Nacimiento : </span>
+                                    <?php echo $sons->list_sons->$i->first_name_son .' '.$sons->list_sons->$i->last_name_son; ?>
+                                </li>
+                                <li><span>Teléfono : </span>
+                                    <?php echo $sons->list_sons->$i->phone_son; ?>
+                                </li>
+                                <li><span>Celular : </span>
+                                    <?php echo $sons->list_sons->$i->cell_phone_son; ?>
+                                </li>
+                                <li><span>Email : </span>
+                                    <?php echo $sons->list_sons->$i->email_son; ?>
+                                </li>
+                                <li><span>Dirección : </span>
+                                    <?php echo $sons->list_sons->$i->address_son; ?>
+                                </li>
+                                <li><span>Último Período Inscrito : </span>
+                                    <b><?php echo $sons->list_sons->$i->last_level_inscription_academic; ?></b>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                <?php endfor; ?>
+                </div>
+
+                <!-- TAB 1 -> PUBLICACIONES -->
+                <div class="personal-information col s12 m10" id="tab_1">
+                    <h3><?php echo $settings->title_label_tab1 ?></h3>
+                    <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
+                    <div id="publications_data_<?php echo $i; ?>" <?php echo ($i > 1) ? 'style="display:none"' : ""; ?> >
+                        <?php if ($sons->list_sons->$i->publications_son->items_publications != '0'): ?>
+                            <?php for ($j=1; $j <= $sons->list_sons->$i->publications_son->items_publications; $j++) :?>
+                            <div class="col s12 m4">
+                                <div class="card medium hoverable">
+                                    <div class="card-content">
+                                        <div class="col s3">
+                                            <img src="<?php echo $sons->list_sons->$i->publications_son->details_publications->$j->photo_publisher ?>" alt="" class="circle responsive-img">
+                                        </div>
+                                        <div class="col s9">
+                                            <span><?php echo $sons->list_sons->$i->publications_son->details_publications->$j->name_publisher ?></span><br>
+                                            <small><?php echo date('d/m/Y H:i',strtotime($sons->list_sons->$i->publications_son->details_publications->$j->date_publication->date)) ?></small>
+                                        </div>
+                                    </div>
+                                    <div class="card-image">
+                                    <?php if ($sons->list_sons->$i->publications_son->details_publications->$j->attachments->type == '1'): ?>
+                                        <div class="video-container">
+                                            <iframe src="//www.youtube.com/embed/<?php echo $sons->list_sons->$i->publications_son->details_publications->$j->attachments->id ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+                                        </div>
+                                    <?php else: ?>
+                                        <a href="https://drive.google.com/open?id=<?php echo $sons->list_sons->$i->publications_son->details_publications->$j->attachments->id ?>" target="_blank">
+                                            <img src="<?php echo $sons->list_sons->$i->publications_son->details_publications->$j->attachments->thumbnail ?>" alt="" class="responsive-img">
+                                        </a>
+                                    <?php endif ?>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="col s12"><p style="color: #444"><?php echo $sons->list_sons->$i->publications_son->details_publications->$j->description_publication ?></p></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endfor; ?>
+                        <?php else:?>
+                            <div class="skill-inner center-align col s12">
+                                <p><?php echo $sons->list_sons->$i->publications_son->txt_no_publications ?></p>
+                            </div>
+                        <?php endif ?>
+                    </div>
+                <?php endfor; ?>
+                </div>
+
+                <!-- TAB 2 -> DOCUMENTOS DE IDENTIDAD -->
+                <div class="personal-information col s12 m10" id="tab_2">
+                    <h3><?php echo $settings->title_label_tab2 ?></h3>
+                    <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
+                    <div id="documents_data_<?php echo $i; ?>" <?php echo ($i > 1) ? 'style="display:none"' : ""; ?> >
+                        <div class="portfolio-bottom">
+                            <div class="portfolio-bottom-inner">
+                                <div id="portfolio-list" class="portfolio-list">
+                                <?php
+                                if ($sons->list_sons->$i->documents_son->items_docs_digitals != '0'):
+                                    for ($j=1; $j <= $sons->list_sons->$i->documents_son->items_docs_digitals; $j++) :?>
+                                    <div class="mix">
+                                        <a class="portfolio-thumbnill" href="<?php echo $sons->list_sons->$i->documents_son->list_docs_digitals->$j->document_digital ?>" >
+                                            <img src="<?php echo $sons->list_sons->$i->documents_son->list_docs_digitals->$j->document_digital ?>" />
+                                            <i class="material-icons view-icon">pageview</i>
+                                        </a>
+                                    </div>
+                                    <?php endfor;?>
+                                <?php else:?>
+                                    <div class="skill-inner center-align col s12">
+                                        <p><?php echo $sons->list_sons->$i->documents_son->txt_no_documents_digital ?></p>
+                                    </div>
+                                <?php endif;?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endfor; ?>
+                </div>
+
+                <!-- TAB 3 -> DEUDAS -->
+                <div class="personal-information col s12 m10" id="tab_3">
+                    <h3><?php echo $settings->title_label_tab3 ?></h3>
+                    <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
+                        <div id="due_data_<?php echo $i; ?>" <?php echo ($i > 1) ? 'style="display:none"' : ""; ?> >
+                            <?php if ($sons->list_sons->$i->due_son->items_due != '0'): ?>
+                            <table class="bordered striped highlight">
+                                <thead>
+                                    <tr>
+                                        <th>Concepto</th>
+                                        <th>Fecha expiración</th>
+                                        <th class="center-align">Monto</th>
+                                    </tr>
+                                </thead>
+
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="2" class="right-align">TOTAL DEUDA NO VENCIDA</td>
+                                        <td class="right-align"><?php echo $utility->formatNumber($sons->list_sons->$i->unexpired_debt_son, true); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="right-align">TOTAL DEUDA VENCIDA</td>
+                                        <td class="right-align"><?php echo $utility->formatNumber($sons->list_sons->$i->expired_debt_son, true); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="right-align">TOTAL GENERAL DEUDA</td>
+                                        <td class="right-align"><?php
+                                        $sun_due_total = $sons->list_sons->$i->unexpired_debt_son + $sons->list_sons->$i->expired_debt_son;
+                                         echo $utility->formatNumber($sun_due_total, true);
+                                        ?></td>
+                                    </tr>
+                                </tfoot>
+
+                                <tbody>
+                                <?php for ($j=1; $j <= $sons->list_sons->$i->due_son->items_due; $j++): ?>
+                                    <tr>
+                                        <td><?php echo $sons->list_sons->$i->due_son->list_due->$j->concept_due ?></td>
+                                        <td><?php echo $sons->list_sons->$i->due_son->list_due->$j->date_expired_due ?></td>
+                                        <td class="right-align" style="color: <?php echo $sons->list_sons->$i->due_son->list_due->$j->color_due ?>"><b><?php echo $utility->formatNumber($sons->list_sons->$i->due_son->list_due->$j->ammount_due, true); ?></b></td>
+                                    </tr>
+                                <?php endfor; ?>
+                                </tbody>
+                            </table>
+                            <?php else: ?>
+                                <div class="skill-inner center-align col s12">
+                                    <p><?php echo $sons->list_sons->$i->due_son->txt_no_due; ?></p>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+
+                <!-- TAB 4 -> CLASES -->
+                <div class="personal-information col s12 m10" id="tab_4">
+                    <h3><?php echo $settings->title_label_tab4 ?></h3>
+                    <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
+                        <div id="class_data_<?php echo $i; ?>" <?php echo ($i > 1) ? 'style="display:none"' : ""; ?> >
+                        <?php if ($sons->list_sons->$i->class_son->items_class != '0'): ?>
+                            <?php if ($sons->list_sons->$i->class_son->settings->show_teacher_guide === true): ?>
+                            <div class="col s12 m3 hide-on-med-and-down">
+                                <div class="card hoverable">
+                                    <div class="card-content">
+                                        <div class="center-align">
+                                            <p><?php echo $sons->list_sons->$i->class_son->settings->label_teacher_guide; ?></p>
+                                            <img class="circle responsive-img" src="<?php echo $sons->list_sons->$i->class_son->settings->photo_teacher_guide; ?>"/>
+                                        </div>
+                                        <div class="center-align">
+                                            <span class="card-title"><?php echo $sons->list_sons->$i->class_son->settings->name_teacher_guide; ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grey lighten-3 col s12 hide-on-large-only">
+                                <div class="col s3">
+                                    <img src="<?php echo $sons->list_sons->$i->class_son->settings->photo_teacher_guide; ?>" alt="" class="circle responsive-img">
+                                </div>
+                                <div class="col s9">
+                                    <span class="title"><?php echo $sons->list_sons->$i->class_son->settings->name_teacher_guide; ?></span>
+                                    <p><?php echo $sons->list_sons->$i->class_son->settings->label_teacher_guide; ?></p>
+                                </div>
+                            </div>
+                            <?php endif ?>
+                            <div class="col s12 m9">
+                                <table class="bordered highlight">
+                                <?php for ($j=1; $j <= $sons->list_sons->$i->class_son->items_class ; $j++) :
+                                $subjects_class = $sons->list_sons->$i->class_son->subjects_class->$j;
+                                ?>
+                                    <tr class="hoverable" style="border-left: solid 7px <?php echo ($subjects_class->bg_color_toolbar != '') ? $subjects_class->bg_color_toolbar : ''; ?>">
+                                        <td style="cursor: pointer;" onclick="<?php if (empty($sons->list_sons->$i->class_son->settings->msg_no_show_results_evaluations)) : ?>loadResultsEval(<?php echo "'".
+                                            $subjects_class->id_qlf."','".
+                                            $subjects_class->id_teacher."','".
+                                            $subjects_class->type_subject."','".
+                                            $subjects_class->qlf_fl."','".
+                                            $subjects_class->qlf_sl."','".
+                                            $subjects_class->qlf_tl."','".
+                                            $subjects_class->qlf_cl."','".
+                                            $subjects_class->photo_teacher."','".
+                                            $subjects_class->name_subject."','".
+                                            $subjects_class->level_section."','".
+                                            $subjects_class->name_teacher."'"
+                                        ?>);
+                                        <?php else: ?>
+                                        alert('<?php echo $sons->list_sons->$i->class_son->settings->msg_no_show_results_evaluations ?>')
+                                        <?php endif ?>
+                                        ">
+                                            <div class="col s2">
+                                                <img src="<?php echo $subjects_class->photo_teacher; ?>" alt="" class="circle responsive-img" />
+                                            </div>
+                                            <div class="col s10">
+                                                <div class="col s9">
+                                                    <b><?php echo $subjects_class->name_subject; ?></b><br/>
+                                                    <?php echo $subjects_class->level_section; ?><br/>
+                                                    <?php echo $subjects_class->name_teacher; ?>
+                                                </div>
+                                                <div class="col s3">
+                                                    <div class="col s6">
+                                                        <?php for ($k=1; $k <= $sons->list_sons->$i->class_son->settings->lapses; $k++) {
+                                                            echo ($k==1) ? $k .'º' : '<br/>'. $k .'º';
+                                                        } ?>
+                                                    </div>
+                                                    <div class="col s6 right-align">
+                                                        <?php
+                                                        if ($sons->list_sons->$i->class_son->settings->lapses >= 1) {
+                                                            echo '<span style="color: '.
+                                                                $subjects_class->color_fl.'">'.
+                                                                $subjects_class->qlf_fl
+                                                                .'</span>';
+                                                        }
+                                                        if ($sons->list_sons->$i->class_son->settings->lapses >= 2) {
+                                                            echo '<br/><span style="color: '.
+                                                                $subjects_class->color_sl.'">'.
+                                                                $subjects_class->qlf_sl
+                                                                .'</span>';
+                                                        }
+                                                        if ($sons->list_sons->$i->class_son->settings->lapses >= 3) {
+                                                            echo '<br/><span style="color: '.
+                                                                $subjects_class->color_tl.'">'.
+                                                                $subjects_class->qlf_tl
+                                                                .'</span>';
+                                                        }
+                                                        if ($sons->list_sons->$i->class_son->settings->lapses >= 4) {
+                                                            echo '<br/><span style="color: '.
+                                                                $subjects_class->color_cl.'">'.
+                                                                $subjects_class->qlf_cl
+                                                                .'</span>';
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                                <div class="col s9">
+                                                    <?php echo $subjects_class->label_qlf_acumulated ?>
+                                                </div>
+                                                <div class="col s3 right-align">
+                                                    <div class="col s6"></div>
+                                                    <div class="col s6 right-align">
+                                                    <?php
+                                                        echo '<span style="color: '.
+                                                            $sons->list_sons->$i->class_son->subjects_class->$j->color_qlf_accumulated .'">'.
+                                                            $sons->list_sons->$i->class_son->subjects_class->$j->qlf_accumulated
+                                                            .'</span>';
+                                                    ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endfor; ?>
+                                </table>
+                            </div>
+                        <?php else: ?>
+                            <div class="skill-inner center-align col s12">
+                                <p><?php echo $sons->list_sons->$i->class_son->txt_no_class_active ?></p>
+                            </div>
+                        <?php endif; ?>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+
+                <!-- TAB 5 -> HISTORIAL -->
+                <div class="col s12 m10" id="tab_5">
+                    <div class="personal-information">
+                        <h3><?php echo $settings->title_label_tab5 ?></h3>
+                    </div>
+                    <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
+                        <div id="stage_data_<?php echo $i; ?>" <?php echo ($i > 1) ? 'style="display:none"' : ""; ?> >
+                        <?php if ($sons->list_sons->$i->history_academic->items_stages != '0'):
+                            $history_academic = $sons->list_sons->$i->history_academic; ?>
+                            <div class="col s12 m4">
+                                <table class="striped">
+                                    <?php for ($j=1; $j <= $history_academic->items_stages; $j++): ?>
+                                    <tr>
+                                        <td class="hoverable" style="cursor: pointer; border-left: solid 7px <?php echo $history_academic->list_stages->$j->color_stage ?>;" onclick="loadHistory(<?php echo $j ?>)">
+                                            <span><?php echo $history_academic->list_stages->$j->name_stage ?></span><br/>
+                                            <small>
+                                                <?php echo $history_academic->list_stages->$j->label_average_stage ?>:
+                                                <b><?php echo $history_academic->list_stages->$j->average_stage ?></b>
+                                            </small>
+                                        </td>
+                                    </tr>
+                                    <?php endfor; ?>
+                                </table>
+                            </div>
+                            <div class="col s12 m8">
+                                <?php for ($j=1; $j <= $history_academic->items_stages; $j++): ?>
+                                <div id="history_data_<?php echo $i.'_'.$j; ?>" <?php echo ($i > 1) ? 'style="display:none"' : ""; ?> >
+                                    <ul class="collapsible" data-collapsible="expandable">
+                                    <?php for ($k=1; $k <= $history_academic->list_stages->$j->items_levels_stage; $k++):
+                                    $levels_stage = $history_academic->list_stages->$j->levels_stage; ?>
+                                        <li>
+                                            <div class="collapsible-header"><span><b><?php echo $levels_stage->$k->name_level; ?></b></span></div>
+                                            <div class="collapsible-body">
+                                                <ul class="collection">
+                                                <?php for ($l=1; $l <= $levels_stage->$k->number_subjects_level; $l++):
+                                                $qlfs_level = $levels_stage->$k->qlfs_level; ?>
+                                                    <li class="collection-item">
+                                                        <span class="badge"><b><?php echo $qlfs_level->$l->qlf ?></b></span>
+                                                        <?php echo $qlfs_level->$l->name_subject_history ?>
+                                                    </li>
+                                                <?php endfor; ?>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    <?php endfor; ?>
+                                    </ul>
+                                </div>
+                                <?php endfor; ?>
+                            </div>
+                        <?php else: ?>
+                            <div class="skill-inner center-align col s12">
+                                <p>SIN DATOS REGISTRADOS</p>
+                            </div>
+                        <?php endif; ?>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+            </div>
+
+            <!-- Modal Structure Downloads -->
+            <div id="modal_download" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <div class="personal-information">
+                        <h3><?php echo $settings->title_label_tab6 ?></h3>
+                    </div>
+                    <?php if ($sons->numbers_files_downloads > 0): ?>
+                        <ul class="collection">
+                        <?php for ($i=1; $i <= $sons->numbers_files_downloads; $i++): ?>
+                            <li class="collection-item avatar">
+                                <i class="material-icons circle">description</i>
+                                <span class="title"><?php echo $sons->files_downloads->$i->title_file_download; ?></span>
+                                <p><?php echo $sons->files_downloads->$i->description_file_download; ?></p>
+                                <a href="<?php echo $sons->files_downloads->$i->root_file_download; ?>" class="secondary-content" target="_blank"><i class="material-icons">file_download</i></a>
+                            </li>
+                        <?php endfor; ?>
+                        </ul>
+                    <?php else: ?>
+                        <div class="skill-inner center-align col s12">
+                            <p>SIN DOCUMENTOS PARA DESCARGAR</p>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn red ">Salir</a>
+                </div>
+            </div>
+
+            <!-- Modal Structure Reports -->
+            <div id="modal_reports" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <div class="personal-information">
+                        <h3>Reportes</h3>
+                    </div>
+                    <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
+                        <div id="report_data_<?php echo $i; ?>" <?php echo ($i > 1) ? 'style="display:none"' : ""; ?> >
+                        <?php if ($sons->list_sons->$i->items_report > 0): ?>
+                            <div class="collection">
+                            <?php
+                            for ($j=1; $j <= $sons->list_sons->$i->items_report; $j++):
+                                $reports_menu = $sons->list_sons->$i->reports_menu->$j;
+                                ?>
+                                <a href="<?php echo $reports_menu->root_report ?>" class="collection-item" target="_blank"><?php echo $reports_menu->description_menu ?></a>
+                            <?php endfor; ?>
+                            </div>
+                        <?php else: ?>
+                            <div class="skill-inner center-align col s12">
+                                <p>SIN REPORTES DISPONIBLES</p>
+                            </div>
+                        <?php endif; ?>
+                        </div>
+                    <?php endfor; ?>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn red ">Salir</a>
+                </div>
+            </div>
+
+            <!-- Modal Structure Results Evaluations -->
+            <div id="modal_results" class="modal modal-fixed-footer">
+                <div class="modal-content">
+                    <div id="reports_evaluations" class="col s12"></div>
+                    <div id="reports_progress" class="progress">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn red ">Salir</a>
+                </div>
+            </div>
+
+            <!-- Menú de aplicaciones -->
+            <div id="appmenu"></div>
+        </div>
+    </main>
+    <footer id="footer" role="contentinfo">
+        <!-- Start Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="row">
+                <div class="col s12">
+                    <div class="footer-inner">
+                        <!-- Bottom to Up Btn -->
+                        <p class="design-info">Servicio proporcionado por<br/>
+                            <a href="http://www.arcadat.com/"><img src="<?php echo $settings->logo_arcadat_footer ?>" alt=""></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jQuery Library -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <!-- Materialize js -->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- Validate js -->
+    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+    <!-- Skill Progress Bar -->
+    <script type="text/javascript" src="js/appear.min.js"></script>
+    <script type="text/javascript" src="js/pro-bars.min.js"></script>
+    <!-- Owl slider -->
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <!-- counter -->
+    <script type="text/javascript" src="js/waypoints.min.js"></script>
+    <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+    <!-- FullCalendar -->
+    <script type="text/javascript" src='js/moment.min.js'></script>
+    <script type="text/javascript" src='js/fullcalendar.min.js'></script>
+    <script type="text/javascript" src='js/fullcalendar.locale.min.es.js'></script>
+    <script type="text/javascript" src='js/pickadate_es_ES.js'></script>
+    <!-- Google Maps -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6-_MBg2QXptawIOEdL7-k1doOfuYdm70"></script>
+    <script type="text/javascript" src="js/gmaps.min.js"></script>
+    <!-- A jQuery plugin that adds cross-browser mouse wheel support. (Optional) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+    <script src="js/lightgallery.min.js"></script>
+
+    <!-- lightgallery plugins -->
+    <script src="js/lg-thumbnail.min.js"></script>
+    <script src="js/lg-fullscreen.min.js"></script>
+
+    <script type="text/javascript">
+        var d_settings  = JSON.parse('<?php echo json_encode($settings) ?>');
+        var d_person    = JSON.parse('<?php echo json_encode($person) ?>');
+        var d_sons      = JSON.parse('<?php echo json_encode($sons) ?>');
+        var d_son_act   = '1';
+        var d_stage_act = '1';
+
+        function loadInfo(arg) {
+            if (d_son_act != arg) {
+                $('#perfil_data_' + d_son_act).hide();
+                $('#alumno_data_' + d_son_act).hide();
+                $('#publications_data_' + d_son_act).hide();
+                $('#documents_data_' + d_son_act).hide();
+                $('#due_data_' + d_son_act).hide();
+                $('#class_data_' + d_son_act).hide();
+                $('#stage_data_' + d_son_act).hide();
+                $('#history_data_' + d_son_act + '_' + d_stage_act).hide();
+                $('#report_data_' + d_son_act).hide();
+                d_son_act = arg;
+                d_stage_act = 1;
+                $('#son_name_nav').html(eval('d_sons.list_sons['+arg+'].first_name_son'));
+                $('#son_img_nav').attr('src',eval('d_sons.list_sons['+arg+'].photo_student'));
+                $('#perfil_data_' + arg).show();
+                $('#alumno_data_' + arg).show();
+                $('#publications_data_' + arg).show();
+                $('#documents_data_' + arg).show();
+                $('#due_data_' + arg).show();
+                $('#class_data_' + arg).show();
+                $('#stage_data_' + arg).show();
+                $('#history_data_' + d_son_act + '_' + d_stage_act).show();
+                $('#report_data_' + arg).show();
+            }
+        }
+        function loadHistory(arg) {
+            if (d_stage_act != arg) {
+                $('#history_data_' + d_son_act + '_' + d_stage_act).hide();
+                d_stage_act = arg;
+                $('#history_data_' + d_son_act + '_' + arg).show();
+            }
+        }
+
+        function loadResultsEval(id_qlf, id_teacher, type_subject, qlf_fl, qlf_sl, qlf_tl, qlf_cl, photo_teacher, name_subject,level_section, name_teacher) {
+            var formData = {
+                'id_qlf': id_qlf,
+                'id_teacher': id_teacher,
+                'type_subject': type_subject,
+                'qlf_fl': qlf_fl,
+                'qlf_sl': qlf_sl,
+                'qlf_tl': qlf_tl,
+                'qlf_cl': qlf_cl,
+                't': '<?php echo ($t!='') ? $t : '' ?>',
+            };
+            var header = {
+                'photo_teacher': photo_teacher,
+                'name_subject': name_subject,
+                'level_section': level_section,
+                'name_teacher': name_teacher,
+            }
+            console.log(header);
+            $.ajax({
+                type: 'POST',
+                url: '/fathers/results',
+                data: formData,
+                dataType: 'json',
+                encode: true
+            }).done(function(data) {
+                console.log(data);
+                if (data.result.number_error != 0) {
+                    Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
+                    $('#login_pass').focus();
+                } else {
+                    $('#reports_evaluations').hide();
+                    $('#modal_results').modal('open');
+                    $('#reports_progress').show();
+                    $('#reports_evaluations').load('/fathers/partials/results', {'body': data, 'header': header});
+                    $('#reports_progress').hide();
+                    $('#reports_evaluations').show();
+                }
+            });
+        }
+
+        $('#appmenu').load('partials/appmenu', {
+            "person": d_person,
+            "settings": d_settings,
+            "request": 'fathers',
+        });
+
+        $(document).ready(function() {
+            $('.dropdown-button').dropdown({
+                inDuration: 300,
+                outDuration: 225,
+                constrainWidth: false, // Does not change width of dropdown to that of the activator
+                hover: true, // Activate on hover
+                alignment: 'right', // Displays dropdown with edge aligned to the left of button
+                stopPropagation: true // Stops event propagation
+            });
+            $('#dropdown_sons_list_btn').dropdown('open');
+            $('.tooltipped').tooltip({
+                delay: 50,
+                html: 'true'
+            });
+
+            $('ul.tabs').tabs();
+        });
+    </script>
+
+    <!-- Custom Js -->
+    <script type="text/javascript" src="js/custom_fathers.js"></script>
+</body>
+
+</html>

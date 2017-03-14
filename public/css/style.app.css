@@ -1,0 +1,70 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.badge-notification {
+    position: relative;
+}
+
+.badge-notification[data-badge]:after {
+    content: attr(data-badge);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: .7em;
+    background: red;
+    font-weight: bold;
+    color: white;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    border: solid 1px white;
+    border-radius: 50%;
+    box-shadow: 1px 1px 2px #333;
+}
+
+.profile-img-nav {
+    height: 45px;
+    vertical-align: middle;
+}
+
+.dropdown-content {
+    background-color: #FFFFFF;
+    margin: 0;
+    display: none;
+    min-width: 300px;
+    /* Changed this to accomodate content width */
+    max-height: auto;
+    margin-left: -1px;
+    /* Add this to keep dropdown in line with edge of navbar */
+    overflow: hidden;
+    /* Changed this from overflow-y:auto; to overflow:hidden; */
+    opacity: 0;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 1;
+    will-change: width, height;
+}
+
+#dropdown_sons_list .title {
+    margin: 0;
+    padding: 0;
+}
+
+#dropdown_sons_list p {
+    line-height: 15px;
+}
+
+.acronym {
+    padding: 10px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 10px;
+}
