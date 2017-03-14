@@ -11,6 +11,7 @@ $config = [
         'url_recovery' => 'http://arcadat.com/apps/json/web_service/recover_password/',
         'url_register' => 'http://arcadat.com/apps/json/web_service/register_user/',
         'url_fathers'  => 'http://arcadat.com/apps/json/web_service/fathers/',
+        'url_students' => 'http://arcadat.com/apps/json/web_service/students/',
         'url_results'  => 'http://arcadat.com/apps/json/web_service/results_evaluations/',
         // ASIGNADOS
         // 'colegioId' => '2b13572b-e506-4bf6-b908-8d228a6cc01f',
