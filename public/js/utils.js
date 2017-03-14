@@ -7,6 +7,9 @@ function ajaxSigin() {
         'rcode': $('#g-recaptcha-response-1').val(),
         'tn': try_numbers
     };
+    $('#login_email').addClass('disabled');
+    $('#login_pass').addClass('disabled');
+    $('#login_check').addClass('disabled');
     $('#btnsubmit').addClass('disabled').html('POR FAVOR ESPERE...');
     $.ajax({
         type: 'POST',
@@ -21,6 +24,9 @@ function ajaxSigin() {
                 grecaptcha.reset(signin_reCaptcha);
                 $('#signin_reCaptcha').show();
             }
+            $('#login_email').removeClass('disabled');
+            $('#login_pass').removeClass('disabled');
+            $('#login_check').removeClass('disabled');
             $('#btnsubmit').removeClass('disabled').html('INICIAR SESIÓN');
             Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
             $('#login_pass').focus();
@@ -30,7 +36,8 @@ function ajaxSigin() {
             $('#userInfo').load('partials/user', data.person);
             $('#appmenu').load('partials/appmenu', {
                 "person": data.person,
-                "settings": data.settings
+                "settings": data.settings,
+                "request": 'web',
             });
             $('#tab_authorities').load('partials/authorities', data.workers.authorities);
             $('#tab_teachers').load('partials/teachers', data.workers.teachers);
