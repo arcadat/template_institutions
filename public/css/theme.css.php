@@ -126,6 +126,16 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid <?php echo $color_i; ?>;
   box-shadow: 0 1px 0 0 <?php echo $color_i; ?>;
 }
+[type="radio"]:checked + label:after,
+[type="radio"].with-gap:checked + label:before,
+[type="radio"].with-gap:checked + label:after {
+  border: 2px solid <?php echo $color_i; ?>;
+}
+
+[type="radio"]:checked + label:after,
+[type="radio"].with-gap:checked + label:after {
+  background-color: <?php echo $color_i; ?>;
+}
 .submit-btn{
   color: <?php echo $color_i; ?>;
 }
@@ -237,5 +247,17 @@ textarea.materialize-textarea:focus:not([readonly]) {
 }
 
 .dropdown-content li > a, .dropdown-content li > span {
+    color: <?php echo $color_i; ?>;
+}
+
+.collection a.collection-item, .secondary-content {
+    color: <?php echo $color_i; ?>;
+}
+
+tr.selected {
+    background-color: rgba(<?php echo $r .', '. $g .', '. $b ?>, 0.5);
+}
+
+.subtitle {
     color: <?php echo $color_i; ?>;
 }
