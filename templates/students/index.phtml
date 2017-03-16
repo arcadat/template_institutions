@@ -169,7 +169,7 @@
                                 <?php echo strftime("%d de %B de %Y", strtotime($student->data_student->date_birthday_student->date)); ?>
                             </li>
                             <li><span>Lugar de Nacimiento : </span>
-                                <?php echo $student->data_student->first_name_student .' '.$student->data_student->last_name_student; ?>
+                                <?php echo $student->data_student->place_of_birth_student; ?>
                             </li>
                             <li><span>Teléfono : </span>
                                 <?php echo $student->data_student->phone_student; ?>
@@ -309,17 +309,15 @@
                     <h3><?php echo $settings->title_label_tab4 ?></h3>
                     <?php if ($student->data_student->class_student->items_class != '0'): ?>
                         <?php if ($student->data_student->class_student->settings->show_teacher_guide === true): ?>
-                        <div class="col s12 m3 hide-on-med-and-down">
-                            <div class="card hoverable">
-                                <div class="card-content">
-                                    <div class="center-align">
-                                        <p><?php echo $student->data_student->class_student->settings->label_teacher_guide; ?></p>
-                                        <img class="circle responsive-img" src="<?php echo $student->data_student->class_student->settings->photo_teacher_guide; ?>"/>
-                                    </div>
-                                    <div class="center-align">
-                                        <span class="card-title"><?php echo $student->data_student->class_student->settings->name_teacher_guide; ?></span>
-                                    </div>
-                                </div>
+                        <div class="grey lighten-3 col s12 m9 hide-on-med-and-down">
+                            <div class="col s3">
+                                <img src="<?php echo $student->data_student->class_student->settings->photo_teacher_guide; ?>" alt="" class="circle responsive-img">
+                            </div>
+                            <div class="col s9">
+                                <p>
+                                    <span class="subtitle"><?php echo $student->data_student->class_student->settings->name_teacher_guide; ?></span>
+                                </p>
+                                <p><b><?php echo $student->data_student->class_student->settings->label_teacher_guide; ?></b></p>
                             </div>
                         </div>
                         <div class="grey lighten-3 col s12 hide-on-large-only">
@@ -434,9 +432,9 @@
                     <?php if ($student->data_student->history_academic->items_stages != '0'):
                         $history_academic = $student->data_student->history_academic; ?>
                         <div class="col s12 m4">
-                            <table class="striped">
+                            <table>
                                 <?php for ($j=1; $j <= $history_academic->items_stages; $j++): ?>
-                                <tr>
+                                <tr class="trselected">
                                     <td class="hoverable" style="cursor: pointer; border-left: solid 7px <?php echo $history_academic->list_stages->$j->color_stage ?>;" onclick="loadHistory(<?php echo $j ?>)">
                                         <span><?php echo $history_academic->list_stages->$j->name_stage ?></span><br/>
                                         <small>
@@ -675,6 +673,10 @@
             $('.tooltipped').tooltip({
                 delay: 50,
                 html: 'true'
+            });
+
+            $(".trselected").click(function(){
+                $(this).addClass("selected").siblings().removeClass("selected");
             });
 
             $('ul.tabs').tabs();

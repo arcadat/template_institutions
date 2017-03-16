@@ -192,7 +192,7 @@
                     <h3><?php echo $settings->title_label_tab0 ?></h3>
                     <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
                     <div id="alumno_data_<?php echo $i ?>" <?php echo ($i > 1) ? 'style="display:none"' : "" ?>>
-                        <div class=" col s12 m6">
+                        <div class=" col s12 m9">
                             <ul>
                                 <li><span>Nro. Identificación : </span>
                                     <?php echo $sons->list_sons->$i->number_id_son; ?>
@@ -207,7 +207,7 @@
                                     <?php echo strftime("%d de %B de %Y", strtotime($sons->list_sons->$i->date_birthday_son->date)); ?>
                                 </li>
                                 <li><span>Lugar de Nacimiento : </span>
-                                    <?php echo $sons->list_sons->$i->first_name_son .' '.$sons->list_sons->$i->last_name_son; ?>
+                                    <?php echo $sons->list_sons->$i->place_of_birth_son; ?>
                                 </li>
                                 <li><span>Teléfono : </span>
                                     <?php echo $sons->list_sons->$i->phone_son; ?>
@@ -363,17 +363,15 @@
                         <div id="class_data_<?php echo $i; ?>" <?php echo ($i > 1) ? 'style="display:none"' : ""; ?> >
                         <?php if ($sons->list_sons->$i->class_son->items_class != '0'): ?>
                             <?php if ($sons->list_sons->$i->class_son->settings->show_teacher_guide === true): ?>
-                            <div class="col s12 m3 hide-on-med-and-down">
-                                <div class="card hoverable">
-                                    <div class="card-content">
-                                        <div class="center-align">
-                                            <p><?php echo $sons->list_sons->$i->class_son->settings->label_teacher_guide; ?></p>
-                                            <img class="circle responsive-img" src="<?php echo $sons->list_sons->$i->class_son->settings->photo_teacher_guide; ?>"/>
-                                        </div>
-                                        <div class="center-align">
-                                            <span class="card-title"><?php echo $sons->list_sons->$i->class_son->settings->name_teacher_guide; ?></span>
-                                        </div>
-                                    </div>
+                            <div class="grey lighten-3 col s12 m9 hide-on-med-and-down">
+                                <div class="col s3">
+                                    <img src="<?php echo $sons->list_sons->$i->class_son->settings->photo_teacher_guide; ?>" alt="" class="circle responsive-img">
+                                </div>
+                                <div class="col s9">
+                                    <p>
+                                        <span class="subtitle"><b><?php echo $sons->list_sons->$i->class_son->settings->name_teacher_guide; ?></b></span>
+                                    </p>
+                                    <p><b><?php echo $sons->list_sons->$i->class_son->settings->label_teacher_guide; ?></b></p>
                                 </div>
                             </div>
                             <div class="grey lighten-3 col s12 hide-on-large-only">
@@ -492,9 +490,9 @@
                         <?php if ($sons->list_sons->$i->history_academic->items_stages != '0'):
                             $history_academic = $sons->list_sons->$i->history_academic; ?>
                             <div class="col s12 m4">
-                                <table class="striped">
+                                <table>
                                     <?php for ($j=1; $j <= $history_academic->items_stages; $j++): ?>
-                                    <tr>
+                                    <tr class="trselected">
                                         <td class="hoverable" style="cursor: pointer; border-left: solid 7px <?php echo $history_academic->list_stages->$j->color_stage ?>;" onclick="loadHistory(<?php echo $j ?>)">
                                             <span><?php echo $history_academic->list_stages->$j->name_stage ?></span><br/>
                                             <small>
@@ -761,6 +759,10 @@
             $('.tooltipped').tooltip({
                 delay: 50,
                 html: 'true'
+            });
+
+            $(".trselected").click(function(){
+                $(this).addClass("selected").siblings().removeClass("selected");
             });
 
             $('ul.tabs').tabs();
