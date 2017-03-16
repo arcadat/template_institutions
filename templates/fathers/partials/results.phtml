@@ -21,19 +21,19 @@
     <div class="col s9" style="color: white; background-color: <?php echo $datos['body']['settings']['color_bg_qlf_acumulated_lapse']; ?>; ">
         <p><b><?php echo $datos['body']['settings']['label_acumulated_lapse']; ?></b></p>
     </div>
-    <div class="col s3 right" style="color: <?php echo $datos['body']['settings']['color_qlf_acumulated_lapse']; ?>;">
-        <p><b><?php echo $datos['body']['settings']['qlf_acumulated_lapse']; ?></b></p>
+    <div class="col s3" style="background-color: #eee; color: <?php echo $datos['body']['settings']['color_qlf_acumulated_lapse']; ?>;">
+        <p class="right-align"><b><?php echo $datos['body']['settings']['qlf_acumulated_lapse']; ?></b></p>
     </div>
 </div>
 <?php
 $results_evaluations = $datos['body']['results_evaluations'];
 for ($i=1; $i <= $datos['body']['settings']['numbers_evaluations']; $i++) : ?>
-<div class="row">
+<div class="row" style="border-bottom: solid 1px #aaa;">
     <div class="col s9">
         <p><?php echo $results_evaluations[$i]['description_evaluation'] ?></p>
     </div>
-    <div class="col s3 right" style="color: <?php echo $results_evaluations[$i]['color']; ?>;">
-        <p><b><?php echo $results_evaluations[$i]['qlf'] ?></b></p>
+    <div class="col s3" style="color: <?php echo $results_evaluations[$i]['color']; ?>;">
+        <p class="right-align"><b><?php echo $results_evaluations[$i]['qlf'] ?></b></p>
     </div>
 </div>
 <?php endfor ?>
