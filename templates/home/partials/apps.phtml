@@ -46,7 +46,14 @@
         ?>" target="_blank">Estudiantes</a></li>
     <?php endif ?>
     <li><div class="divider"></div></li>
-    <li><a class="waves-effect" href="/signout">Cerrar Sesión</a></li>
+    <li><a class="waves-effect" href="/signout<?php
+        if (!isset($_SESSION['user'])) {
+            $kv = [
+                'token' => $datos['settings']['token'],
+            ];
+            echo '?'. http_build_query($kv);
+        }
+        ?>">Cerrar Sesión</a></li>
 </ul>
 
 
