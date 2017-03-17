@@ -29,7 +29,7 @@
 $results_evaluations = $datos['body']['results_evaluations'];
 for ($i=1; $i <= $datos['body']['settings']['numbers_evaluations']; $i++) : ?>
 <div class="row" style="border-bottom: solid 1px #aaa;">
-    <div class="col s9">
+    <div class="col s9" style="word-wrap: break-word;">
         <p><?php echo $results_evaluations[$i]['description_evaluation'] ?></p>
     </div>
     <div class="col s3" style="color: <?php echo $results_evaluations[$i]['color']; ?>;">
