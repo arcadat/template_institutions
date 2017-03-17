@@ -46,12 +46,13 @@ class FathersController extends Controller
             $response->body->settings->thousands_separator
             );
 
+        $response->body->settings->token = (isset($_SESSION['token'])) ? '' : $data['t'];
+
         $args = [
             'settings' => $response->body->settings,
             'person'   => $response->body->person,
             'sons'     => $response->body->sons,
             'utility'  => $utility,
-            't'        => (isset($_SESSION['token'])) ? '' : $data['t'],
         ];
 
         // Render view

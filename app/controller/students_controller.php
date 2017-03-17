@@ -46,11 +46,12 @@ class StudentsController extends Controller
             $response->body->settings->thousands_separator
             );
 
+        $response->body->settings->token = (isset($_SESSION['token'])) ? '' : $data['t'];
+
         $args = [
             'settings' => $response->body->settings,
             'student'   => $response->body->student,
             'utility'  => $utility,
-            't'        => (isset($_SESSION['token'])) ? '' : $data['t'],
         ];
 
         // Render view
