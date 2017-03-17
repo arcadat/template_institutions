@@ -12,8 +12,6 @@ if (PHP_SAPI == 'cli-server') {
 
 require __DIR__ . '/../vendor/autoload.php';
 
-session_start();
-
 // Instantiate the app
 $settings = require __DIR__ . '/../src/settings.php';
 $app = new \Slim\App($settings);
@@ -22,6 +20,9 @@ $app = new \Slim\App($settings);
 require __DIR__ . '/../src/dependencies.php';
 
 setlocale(LC_TIME, $app->getContainer()->get('config')->enviroment->lc_time);
+ini_set("session.cookie_lifetime", $app->getContainer()->get('config')->enviroment->session_lifetime);
+ini_set("session.gc_maxlifetime", $app->getContainer()->get('config')->enviroment->session_lifetime);
+session_start();
 
 // Register middleware
 require __DIR__ . '/../src/middleware.php';

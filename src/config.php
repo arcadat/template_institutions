@@ -2,7 +2,8 @@
 
 $config = [
     'enviroment' => [
-        'lc_time' => 'es_ES.UTF-8',
+        'lc_time'          => 'es_ES.UTF-8',
+        'session_lifetime' => '31536000',
     ],
     'api'        => [
         'url_basic'    => 'http://arcadat.com/apps/json/web_service/data_basic_institution/?i_i=',
@@ -18,9 +19,9 @@ $config = [
         // 'colegioId' => '2b13572b-e506-4bf6-b908-8d228a6cc01f',
         // 'colegioId' => 'e0aef592-5ed5-4f20-a8cc-29c10d9a2db2',
         // 'colegioId' => '07b7c9b3-2c31-42ae-9ef1-21591733f8fe',
-        'colegioId' => 'b1359b3a-9210-4d7e-a353-e8a0c3506ba0',
+        'colegioId'    => 'b1359b3a-9210-4d7e-a353-e8a0c3506ba0',
         // 'colegioId' => 'ccc9747b-3a46-4367-a641-46cc97f2a747',
-        // 'colegioId'    => '99b23e45-376b-4afd-acb1-78bda55b3968',
+        // 'colegioId' => '99b23e45-376b-4afd-acb1-78bda55b3968',
         // SIN ASIGNAR
         // 'colegioId' => 'b6b4fc42-8252-4535-8f05-ffce89fb7b5d',
         // 'colegioId' => 'a97d3165-138e-4802-9986-9184ad615560',
@@ -37,7 +38,7 @@ $config = [
     ],
     'api_recaptcha' => [
         'sitekey' => '6LdJ-xUUAAAAAJ8dcUtN1PUEHf1gjWxiNJGC5zoO',
-        'secret' => '6LdJ-xUUAAAAAB9QWlgv18IOsZtn_5eYw7ztJeka',
+        'secret'  => '6LdJ-xUUAAAAAB9QWlgv18IOsZtn_5eYw7ztJeka',
     ],
 ];
 
