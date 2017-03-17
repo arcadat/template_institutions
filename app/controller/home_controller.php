@@ -146,6 +146,21 @@ class HomeController extends Controller
 
     public function signout($req, $res, $args)
     {
+        $data = [
+            't' => (isset($_SESSION['token'])) ? $_SESSION['token'] : $_GET['token'],
+        ];
+
+        $uri = $this->container->config->api->url_logout . '?' . http_build_query($data);
+
+        $response = Request::get($uri)->send();
+
+        if ($response->meta_data['http_code'] != 200) {
+            echo 'Error: ' . $response->meta_data['http_code'] . '<br/>';
+            echo '<pre>';
+            // var_dump($response);
+            die();
+        }
+
         session_destroy();
         return $res->withRedirect('/');
     }

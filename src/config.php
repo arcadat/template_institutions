@@ -7,6 +7,7 @@ $config = [
     'api'        => [
         'url_basic'    => 'http://arcadat.com/apps/json/web_service/data_basic_institution/?i_i=',
         'url_login'    => 'http://arcadat.com/apps/json/web_service/login/',
+        'url_logout'   => 'http://arcadat.com/apps/json/web_service/logout/',
         'url_contact'  => 'http://arcadat.com/apps/json/web_service/contact_us/default.php',
         'url_recovery' => 'http://arcadat.com/apps/json/web_service/recover_password/',
         'url_register' => 'http://arcadat.com/apps/json/web_service/register_user/',
