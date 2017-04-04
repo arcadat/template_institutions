@@ -14,6 +14,14 @@
                 <input type="email" class="center validate" name="register2_email" id="register2_email" title="La fecha de nacimiento es requerida." required>
                 <label class="input-label" for="register2_email">Correo electrónico</label>
             </div>
+            <div class="input-field center">
+                <input type="password" class="center validate" name="register2_pass" id="register2_pass" title="La clave es requerida." pattern=".{3,50}" required>
+                <label class="input-label" for="register2_pass">Clave</label>
+            </div>
+            <div class="input-field center">
+                <input type="password" class="center validate" name="register2_pass1" id="register2_pass1" title="Repetir la clave es requerido." pattern=".{3,50}" required>
+                <label class="input-label" for="register2_pass1">Repetir Clave</label>
+            </div>
             <div class="input-field center-align">
                 <input id="register2_id_person" name="register2_id_person" type="hidden" value="<?php echo $datos['id_person'] ?>" />
                 <input id="register2_option" name="register2_option" type="hidden" value="2" />
@@ -30,13 +38,17 @@
 </div>
 
 <script type='text/javascript'>
-    $('#register2_frm').validate({
+    jQuery('#register2_frm').validate({
         errorClass: 'invalid',
         errorPlacement: function(error, element) {
             element.next("label").attr("data-error", error.contents().text())
         },
         submitHandler: function(form) {
-            ajaxRegister2();
+            if(jQuery('#register2_pass').val() === jQuery('#register2_pass1').val()) {
+                ajaxRegister2();
+            } else {
+                Materialize.toast('Error<br/>Las claves no son iguales.<br/>Por favor intente de nuevo.', 5000, 'rounded');
+            }
             return false;
         }
     });
