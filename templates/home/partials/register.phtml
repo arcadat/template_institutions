@@ -1,12 +1,12 @@
 <div class="modal-content personal-information">
-    <h3>Registro de Usuario</h3>
+    <h3>Abrir nueva cuenta</h3>
     <form id="register_frm">
         <div class="input-field">
-            <input type="text" class="input-box validate" name="register_nip" id="register_nip" title="Número de identificación personal es requerido." required>
+            <input tabindex="11" type="text" class="input-box validate" name="register_nip" id="register_nip" title="Número de identificación personal es requerido." required>
             <label class="input-label" for="register_nip">Número de identificación personal</label>
         </div>
         <div class="input-field">
-            <input type="date" class="" name="register_date" id="register_date" title="La fecha de nacimiento es requerida." required>
+            <input tabindex="12" type="date" class="" name="register_date" id="register_date" title="La fecha de nacimiento es requerida." required>
             <label class="input-label" for="register_date">Fecha de nacimiento</label>
         </div>
         <div class="input-field center-align">
@@ -27,15 +27,21 @@
         'sitekey' : siteKey,
     });
 
-    $('#register_date').pickadate({
+    jQuery('#register_date').pickadate({
         max: new Date(),
         format: 'dd-mm-yyyy',
         selectMonths: true, // Creates a dropdown to control month
         selectYears: 85, // Creates a dropdown of 15 years to control year
         container: 'body',
+        onSet: function( arg ){
+            if ( 'select' in arg ){ //prevent closing on selecting month/year
+                this.close();
+            }
+        }
     });
+    jQuery('#register_date').attr('tabindex','12')
 
-    $('#register_frm').validate({
+    jQuery('#register_frm').validate({
         errorClass: 'invalid',
         errorPlacement: function(error, element) {
             element.next("label").attr("data-error", error.contents().text())
@@ -45,4 +51,5 @@
             return false;
         }
     });
+    jQuery('#register_nip').focus();
 </script>
