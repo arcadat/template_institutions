@@ -41,7 +41,7 @@
     jQuery('#register2_frm').validate({
         errorClass: 'invalid',
         errorPlacement: function(error, element) {
-            element.next("label").attr("data-error", error.contents().text())
+            element.next("label").attr("data-error", error.contents().text());
         },
         submitHandler: function(form) {
             if(jQuery('#register2_pass').val() === jQuery('#register2_pass1').val()) {
