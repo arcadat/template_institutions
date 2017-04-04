@@ -7,9 +7,9 @@ function ajaxSigin() {
         'rcode': $('#g-recaptcha-response-1').val(),
         'tn': try_numbers
     };
-    $('#login_email').addClass('disabled');
-    $('#login_pass').addClass('disabled');
-    $('#login_check').addClass('disabled');
+    $('#login_email').attr('disabled',true);
+    $('#login_pass').attr('disabled',true);
+    $('#login_check').attr('disabled',true);
     $('#btnsubmit').addClass('disabled').html('POR FAVOR ESPERE...');
     $.ajax({
         type: 'POST',
@@ -24,9 +24,9 @@ function ajaxSigin() {
                 grecaptcha.reset(signin_reCaptcha);
                 $('#signin_reCaptcha').show();
             }
-            $('#login_email').removeClass('disabled');
-            $('#login_pass').removeClass('disabled');
-            $('#login_check').removeClass('disabled');
+            $('#login_email').removeAttr('disabled');
+            $('#login_pass').removeAttr('disabled');
+            $('#login_check').removeAttr('disabled');
             $('#btnsubmit').removeClass('disabled').html('INICIAR SESIÓN');
             Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
             $('#login_pass').focus();
@@ -59,11 +59,11 @@ function ajaxContact() {
         'send_to': $('input[name=send_to]:checked').val(),
         'recaptcha': $('#g-recaptcha-response').val()
     };
-    $('#contact-name').addClass('disabled');
-    $('#contact-email').addClass('disabled');
-    $('#contact-subject').addClass('disabled');
-    $('#contact-message').addClass('disabled');
-    $('input[name=send_to]').addClass('disabled');
+    $('#contact-name').attr('disabled',true);
+    $('#contact-email').attr('disabled',true);
+    $('#contact-subject').attr('disabled',true);
+    $('#contact-message').attr('disabled',true);
+    $('input[name=send_to]').attr('disabled',true);
     $('#contact-btn').addClass('disabled').html('POR FAVOR ESPERE...');
 
     $.ajax({
@@ -74,11 +74,11 @@ function ajaxContact() {
         encode: true
     }).done(function(data) {
         console.log(data);
-        $('#contact-name').removeClass('disabled');
-        $('#contact-email').removeClass('disabled');
-        $('#contact-subject').removeClass('disabled');
-        $('#contact-message').removeClass('disabled');
-        $('input[name=send_to]').removeClass('disabled');
+        $('#contact-name').removeAttr('disabled');
+        $('#contact-email').removeAttr('disabled');
+        $('#contact-subject').removeAttr('disabled');
+        $('#contact-message').removeAttr('disabled');
+        $('input[name=send_to]').removeAttr('disabled');
         $('#contact-btn').removeClass('disabled').html('ENVIAR MENSAJE');
         if (data.result.number_error != 0) {
             Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
@@ -101,7 +101,7 @@ function ajaxRecovery() {
     var formData = {
         'email': $('#recovery_email').val(),
     };
-    $('#recovery_email').addClass('disabled');
+    $('#recovery_email').attr('disabled',true);
     $('#recovery_btn').addClass('disabled').html('POR FAVOR ESPERE...');
 
     $.ajax({
@@ -112,14 +112,14 @@ function ajaxRecovery() {
         encode: true
     }).done(function(data) {
         console.log(data);
-        $('#recovery_email').removeClass('disabled');
+        $('#recovery_email').removeAttr('disabled');
         $('#recovery_btn').removeClass('disabled').html('ENVIAR MENSAJE');
         if (data.result.number_error != 0) {
             Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
             $('#recovery_email').focus();
         } else {
             $('#recovery-content').hide('slow');
-            $('#recovery-message').show('slow');
+            $('#recovery-message').html('<h5 class="center-align">'+data.result.msg_error+'<h5>').show('slow');
         }
     });
 }
@@ -133,8 +133,8 @@ function ajaxRegister() {
         'date': $('#register_date').val(),
         'recaptcha': $("#register_frm [name='g-recaptcha-response']").val(),
     };
-    $('#register_nip').addClass('disabled');
-    $('#register_date').addClass('disabled');
+    $('#register_nip').attr('disabled',true);
+    $('#register_date').attr('disabled',true);
     $('#register_btn').addClass('disabled').html('POR FAVOR ESPERE...');
 
     $.ajax({
@@ -146,8 +146,8 @@ function ajaxRegister() {
     }).done(function(data) {
         console.log(data);
         grecaptcha.reset(register_reCaptcha);
-        $('#register_nip').removeClass('disabled');
-        $('#register_date').removeClass('disabled');
+        $('#register_nip').removeAttr('disabled');
+        $('#register_date').removeAttr('disabled');
         $('#register_btn').removeClass('disabled').html('ENVIAR MENSAJE');
         if (data.result.number_error != 0) {
             Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
@@ -164,8 +164,11 @@ function ajaxRegister2() {
         'op': $('#register2_option').val(),
         'id': $('#register2_id_person').val(),
         'email': $('#register2_email').val(),
+        'pass': $('#register2_pass').val(),
     };
-    $('#register2_email').addClass('disabled');
+    $('#register2_email').attr('disabled',true);
+    $('#register2_pass').attr('disabled',true);
+    $('#register2_pass1').attr('disabled',true);
     $('#register2_btn').addClass('disabled').html('POR FAVOR ESPERE...');
 
     $.ajax({
@@ -177,14 +180,16 @@ function ajaxRegister2() {
     }).done(function(data) {
         console.log(data);
         grecaptcha.reset(register_reCaptcha);
-        $('#register2_email').removeClass('disabled');
+        $('#register2_email').removeAttr('disabled');
+        $('#register2_pass').removeAttr('disabled');
+        $('#register2_pass1').removeAttr('disabled');
         $('#register2_btn').removeClass('disabled').html('ENVIAR MENSAJE');
         if (data.result.number_error != 0) {
             Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
             $('#register2_email').focus();
         } else {
             $('#register2-content').hide('slow');
-            $('#register2-message').show('slow');
+            $('#register2-message').html('<h5 class="center-align">'+data.result.msg_error+'</h5>').show('slow');
         }
     });
 }
