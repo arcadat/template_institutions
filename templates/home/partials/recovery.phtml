@@ -1,14 +1,14 @@
 <div class="modal-content personal-information">
-    <h3>Restablecer su contraseña</h3>
+    <h3>Restauración de contraseña</h3>
     <div id="recovery-content">
-        <p>Ingrese su dirección de correo electrónico y le enviaremos un enlace para restablecer su contraseña.</p>
+        <p>Ingrese la dirección de correo electrónico de su cuenta en ARCADAT.</p>
         <form id="recovery_frm">
             <div class="input-field center">
                 <input type="email" class="input-box center validate" name="recovery_email" id="recovery_email" title="Correo electrónico es requerido." required>
                 <label class="input-label" for="recovery_email">Correo electrónico</label>
             </div>
             <div class="input-field center-align">
-                 <button id="recovery_btn" class="waves-effect btn brand-text col s12 m12 l12" type="submit">Enviar email</button>
+                 <button id="recovery_btn" class="waves-effect btn brand-text col s12 m12 l12" type="submit">Enviar</button>
             </div>
         </form>
     </div>
@@ -24,7 +24,7 @@
     $('#recovery_frm').validate({
         errorClass: 'invalid',
         errorPlacement: function(error, element) {
-            element.next("label").attr("data-error", error.contents().text())
+            element.next("label").attr("data-error", error.contents().text());
         },
         submitHandler: function(form) {
             ajaxRecovery();
