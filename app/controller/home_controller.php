@@ -334,6 +334,7 @@ class HomeController extends Controller
             'i_i'       => $_SESSION['idco'],
             'id_person' => $data['id'],
             'em'        => $data['email'],
+            'pwd'       => $data['pass'],
             'option'    => $data['op'],
         ];
 
