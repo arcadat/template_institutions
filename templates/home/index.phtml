@@ -49,6 +49,17 @@
     </div>
     <!-- END PRELOADER -->
     <header id="header" role="banner">
+        <!-- For Mobile View -->
+        <ul id="slide-out" class="side-nav menu-scroll">
+            <li><a href="#about">Nosotros</a></li>
+            <li><a href="#resume">Historia</a></li>
+            <li><a href="#education"><?php echo $degree->label_degree ?></a></li>
+            <?php if ($installations->installations): ?>
+            <li><a href="#portfolio">Instalaciones</a></li>
+            <?php endif;?>
+            <li><a href="#calendar">Cronograma</a></li>
+            <li><a href="#footer">Contáctenos</a></li>
+        </ul>
         <div class="navbar-fixed">
             <nav>
                 <div class="container">
@@ -68,17 +79,6 @@
                         <!-- Image Based Logo -->
                         <!-- <a href="index.html" class="brand-logo"><img src="img/logo.jpeg" alt="logo img"></a>  -->
                         <ul class="right hide-on-med-and-down custom-nav menu-scroll">
-                            <li><a href="#about">Nosotros</a></li>
-                            <li><a href="#resume">Historia</a></li>
-                            <li><a href="#education"><?php echo $degree->label_degree ?></a></li>
-                            <?php if ($installations->installations): ?>
-                            <li><a href="#portfolio">Instalaciones</a></li>
-                            <?php endif;?>
-                            <li><a href="#calendar">Cronograma</a></li>
-                            <li><a href="#footer">Contáctenos</a></li>
-                        </ul>
-                        <!-- For Mobile View -->
-                        <ul id="slide-out" class="side-nav menu-scroll">
                             <li><a href="#about">Nosotros</a></li>
                             <li><a href="#resume">Historia</a></li>
                             <li><a href="#education"><?php echo $degree->label_degree ?></a></li>
@@ -341,31 +341,31 @@
                                                 <div class="contact-form">
                                                     <form id="contact_frm">
                                                         <div class="input-field">
-                                                            <input type="text" class="input-box validate" name="contactName" id="contact-name" title="Nombre es requerido."  required>
+                                                            <input tabindex="1" type="text" class="input-box validate" name="contactName" id="contact-name" title="Nombre es requerido."  required>
                                                             <label class="input-label" for="contact-name">Nombre</label>
                                                         </div>
                                                         <div class="input-field">
-                                                            <input type="email" class="input-box validate" name="contactEmail" id="contact-email" title="Correo electrónico es requerido."  required>
+                                                            <input tabindex="2" type="email" class="input-box validate" name="contactEmail" id="contact-email" title="Correo electrónico es requerido."  required>
                                                             <label class="input-label" for="contact-email">Email</label>
                                                         </div>
                                                         <div class="input-field">
-                                                            <input type="text" class="input-box validate" name="contactSubject" id="contact-subject" title="Asunto es requerido."  required>
+                                                            <input tabindex="3" type="text" class="input-box validate" name="contactSubject" id="contact-subject" title="Asunto es requerido."  required>
                                                             <label class="input-label" for="contact-subject">Asunto</label>
                                                         </div>
                                                         <div class="input-field textarea-input">
-                                                            <textarea class="materialize-textarea validate" name="contactMessage" id="contact-message" title="Mensaje es requerido."  required></textarea>
+                                                            <textarea tabindex="4" class="materialize-textarea validate" name="contactMessage" id="contact-message" title="Mensaje es requerido."  required></textarea>
                                                             <label class="input-label" for="contact-message">Mensaje</label>
                                                         </div>
                                                         <p>
-                                                            <input class="input-box validate" name="send_to" type="radio" id="send_to_1" value="1" checked="checked">
+                                                            <input tabindex="5" class="input-box validate" name="send_to" type="radio" id="send_to_1" value="1" checked="checked">
                                                             <label for="send_to_1">Coordinación Académica</label>
                                                         </p>
                                                         <p>
-                                                            <input class="input-box validate" name="send_to" type="radio" id="send_to_2" value="2">
+                                                            <input tabindex="6" class="input-box validate" name="send_to" type="radio" id="send_to_2" value="2">
                                                             <label for="send_to_2">Administración</label>
                                                         </p>
                                                         <div id="contact_reCaptcha" class="g-recaptcha"></div>
-                                                        <button id="contact-btn" class="left waves-effect btn-flat brand-text submit-btn" type="submit">enviar mensaje</button>
+                                                        <button tabindex="7" id="contact-btn" class="left waves-effect btn-flat brand-text submit-btn" type="submit">enviar mensaje</button>
                                                     </form>
                                                 </div>
                                             </div>
