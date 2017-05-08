@@ -4,6 +4,14 @@
     </a>
 </div>
 
+<!-- Tap Target Structure -->
+<div class="tap-target" data-activates="btncollapse">
+    <div class="tap-target-content">
+        <h5>RECUERDE:</h5>
+        <p>Presionando sobre este botón podrá visualizar las aplicaciones Arcadat que usted tiene asociadas.</p>
+    </div>
+</div>
+
 <ul id="slide-out-user" class="side-nav">
     <li>
         <div class="userView">
@@ -23,12 +31,21 @@
     <?php if ($datos['settings']['is_user_paysheet'] === 'true'): ?>
     <li><a class="waves-effect" href="<?php echo $datos['settings']['link_paysheet']; ?>">Nómina</a></li>
     <?php endif ?>
+    <?php if ($datos['settings']['is_teacher'] === 'true' && $datos['request'] != 'teachers'): ?>
+    <li><a class="waves-effect" href="/teachers<?php
+        if (!isset($_SESSION['user'])) {
+            $kv = [
+                'token' => $datos['settings']['token'],
+            ];
+            echo '?'. http_build_query($kv);
+        }
+        ?>" target="_blank">Profesores</a></li>
+    <?php endif ?>
     <?php if ($datos['settings']['is_father'] === 'true' && $datos['request'] != 'fathers'): ?>
     <li><a class="waves-effect" href="/fathers<?php
         if (!isset($_SESSION['user'])) {
             $kv = [
                 'token' => $datos['settings']['token'],
-                'idper' => $datos['person']['id_person'],
             ];
             echo '?'. http_build_query($kv);
         }
@@ -39,7 +56,6 @@
         if (!isset($_SESSION['user'])) {
             $kv = [
                 'token' => $datos['settings']['token'],
-                'idper' => $datos['person']['id_person'],
             ];
             echo '?'. http_build_query($kv);
         }
@@ -60,4 +76,5 @@
 <script type='text/javascript'>
     $("#btncollapse").sideNav();
     $('.tooltipped').tooltip();
+    $('.tap-target').tapTarget('open');
 </script>
