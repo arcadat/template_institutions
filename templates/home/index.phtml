@@ -176,19 +176,19 @@
 
                                                 <li><span>Redes Sociales : </span>
                                                     <?php if (!empty($main_data->facebook_account)): ?>
-                                                    <a class="btn" href=""><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                                                    <a class="btn" href="https://facebook.com/<?php echo $main_data->facebook_account ?>"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
                                                     <?php endif ?>
 
                                                     <?php if (!empty($main_data->twitter_account)): ?>
-                                                    <a class="btn" href=""><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                                                    <a class="btn" href="https://twitter.com/<?php echo $main_data->twitter_account ?>"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
                                                     <?php endif ?>
 
                                                     <?php if (!empty($main_data->instagram_account)): ?>
-                                                    <a class="btn" href=""><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                                                    <a class="btn" href="https://instagram.com/<?php echo $main_data->instagram_account ?>"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
                                                     <?php endif ?>
 
                                                     <?php if (!empty($main_data->url_blog)): ?>
-                                                    <a class="btn" href=""><i class="fa fa-rss-square fa-2x" aria-hidden="true"></i></a>
+                                                    <a class="btn" href="<?php echo $main_data->url_blog ?>"><i class="fa fa-rss-square fa-2x" aria-hidden="true"></i></a>
                                                     <?php endif ?>
                                                 </li>
                                                 <?php endif ?>
