@@ -3,6 +3,7 @@
 namespace App\Lib;
 
 use DateTime;
+use DateTimeZone;
 
 class UtilityLib
 {
@@ -26,6 +27,16 @@ class UtilityLib
             $number = $this->coin_symbol .' '. $number;
         }
         return $number;
+    }
+
+    public function formatDate($date=null, $timezone='GMT', $format='d-m-Y')
+    {
+        if (!$date) {
+            $date = date();
+        }
+        $return = new DateTime( $date, new DateTimeZone($timezone));
+
+        return $return->format($format);
     }
 
     public function tiempoTranscurrido($fechaInit)
