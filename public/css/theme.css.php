@@ -26,6 +26,9 @@ a {
 .btn:hover, .btn-large:hover {
   background-color: <?php echo $color_i; ?>;
 }
+.btn:focus, .btn-large:focus {
+  background-color: rgba(<?php echo $r .', '. $g .', '. $b ?>, 0.5);
+}
 .home-title span{
   color: <?php echo $color_i; ?>;
 }
@@ -136,6 +139,18 @@ textarea.materialize-textarea:focus:not([readonly]) {
 [type="radio"].with-gap:checked + label:after {
   background-color: <?php echo $color_i; ?>;
 }
+.switch label input[type=checkbox]:checked + .lever {
+    background-color: <?php echo $color_i; ?>;
+}
+.switch label input[type=checkbox]:checked + .lever:after {
+  background-color: <?php echo $color_i; ?>;
+}
+.picker__date-display, .picker__weekday-display, .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+  background-color: <?php echo $color_i; ?>;
+}
+.picker__day.picker__day--today, .picker__close, .picker__today {
+  color: <?php echo $color_i; ?>;
+}
 .submit-btn{
   color: <?php echo $color_i; ?>;
 }
@@ -238,7 +253,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
     color: <?php echo $color_i; ?>;
 }
 
-.userView {
+.userView, .tap-target {
     background-color: <?php echo $color_i; ?>;
 }
 
@@ -260,4 +275,20 @@ tr.selected {
 
 .subtitle {
     color: <?php echo $color_i; ?>;
+}
+
+.collapsible-body {
+    background-color: rgba(<?php echo $r .', '. $g .', '. $b ?>, 0.5);
+}
+
+.resourceMenu, .resourceMenu.breadcrumb:last-child, .resourceMenu.breadcrumb:before {
+    color: <?php echo $color_i; ?>;
+}
+
+.class-title {
+    background-color: rgba(<?php echo $r .', '. $g .', '. $b ?>, 0.75);
+}
+
+.class-body {
+    background-color: rgba(<?php echo $r .', '. $g .', '. $b ?>, 0.25);
 }

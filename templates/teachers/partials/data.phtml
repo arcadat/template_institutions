@@ -1,0 +1,38 @@
+<ul>
+    <li>
+        <span>Nro. Identificación : </span>
+        <?php echo $datos['number_id_teacher']; ?>
+    </li>
+    <li>
+        <span>Nombre : </span>
+        <?php echo $datos['first_name_teacher'] .' '.$datos['last_name_teacher']; ?>
+    </li>
+    <li>
+        <span>Sexo : </span>
+        <?php echo ($datos['sex_teacher'] == '1') ? 'Hombre' : 'Mujer'; ?>
+    </li>
+    <li>
+        <span>Fecha de Nacimiento : </span>
+        <?php echo strftime("%d de %B de %Y", strtotime($datos['date_birthday_teacher']['date'])); ?>
+    </li>
+    <li>
+        <span>Lugar de Nacimiento : </span>
+        <?php echo $datos['place_of_birth_teacher']; ?>
+    </li>
+    <li>
+        <span>Teléfono : </span>
+        <?php echo $datos['phone_teacher']; ?>
+    </li>
+    <li>
+        <span>Celular : </span>
+        <?php echo $datos['cell_phone_teacher']; ?>
+    </li>
+    <li>
+        <span>Email : </span>
+        <?php echo $datos['email_teacher']; ?>
+    </li>
+    <li>
+        <span>Dirección : </span>
+        <?php echo $datos['address_teacher']; ?>
+    </li>
+</ul>

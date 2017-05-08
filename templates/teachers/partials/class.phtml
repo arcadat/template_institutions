@@ -1,0 +1,82 @@
+<?php if ($datos['items_stage'] != '0'): ?>
+    <div id="class_list" class="col s12">
+    <?php for ($j=1; $j <= $datos['items_stage']; $j++) :
+    $list_stages = $datos['list_stage'][$j]; ?>
+        <div class="class-title col s12">
+            <h6>
+                <?php echo $list_stages['name_stage']; ?>
+            </h6>
+        </div>
+        <div class="class-body col s12">
+            <?php for ($k=1; $k <= $list_stages['class_stage']['numbers_class']; $k++):
+            $class_details = $list_stages['class_stage']['class'][$k]; ?>
+                <div class="col s12 m6" style="margin-left: 0;">
+                    <div class="card horizontal hoverable" style="cursor: pointer; border-left: solid 7px <?php echo $class_details['color'] ?>;">
+                        <div class="fontCircle" style="background-color: <?php echo $class_details['color'] ?>;">
+                            <span class="title"><?php echo $class_details['name_section'] ?></span>
+                            <span ><?php echo $class_details['name_turn'] ?></span>
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <span>
+                                    <b><?php echo $class_details['level'] ?></b>
+                                    <a href="#!" class="dropdown-button right" data-activates='dropdown_class_<?php echo $j.'_'.$k ?>'><i class="material-icons">more_vert</i></a>
+                                </span>
+                                <p>
+                                    <?php echo $class_details['numbers_students'] ?> Estudiantes<br/>
+                                    <span><?php echo $class_details['name_subject'] ?></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <script type='text/javascript'>
+                        var class_<?php echo $j.'_'.$k ?> = {
+                            header: {
+                                color: '<?php echo $class_details['color'] ?>',
+                                section: '<?php echo $class_details['name_section'] ?>',
+                                turn: '<?php echo $class_details['name_turn'] ?>',
+                                level: '<?php echo $class_details['level'] ?>',
+                                students: '<?php echo $class_details['numbers_students'] ?>',
+                                subject: '<?php echo $class_details['name_subject'] ?>',
+                                type_class: '<?php echo $class_details['type_class'] ?>',
+                            },
+                            params: {
+                                type_class: '<?php echo $class_details['type_class'] ?>',
+                                id_section: '<?php echo $class_details['id_section'] ?>',
+                                id_turn: '<?php echo $class_details['id_turn'] ?>',
+                                id_period: '<?php echo $class_details['id_period'] ?>',
+                                id_pensum: '<?php echo $class_details['id_pensum'] ?>',
+                                id_detail: '<?php echo $class_details['id_detail'] ?>',
+                                id_subject: '<?php echo $class_details['id_subject'] ?>',
+                            }
+                        };
+                    </script>
+                    <ul id='dropdown_class_<?php echo $j.'_'.$k ?>' class='dropdown-content hoverable'>
+                        <li><a href="#!" onclick="loadClassApp('evaluations',class_<?php echo $j.'_'.$k ?>)"><?php echo $datos['menu_class_teacher']['label_option1_menu_class_teacher'] ?></a></li>
+                        <li class="divider"></li>
+                        <li><a href="#!" onclick="loadClassApp('absences',class_<?php echo $j.'_'.$k ?>)"><?php echo $datos['menu_class_teacher']['label_option2_menu_class_teacher'] ?></a></li>
+                        <li class="divider"></li>
+                        <li><a href="#!" onclick="loadClassApp('results',class_<?php echo $j.'_'.$k ?>)"><?php echo $datos['menu_class_teacher']['label_option3_menu_class_teacher'] ?></a></li>
+                    </ul>
+                </div>
+            <?php endfor; ?>
+        </div>
+    <?php endfor; ?>
+    </div>
+    <div id="class_app" class="col s12" style="display: none;"></div>
+    <script type="text/javascript">
+        jQuery('.collapsible').collapsible();
+        jQuery('.dropdown-button').dropdown({
+            inDuration: 300,
+            outDuration: 225,
+            constrainWidth: false, // Does not change width of dropdown to that of the activator
+            hover: true, // Activate on hover
+            alignment: 'right', // Displays dropdown with edge aligned to the left of button
+            stopPropagation: true // Stops event propagation
+        });
+    </script>
+<?php else:?>
+    <div class="skill-inner center-align col s12">
+        <p><?php echo $datos['txt_no_stage'] ?></p>
+    </div>
+<?php endif; ?>

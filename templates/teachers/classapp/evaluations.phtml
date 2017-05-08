@@ -1,0 +1,226 @@
+<nav id="absence_nav_menu" class="grey lighten-5">
+    <div class="nav-wrapper">
+        <ul class="left">
+            <li><a href="#!" class="breadcrumb resourceMenu" onclick="closeClassApp();"><i class="material-icons">arrow_back</i> Regresar</a></li>
+        </ul>
+        <?php if ($datos->list_evaluations->numbers_evaluations != 0 || $datos->settings->section_close === false): ?>
+        <ul class="right">
+            <li><a href="#!" class="resourceMenu tooltipped" data-position="top" data-delay="50" data-tooltip="Importar Plan de Evaluacion" onclick="btnImportEval();"><i class="material-icons">import_export</i></a></li>
+            <li><a href="<?php echo $datos->settings->root_print_plan_evaluation ?>" class="resourceMenu tooltipped" target="_blank" data-position="top" data-delay="50" data-tooltip="Imprimir Plan de Evaluacion"><i class="material-icons">print</i></a></li>
+        </ul>
+        <?php endif; ?>
+    </div>
+</nav>
+
+<div class="card horizontal" style="border-left: solid 7px <?php echo $header['color'] ?>;">
+    <div class="fontCircle" style="background-color: <?php echo $header['color'] ?>;">
+        <span class="title"><?php echo $header['section'] ?></span>
+        <span ><?php echo $header['turn'] ?></span>
+    </div>
+    <div class="card-stacked">
+        <div class="card-content">
+            <span class="lapse">
+                <span class="right">
+                <span class="right title red-text text-accent-4"><?php echo $datos->settings->label_lapse ?></span><br>
+                <span class="right subtitle green-text text-dark-4"><b><?php echo $datos->settings->percent_lap .'%' ?></b></span>
+                </span>
+                <b><?php echo $header['level'] ?></b>
+            </span>
+            <p>
+                <?php echo $header['students'] ?> Estudiantes<br/>
+                <span><?php echo $header['subject'] ?></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<?php if ($datos->list_evaluations->numbers_evaluations != 0 || $datos->settings->section_close === false): ?>
+
+    <script type="text/javascript">
+        evaluations_list = {};
+    </script>
+
+    <table class="bordered highlight table_evaluations">
+        <thead>
+            <tr>
+                <th>Nº</th>
+                <?php if ($datos->settings->apply_date === true) : ?>
+                <th>Fecha</th>
+                <?php endif ?>
+                <th>Estrategia o técnica: Temas de la evaluación</th>
+                <th>Peso %</th>
+            </tr>
+        </thead>
+        <tbody>
+    <?php
+    for ($k=1; $k <= $datos->settings->max_evaluations; $k++):
+        $evaluation = (isset($datos->list_evaluations->evaluations->$k)) ? $datos->list_evaluations->evaluations->$k : null;
+     ?>
+        <tr>
+            <td class="title"><?php echo $k ?></td>
+            <?php if ($datos->settings->apply_date === true) : ?>
+            <td class="tdinput">
+                <input id="eval_date_<?php echo $k ?>" type="text" size="5" class="datepicker" value="<?php echo (isset($evaluation->date)) ? $utility->formatDate($evaluation->date->date, $evaluation->date->timezone) : '' ?>" onclick="updateList(<?php echo $k ?>)">
+            </td>
+            <?php endif ?>
+            <td class="tdinput">
+                <textarea id="eval_desc_<?php echo $k ?>" class="materialize-textarea" onChange="updateList(<?php echo $k ?>)"><?php echo (isset($evaluation->description)) ? $evaluation->description : '' ?></textarea>
+            </td>
+            <td class="tdinput">
+                <input id="eval_perc_<?php echo $k ?>"
+                onchange="updateList(<?php echo $k ?>)"
+                type="number" maxlength="5" class="right-align"
+                max="<?php echo $datos->settings->percent_lap ?>" min="0" step="0.5"
+                value="<?php
+                if (isset($evaluation->percent)) {
+                    echo $utility->formatNumber($evaluation->percent);
+                } else echo $utility->formatNumber(0);
+                ?>"
+                <?php if (!isset($evaluation->percent)): ?>
+                disabled
+                <?php endif; ?>
+                required>
+                <?php if (isset($evaluation->description)): ?>
+                <script type="text/javascript">
+                evaluations_list['<?php echo $k ?>'] = {
+                    date: '<?php echo ($evaluation->date->date) ? $utility->formatDate($evaluation->date->date, $evaluation->date->timezone) : date('d-m-Y') ?>',
+                    description: '<?php echo $evaluation->description ?>',
+                    percent: '<?php echo $utility->formatNumber($evaluation->percent) ?>',
+                };
+                </script>
+                <?php endif; ?>
+            </td>
+        </tr>
+    <?php endfor; ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <?php if ($datos->settings->apply_date === true) : ?>
+                <td></td>
+                <?php endif ?>
+                <td class="right-align"><b>TOTAL</b></td>
+                <td class="right-align"><span id="total_percent"></span></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <textarea id="evaluations_data" style="display: none;"></textarea>
+    <input id="id_evaluation" type="hidden" value="<?php echo $datos->list_evaluations->id_evalution ?>">
+    <input id="lapse" type="hidden" value="<?php echo $datos->settings->lapse ?>">
+    <input id="type_class" type="hidden" value="<?php echo $params['type_class'] ?>">
+
+    <div class="fixed-action-btn second-fixed-action-btn">
+        <a id="evaluations_btn_save" class="btn-floating btn-large waves-effect waves-light green darken-4" onclick="btnSave()">
+            <i class="large material-icons">save</i>
+        </a>
+    </div>
+
+    <!-- Modal Structure Begin -->
+    <div id="modal_evaluations" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <div class="personal-information">
+                <h3>Importar Plan de Evaluación</h3>
+            </div>
+            <div id="list_evaluations_import"></div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-red btn">Cerrar</a>
+        </div>
+    </div>
+    <!-- Modal Structure End -->
+
+    <script type="text/javascript">
+        var today = '<?php echo date('d-m-Y') ?>';
+        var d_params = JSON.parse('<?php echo json_encode($params) ?>');
+
+        function updateList(dkey) {
+            var eval_date        = jQuery('#eval_date_' + dkey).val();
+            var eval_description = jQuery('#eval_desc_' + dkey).val().trim();
+            var eval_percent     = jQuery('#eval_perc_' + dkey).val();
+            jQuery('#eval_desc_' + dkey).val(eval_description);
+            if (eval_description.length > 0) {
+                jQuery('#eval_perc_' + dkey).removeAttr('disabled');
+                jQuery('#eval_perc_' + dkey).focus();
+            } else {
+                jQuery('#eval_date_' + dkey).val('');
+                jQuery('#eval_perc_' + dkey).val('0.0').attr('disabled',true);
+            }
+            if(eval_description.length > 0 && eval_percent != 0.0){
+                if (eval_date.length == 0) {
+                    eval_date = today;
+                    jQuery('#eval_date_' + dkey).val(eval_date);
+                }
+                evaluations_list[dkey] = {
+                    date:  eval_date,
+                    description: eval_description,
+                    percent: Number(eval_percent).toFixed(2),
+                };
+            } else {
+                delete evaluations_list[dkey];
+            }
+            jQuery('#evaluations_data').text(JSON.stringify(evaluations_list));
+            checkPercent();
+        }
+
+        function checkPercent() {
+            var percent_lap = <?php echo $datos->settings->percent_lap ?>;
+            var percent_evl = 0;
+            var count = Object.keys(evaluations_list).length;
+            jQuery.each(evaluations_list, function (idx, elem) {
+                percent_evl += parseFloat(elem.percent);
+            });
+            jQuery('#total_percent').html('<b>'+percent_evl+'%</b>');
+            if (percent_evl > percent_lap) {
+                swal('Valor Incorrecto','La suma de <?php echo $datos->settings->label_percents ?> excede el permitido','error')
+                return false;
+            } else {
+                if (count > 0) {
+                    jQuery('#evaluations_btn_save').removeClass('disabled');
+                }
+                return true;
+            }
+        }
+
+        function btnSave() {
+            if (evaluations_save() != false) {
+                jQuery('#evaluations_data').text(JSON.stringify(evaluations_list));
+            }
+        }
+
+        function btnImportEval() {
+            jQuery('#modal_evaluations').modal('open');
+            importEvaluation(1);
+        }
+
+        jQuery("input[type=number]").focus(function() {
+           jQuery(this).select();
+        });
+
+        jQuery('.datepicker').pickadate({
+            format: 'dd-mm-yyyy',
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 3, // Creates a dropdown of 15 years to control year
+            container: 'body',
+            onSet: function( arg ){
+                if ( 'select' in arg ){ //prevent closing on selecting month/year
+                    this.close();
+                }
+            }
+        });
+
+        jQuery('#evaluations_btn_save').addClass('disabled');
+        jQuery('#evaluations_data').text(JSON.stringify(evaluations_list));
+        jQuery('.tooltipped').tooltip({delay: 50});
+        jQuery('#modal_evaluations').modal();
+        checkPercent();
+    </script>
+<?php else: ?>
+    <div class="card-panel hoverable yellow accent-1 col s12">
+        <div class="skill-inner center-align">
+            <p><?php
+            echo ($datos->settings->section_close === true) ? $datos->settings->msg_section_close : $datos->list_evaluations->msg_error_config
+            ?></p>
+        </div>
+    </div>
+<?php endif ?>

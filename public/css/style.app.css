@@ -70,9 +70,129 @@ main {
 }
 
 .subtitle {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 25px;
-  margin-top: 0;
-  text-transform: uppercase;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+.collapsible span.badge, .collection-item span.badge {
+    margin-top: 0;
+}
+
+.fontCircle {
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    border-radius: 50%;
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+    color: #ffffff;
+    padding: .5rem 0;
+    font-weight: 400;
+    border: 1px solid transparent;
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    box-sizing: inherit;
+    line-height: 5px;
+}
+
+.fontCircle .title {
+    color: #fff;
+}
+
+.lapse .title, .lapse .subtitle {
+    margin-bottom: 0;
+}
+
+#resource-list .mix a {
+    display: block;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+#resource-list .mix>a::before {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 0 solid transparent;
+    content: "";
+    height: 100.5%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: border-width 0.2s ease 0s, border-color 0.2s ease 0s;
+    width: 100.5%;
+}
+
+#resource-list .mix:hover>a::before {
+    opacity: 0.8;
+    -webkit-transition: background-color 0.5s ease-in-out;
+    -moz-transition: background-color 0.5s ease-in-out;
+    -o-transition: background-color 0.5s ease-in-out;
+    -ms-transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out;
+}
+
+#resource-list .mix:hover .view-icon {
+    left: 43%;
+    visibility: visible;
+}
+
+#resource-list .mix:hover {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+table {
+    background-color: #fff;
+}
+
+.class-title {
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px 5px 0px 0px;
+}
+.class-title h6 {
+    font-weight: bold;
+    color: white;
+}
+.class-body {
+    margin-bottom: 20px;
+}
+
+.second-fixed-action-btn {
+  position: fixed;
+  right: 23px;
+  bottom: 90px;
+  padding-top: 15px;
+  margin-bottom: 0;
+  z-index: 998;
+}
+
+.table_evaluations input[type="text"],
+.table_evaluations input[type="number"],
+.table_evaluations textarea.materialize-textarea {
+    border: solid 1px #ccc;
+    border-radius: 4px;
+    height: 3rem;
+    min-height: 3rem;
+    max-height: 3rem;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    background-color: #fff;
+    resize: none;
+    overflow-y: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+.table_evaluations .tdinput {
+    vertical-align: top;
+}
+
+@media (max-width: 480px) {
+    .fontCircle .title {
+        font-size: 44px;
+    }
 }

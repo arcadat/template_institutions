@@ -1,0 +1,26 @@
+<div class="portfolio-bottom-inner">
+    <div id="portfolio-list" class="portfolio-list">
+    <?php
+    if ($datos['items_docs_digitals'] != '0'):
+        for ($j=1; $j <= $datos['items_docs_digitals']; $j++) :?>
+        <div class="mix">
+            <a class="portfolio-thumbnill" href="<?php echo $datos['list_docs_digitals'][$j]['document_digital'] ?>" >
+                <img src="<?php echo $datos['list_docs_digitals'][$j]['document_digital'] ?>" />
+                <i class="material-icons view-icon">pageview</i>
+            </a>
+        </div>
+        <?php endfor;?>
+    <?php else:?>
+        <div class="skill-inner center-align col s12">
+            <p><?php echo $datos['txt_no_documents_digital'] ?></p>
+        </div>
+    <?php endif; ?>
+    </div>
+</div>
+
+<script type='text/javascript'>
+    jQuery(".portfolio-list").lightGallery({
+        selector: '.portfolio-thumbnill',
+        download: false
+    });
+</script>

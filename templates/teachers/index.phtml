@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>
+        <?php echo $settings->name_i ?>
+    </title>
+
+    <!-- Favicon -->
+    <link rel='shortcut icon' type='image/x-icon' href='<?php echo $settings->favicon_i ?>' />
+    <!-- CSS  -->
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <!-- Font Awesome -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- Skill Progress Bar -->
+    <link href="css/pro-bars.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <!-- Owl Carousel -->
+    <link href='css/fullcalendar.min.css' rel='stylesheet' />
+    <link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <!-- Default Theme CSS File-->
+    <link id="switcher" href="css/theme.css.php?color_i=<?php echo urlencode($settings->color_i); ?>" type="text/css" rel="stylesheet" media="screen,projection" />
+    <!-- LightGallery -->
+    <link type="text/css" rel="stylesheet" href="css/lightgallery.min.css" />
+    <!-- Sweetalert -->
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+    <!-- Main css File -->
+    <link href="css/style.app.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- BEGAIN PRELOADER -->
+    <div id="preloader">
+        <div class="progress">
+            <div class="indeterminate"></div>
+        </div>
+        <div class="caja">
+            <h6>Bienvenido a nuestro sitio web</h6><br><br>
+            <img src="<?php echo $settings->logo_i ?>" alt="Logo">
+            <p><b><?php echo $settings->name_i ?></b><br>
+                <?php echo $settings->slogan_i ?>
+            </p>
+        </div>
+    </div>
+    <!-- END PRELOADER -->
+    <header id="header" role="banner">
+        <div class="navbar-fixed">
+
+            <nav>
+                <div class="nav-wrapper">
+
+                    <!-- LOGO -->
+                    <!-- TEXT BASED LOGO -->
+                    <a href="#" class="brand-logo" style="padding-left: 15px;">
+                        <?php if (!empty($settings->logo_top_i)): ?>
+                        <img src="<?php echo $settings->logo_top_i ?>" alt="<?php echo $settings->name_i ?>">
+                        <?php else: ?>
+                        <?php echo $settings->name_i ?>
+                        <?php endif;?>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main role="main">
+        <div class="main-wrapper">
+            <div class="row">
+                <div class="col s12 m2">
+                    <div class="card hoverable hide-on-small-only">
+                        <div class="card-content">
+                            <div class="center-align">
+                                <img class="circle responsive-img" src="<?php echo $data_teacher->photo_teacher ?>"/>
+                            </div>
+                            <div class="center-align">
+                                <span class="card-title"><?php echo $data_teacher->first_name_teacher; ?></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hide-on-med-and-up">
+                        <div class="col s4">
+                            <img src="<?php echo $data_teacher->photo_teacher ?>" alt="" class="circle responsive-img">
+                        </div>
+                        <div class="col s8">
+                            <p>
+                                <span class="title"><?php echo $data_teacher->first_name_teacher ?></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m10">
+                    <ul class="tabs">
+                        <li class="tab col s2"><a href="#tab_0" class="tooltipped active" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab0 ?>"><i class="fa fa-id-card fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab0 ?></span></a></li>
+                        <li class="tab col s2"><a href="#tab_1" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab1 ?>"><i class="fa fa-bullhorn fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab1 ?></span></a></li>
+                        <li class="tab col s2"><a href="#tab_2" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab2 ?>"><i class="fa fa-file-text fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab2 ?></span></a></li>
+                        <li class="tab col s2"><a href="#tab_3" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab3 ?>"><i class="fa fa-exclamation-circle fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab3 ?></span></a></li>
+                        <li class="tab col s2"><a href="#tab_4" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab4 ?>"><i class="fa fa-book fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab4 ?></span></a></li>
+                        <li class="tab col s2"><a href="#tab_5" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab5 ?>"><i class="fa fa-history fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab5 ?></span></a></li>
+                    </ul>
+                </div>
+
+                <!-- TAB 0 -> DATOS PERSONALES -->
+                <div class="personal-information col s12 m10" id="tab_0">
+                    <h3><?php echo $settings->title_label_tab0 ?><a href="#!" class="btn btn-floating waves-effect waves-light right" onclick="refreshTab('data_teacher');"><i class="material-icons small">refresh</i></a></h3>
+                    <div id="data_teacher" class="col s12 m9"></div>
+                </div>
+
+                <!-- TAB 1 -> DOCUMENTOS DE IDENTIDAD -->
+                <div class="personal-information col s12 m10" id="tab_1">
+                    <h3><?php echo $settings->title_label_tab1 ?><a href="#!" class="btn btn-floating waves-effect waves-light right" onclick="refreshTab('documents_teacher');"><i class="material-icons small">refresh</i></a></h3>
+                    <div id="documents_teacher" class="portfolio-bottom"></div>
+                </div>
+
+                <!-- TAB 2 -> RECURSOS -->
+                <div class="col s12 m10" id="tab_2">
+                    <div class="personal-information col s12">
+                        <h3><?php echo $settings->title_label_tab2 ?></h3>
+                    </div>
+                    <div class="col s12">
+                        <nav class="grey lighten-5">
+                            <div class="nav-wrapper">
+                                <div class="resourceMenu col s6 left">
+                                    <a href="#!" class="breadcrumb resourceMenu" onclick="closeFolder();"><i class="material-icons">home</i></a>
+                                    <a href="#!" class="breadcrumb resourceMenu" id="subfoldertitle" style="display: none;">Second</a>
+                                </div>
+                                <ul class="right">
+                                    <li id="menu_folder"><a onclick="actionFolder('create');" class="tooltipped resourceMenu" data-position="button" data-delay="50" data-tooltip="Agregar Nueva Carpeta"><i class="material-icons">create_new_folder</i></a></li>
+                                    <li id="menu_youtube" style="display: none;"><a onclick="actionResource('create');" class="tooltipped resourceMenu" data-position="button" data-delay="50" data-tooltip="Agregar Nuevo Video"><i class="material-icons">subscriptions</i></a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <!-- Carpetas -->
+                    <div id="folders" class="col s12">
+                    <?php if ($teaching_resources->folders_teaching_resource != '0'): ?>
+                        <?php for ($i=1; $i <= $teaching_resources->folders_teaching_resource; $i++) : ?>
+                        <div id="folder_<?php echo $i ?>" class="col s12 m6">
+                            <div class="card horizontal hoverable">
+                                <div class="card-image fontCircle" style="background-color: <?php echo $settings->color_i; ?>">
+                                    <i class="material-icons medium">folder</i>
+                                </div>
+                                <div class="card-stacked">
+                                    <div class="card-content">
+                                        <span id="folder_title_<?php echo $i ?>"><?php echo $teaching_resources->list_folders->$i->name_folder ?></span>
+                                        <a href="#" class="right dropdown-button" data-activates='dropdown_<?php echo $i; ?>'><i class="material-icons">more_vert</i></a href="#">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Dropdown Structure -->
+                            <ul id='dropdown_<?php echo $i; ?>' class='dropdown-content'>
+                                <li><a href="#!" onclick="loadFolder(<?php echo $i; ?>);"><i class="material-icons">folder</i>Abrir</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#!" onclick="actionFolder('update','<?php echo $i ?>');"><i class="material-icons">mode_edit</i>Editar</a></li>
+                                <li><a href="#!" onclick="actionFolder('delete','<?php echo $i ?>');"><i class="material-icons">delete</i>Borrar</a></li>
+                            </ul>
+                        </div>
+                        <?php endfor; ?>
+                    <?php else: ?>
+                        <div class="skill-inner center-align col s12">
+                            <p>Sin Carpetas para mostrar</p>
+                        </div>
+                    <?php endif; ?>
+                    </div>
+
+                    <!-- Recursos -->
+                    <?php for ($i=1; $i <= $teaching_resources->folders_teaching_resource; $i++) :
+                    $files_folder = $teaching_resources->list_folders->$i->files_folder; ?>
+                    <div id="folder_resources_<?php echo $i ?>" class="portfolio-list col s12" style="display: none;">
+                        <?php for ($j=1; $j <= $files_folder->numbers_items_url_youtube; $j++) :
+                        $url_youtube = $files_folder->list_url_youtube->$j; ?>
+                        <div id="resource_item_<?php echo $i.'_'.$j ?>" class="col s12 m4">
+                            <div class="card small hoverable" id="resource-list">
+                                <div class="card-image mix">
+                                    <a class="portfolio-thumbnill" href="<?php echo $url_youtube->url ?>">
+                                        <img src="<?php echo $url_youtube->thumbnail ?>" alt="">
+                                        <i class="material-icons view-icon">play_circle_outline</i>
+                                    </a>
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title activator"><i class="material-icons right" onclick="actionResource(<?php echo "'delete','$i','$j','$url_youtube->code'" ?>);">delete</i></span>
+                                    <p><?php echo $url_youtube->title ?></p>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endfor; ?>
+                    </div>
+                    <?php endfor; ?>
+                </div>
+
+                <!-- TAB 3 -> PUBLICACIONES -->
+                <div class="personal-information col s12 m10" id="tab_3">
+                    <h3><?php echo $settings->title_label_tab3 ?></h3>
+                    <?php if ($publications_teacher->items_publications != '0'): ?>
+                        <?php for ($j=1; $j <= $publications_teacher->items_publications; $j++) :?>
+                        <div class="col s12 m4">
+                            <div class="card medium hoverable">
+                                <div class="card-content">
+                                    <div class="col s3">
+                                        <img src="<?php echo $publications_teacher->details_publications->$j->photo_publisher ?>" alt="" class="circle responsive-img">
+                                    </div>
+                                    <div class="col s9">
+                                        <span><?php echo $publications_teacher->details_publications->$j->name_publisher ?></span><br>
+                                        <small><?php echo date('d/m/Y H:i',strtotime($publications_teacher->details_publications->$j->date_publication->date)) ?></small>
+                                    </div>
+                                </div>
+                                <div class="card-image">
+                                <?php if ($publications_teacher->details_publications->$j->attachments->type == '1'): ?>
+                                    <div class="video-container">
+                                        <iframe src="//www.youtube.com/embed/<?php echo $publications_teacher->details_publications->$j->attachments->id ?>?rel=0" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                <?php else: ?>
+                                    <a href="https://drive.google.com/open?id=<?php echo $publications_teacher->details_publications->$j->attachments->id ?>" target="_blank">
+                                        <img src="<?php echo $publications_teacher->details_publications->$j->attachments->thumbnail ?>" alt="" class="responsive-img">
+                                    </a>
+                                <?php endif ?>
+                                </div>
+                                <div class="card-content">
+                                    <div class="col s12"><p style="color: #444"><?php echo $publications_teacher->details_publications->$j->description_publication ?></p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endfor; ?>
+                    <?php else:?>
+                        <div class="skill-inner center-align col s12">
+                            <p><?php echo $publications_teacher->txt_no_publications ?></p>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- TAB 4 -> TUTORIAS -->
+                <div class="col s12 m10" id="tab_4">
+                    <div class="personal-information">
+                        <h3><?php echo $settings->title_label_tab4 ?>
+                            <a href="#!" class="btn btn-floating waves-effect waves-light right" onclick="refreshTab('tutorials_teacher');">
+                                <i class="material-icons small">refresh</i>
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="tutorials_teacher" class="col s12"></div>
+                </div>
+
+                <!-- TAB 5 -> CLASES -->
+                <div class="col s12 m10" id="tab_5">
+                    <div class="personal-information">
+                        <h3><?php echo $settings->title_label_tab5 ?>
+                            <a href="#!" class="btn btn-floating waves-effect waves-light right" onclick="refreshTab('class_teacher');">
+                                <i class="material-icons small">refresh</i>
+                            </a>
+                        </h3>
+                    </div>
+                    <div id="class_teacher" class="col s12"></div>
+                </div>
+            </div>
+
+            <!-- Menú de aplicaciones -->
+            <div id="appmenu"></div>
+        </div>
+    </main>
+    <footer id="footer" role="contentinfo">
+        <!-- Start Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="row">
+                <div class="col s12">
+                    <div class="footer-inner">
+                        <!-- Bottom to Up Btn -->
+                        <p class="design-info">Servicio proporcionado por<br/>
+                            <a href="http://www.arcadat.com/"><img src="<?php echo $settings->logo_arcadat_footer ?>" alt=""></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jQuery Library -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <!-- Materialize js -->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- Validate js -->
+    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+    <!-- Skill Progress Bar -->
+    <script type="text/javascript" src="js/appear.min.js"></script>
+    <script type="text/javascript" src="js/pro-bars.min.js"></script>
+    <!-- Owl slider -->
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <!-- counter -->
+    <script type="text/javascript" src="js/waypoints.min.js"></script>
+    <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+    <!-- FullCalendar -->
+    <script type="text/javascript" src='js/moment.min.js'></script>
+    <script type="text/javascript" src='js/fullcalendar.min.js'></script>
+    <script type="text/javascript" src='js/fullcalendar.locale.min.es.js'></script>
+    <script type="text/javascript" src='js/pickadate_es_ES.js'></script>
+    <!-- Google Maps -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6-_MBg2QXptawIOEdL7-k1doOfuYdm70"></script>
+    <script type="text/javascript" src="js/gmaps.min.js"></script>
+    <!-- A jQuery plugin that adds cross-browser mouse wheel support. (Optional) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
+    <script src="js/lightgallery.min.js"></script>
+
+    <!-- lightgallery plugins -->
+    <script src="js/lg-thumbnail.min.js"></script>
+    <script src="js/lg-fullscreen.min.js"></script>
+    <script src="js/lg-video.min.js"></script>
+
+    <!-- Sweetalert plugins -->
+    <script src="js/sweetalert.min.js"></script>
+
+    <script type="text/javascript">
+        var d_settings  = JSON.parse('<?php echo json_encode($settings) ?>');
+        var d_data      = JSON.parse('<?php echo json_encode($data_teacher) ?>');
+        var d_documents = JSON.parse('<?php echo json_encode($documents_teacher) ?>');
+        var d_tutorials = JSON.parse('<?php echo json_encode($tutorials_teacher) ?>');
+        var d_class     = JSON.parse('<?php echo json_encode($class_teacher) ?>');
+        var d_resources = JSON.parse('<?php echo json_encode($teaching_resources) ?>');
+        var d_person    = {
+            'photo_person': '<?php echo $data_teacher->photo_profile_teacher ?>',
+            'first_name': '<?php echo $data_teacher->first_name_teacher ?>',
+            'last_name': '<?php echo $data_teacher->last_name_teacher ?>',
+            };
+        var d_id_folder;
+    </script>
+
+    <!-- Custom Js -->
+    <script type="text/javascript" src="js/custom_teachers.js"></script>
+</body>
+
+</html>

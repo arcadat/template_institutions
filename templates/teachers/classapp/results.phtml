@@ -1,0 +1,225 @@
+<nav id="absence_nav_menu" class="grey lighten-5">
+    <div class="nav-wrapper">
+        <ul class="left">
+            <li><a href="#!" class="breadcrumb resourceMenu" onclick="closeClassApp();"><i class="material-icons">arrow_back</i> Regresar</a></li>
+        </ul>
+        <?php if (isset($datos->list_evaluations) && $datos->list_evaluations->numbers_evaluations != 0): ?>
+        <ul class="right">
+            <li><a href="#" class="resourceMenu tooltipped right" data-position="left" data-delay="50" data-tooltip="<?php echo $datos->settings->tooltip_button_print_results_evaluation ?>" onclick="jQuery('#modal_print_results_evaluation').modal('open');"><i class="material-icons">print</i></a></li>
+        </ul>
+        <?php endif; ?>
+    </div>
+</nav>
+
+<div class="card horizontal" style="border-left: solid 7px <?php echo $header['color'] ?>;">
+    <div class="fontCircle" style="background-color: <?php echo $header['color'] ?>;">
+        <span class="title"><?php echo $header['section'] ?></span>
+        <span ><?php echo $header['turn'] ?></span>
+    </div>
+    <div class="card-stacked">
+        <div class="card-content">
+            <span class="lapse">
+                <span class="right title red-text text-accent-4"><?php echo $datos->settings->label_lapse ?></span>
+                <b><?php echo $header['level'] ?></b>
+            </span>
+            <p>
+                <?php echo $header['students'] ?> Estudiantes<br/>
+                <span><?php echo $header['subject'] ?></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<?php if (isset($datos->list_evaluations) && $datos->list_evaluations->numbers_evaluations != 0): ?>
+
+    <script type="text/javascript">
+        output_students_list = {};
+    </script>
+
+    <div class="col s12 grey lighten-3" style="cursor: pointer; padding: 15px 5px" onclick="jQuery('#modal_evaluations').modal('open');">
+        <div id="evaluation_title" class="col s9">
+            <?php echo $datos->list_evaluations->evaluations->{1}->description ?>
+        </div>
+        <div id="evaluation_percent" class="col s3 right-align">
+            <b><?php echo $datos->list_evaluations->evaluations->{1}->percent ?>%</b>
+        </div>
+    </div>
+
+    <ul class="collection">
+    <?php for ($k=1; $k <= $datos->list_students->numbers_students; $k++):
+    $student = $datos->list_students->students->$k; ?>
+        <li class="collection-item avatar">
+            <img src="<?php echo $student->photo ?>" alt="" class="circle">
+            <span class="title">
+                <?php echo $student->last_name; ?>
+                <div class="right">
+                    <input id="results_<?php echo $k ?>"
+                        onchange="updateList(<?php echo $k ?>)"
+                        type="number" maxlength="5" style="text-align:right;"
+                        max="<?php echo $datos->settings->qlf_max ?>" min="0" step="0.5"
+                        value="<?php echo $utility->formatNumber($datos->list_students->students->$k->results_evaluations->{1}->qlf); ?>" required>
+                </div>
+            </span>
+            <p>
+                <?php echo $student->first_name ?><br/>
+            </p>
+            <script type="text/javascript">
+                output_students_list['<?php echo $k ?>'] = {
+                    id: '<?php echo $student->id ?>',
+                    qlf: '<?php echo $datos->list_students->students->$k->results_evaluations->{1}->qlf ?>',
+                };
+            </script>
+        </li>
+    <?php endfor; ?>
+    </ul>
+
+    <textarea id="results_students_data" style="display: none;"></textarea>
+    <input id="lapse" type="hidden" value="<?php echo $datos->settings->lapse ?>">
+    <input id="type_class" type="hidden" value="<?php echo $header['type_class'] ?>">
+    <input id="id_evaluation" type="hidden" value="<?php echo $datos->list_evaluations->evaluations->{1}->id ?>">
+
+    <div class="fixed-action-btn second-fixed-action-btn">
+        <a id="results_btn_save" class="btn-floating btn-large waves-effect waves-light green darken-4" onclick="btnSave()">
+            <i class="large material-icons">save</i>
+        </a>
+    </div>
+
+    <!-- Modal Structure Begin -->
+    <div id="modal_evaluations" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <div class="personal-information">
+                <h3>Plan de Evaluación</h3>
+            </div>
+            <span>
+                <span class="badge title"><?php echo $datos->settings->label_lapse ?></span>
+                <b><?php echo $header['subject'] ?></b>
+            </span>
+            <p>
+                <span><?php echo $header['level'] .' '. $header['section'] .' '. $header['turn'] ?></span>
+            </p>
+            <table class="bordered highlight">
+                <?php foreach ($datos->list_evaluations->evaluations as $key => $evaluation): ?>
+                    <tr style="cursor: pointer;" onclick="changeEvaluation(<?php echo $key ?>)">
+                        <td>
+                            <div class="col s9"><?php echo $evaluation->description ?></div>
+                            <div class="col s3 right-align"><b><?php echo $evaluation->percent ?>%</b></div>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </table>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-red btn">Cerrar</a>
+        </div>
+    </div>
+    <!-- Modal Structure End -->
+
+    <script type="text/javascript">
+        var results_students_list = JSON.parse('<?php echo json_encode($datos->list_students->students) ?>');
+        var evaluation_list       = JSON.parse('<?php echo json_encode($datos->list_evaluations->evaluations) ?>');
+        var evaluation_select     = 1;
+        var change                = false;
+
+        function updateList(dkey) {
+            var value  = parseFloat(jQuery('#results_'+dkey).val());
+            var valmax = '<?php echo $datos->settings->qlf_max ?>';
+            if (value > parseFloat('<?php echo $datos->settings->qlf_max ?>')) {
+                value = valmax;
+                jQuery('#results_'+dkey).val('<?php echo $datos->settings->qlf_max ?>.0');
+                swal('Error','Sólo se aceptan valores entre 0 y '+valmax, 'warning');
+            } else if (value < 0) {
+                value = 0.0;
+                jQuery('#results_'+dkey).val('0.0');
+                swal('Error','Sólo se aceptan valores entre 0 y '+valmax, 'warning');
+            } else if (value != results_students_list[dkey].results_evaluations[evaluation_select].qlf) {
+                change = true;
+                jQuery('#results_btn_save').removeClass('disabled');
+            }
+            output_students_list[dkey].qlf = value;
+            jQuery('#results_students_data').text(JSON.stringify(output_students_list));
+        }
+
+        function changeEvaluation(dkey) {
+            if (change === true) {
+                swal({
+                    title: "¿Guardar cambios antes de cambiar de evaluación?",
+                    text: "Se detectaron cambios de notas en la evaluación anterior.!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Si, guardar!",
+                    cancelButtonText: "No, guardar!",
+                    closeOnConfirm: false
+                },
+                function(isConfirm){
+                    change = false;
+                    if (isConfirm) {
+                        btnSave();
+                    }
+                    loadEvaluation(dkey);
+                });
+            } else {
+                loadEvaluation(dkey);
+            }
+        }
+
+        function loadEvaluation(dkey) {
+            jQuery('#evaluation_title').html(evaluation_list[dkey].description);
+            jQuery('#evaluation_percent').html('<b>'+evaluation_list[dkey].percent+'%</b>');
+            jQuery('#id_evaluation').val(evaluation_list[dkey].id);
+            evaluation_select = dkey;
+            jQuery.each(results_students_list, function(idx, elem) {
+                var value = elem.results_evaluations[dkey].qlf;
+                jQuery('#results_'+idx).val(Number(value).toFixed(2));
+                output_students_list[idx].qlf = value;
+            });
+            jQuery('#results_students_data').text(JSON.stringify(output_students_list));
+            jQuery('#results_btn_save').addClass('disabled');
+            jQuery('#modal_evaluations').modal('close');
+        }
+
+        function btnSave() {
+            change = false;
+            if (qlfs_save() === false){
+                change = true;
+            } else {
+                jQuery.each(output_students_list, function (idx, elem) {
+                    results_students_list[idx].results_evaluations[evaluation_select].qlf = elem.qlf;
+                });
+            }
+        }
+
+        jQuery("input[type=number]").focus(function() {
+           jQuery(this).select();
+        });
+        jQuery('#results_btn_save').addClass('disabled');
+        jQuery('#results_students_data').text(JSON.stringify(output_students_list));
+        jQuery('#modal_evaluations').modal();
+    </script>
+<?php else: ?>
+    <div class="skill-inner center-align col s12">
+        <p><?php // echo $datos->list_evaluations->msg_error_config ?></p>
+    </div>
+<?php endif ?>
+
+<!-- Modal Structure Begin -->
+<div id="modal_print_results_evaluation" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <div class="personal-information">
+            <h3><?php echo $datos->settings->label_combo_box_lapse ?></h3>
+        </div>
+        <div class="collection">
+        <?php foreach ($datos->settings->reports_results_evaluations as $report): ?>
+            <a href="<?php echo $report->root_report ?>" target="_blank" class="collection-item"><?php echo $report->label_report ?></a>
+        <?php endforeach ?>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-red btn">Cerrar</a>
+    </div>
+</div>
+<!-- Modal Structure End -->
+
+<script type='text/javascript'>
+    jQuery('#modal_print_results_evaluation').modal();
+    jQuery('.tooltipped').tooltip({delay: 50});
+</script>

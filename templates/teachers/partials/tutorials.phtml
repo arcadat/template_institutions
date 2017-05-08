@@ -1,0 +1,25 @@
+<?php if ($datos['items_tutorials'] != '0'): ?>
+    <?php for ($j=1; $j <= $datos['items_tutorials']; $j++) :?>
+    <div class="col s12 m6 l4">
+        <div class="card horizontal hoverable" style="cursor: pointer; border-left: solid 7px <?php echo $datos['list_tutorials'][$j]['color'] ?>;">
+            <div class="fontCircle" style="background-color: <?php echo $datos['list_tutorials'][$j]['color'] ?>;">
+                <span class="title"><?php echo $datos['list_tutorials'][$j]['section'] ?></span>
+                <span ><?php echo $datos['list_tutorials'][$j]['turn'] ?></span>
+            </div>
+            <div class="card-stacked">
+                <div class="card-content">
+                    <p>
+                        <b><?php echo $datos['list_tutorials'][$j]['level'] ?></b><br/>
+                        <?php echo $datos['list_tutorials'][$j]['numbers_students'] ?> Estudiantes<br/>
+                        <span><?php echo $datos['list_tutorials'][$j]['stage'] ?></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php endfor; ?>
+<?php else:?>
+    <div class="skill-inner center-align col s12">
+        <p><?php echo $datos['txt_no_tutorials'] ?></p>
+    </div>
+<?php endif; ?>

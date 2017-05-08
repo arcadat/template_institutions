@@ -1,0 +1,81 @@
+<nav id="absence_nav_menu" class="grey lighten-5">
+    <div class="nav-wrapper">
+        <ul class="left">
+            <li><a href="#!" class="breadcrumb resourceMenu" onclick="closeClassApp();"><i class="material-icons">arrow_back</i> Regresar</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="card horizontal" style="border-left: solid 7px <?php echo $header['color'] ?>;">
+    <div class="fontCircle" style="background-color: <?php echo $header['color'] ?>;">
+        <span class="title"><?php echo $header['section'] ?></span>
+        <span ><?php echo $header['turn'] ?></span>
+    </div>
+    <div class="card-stacked">
+        <div class="card-content">
+            <span>
+                <b><?php echo $header['level'] ?></b>
+            </span>
+            <p>
+                <?php echo $header['students'] ?> Estudiantes<br/>
+                <span><?php echo $header['subject'] ?></span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var absences_students_list = {};
+</script>
+
+<ul class="collection">
+    <li class="collection-item grey lighten-4 center-align">
+        <span>Registro de asistencias del día:</span><br/>
+        <span class="title"><?php echo date('d-m-Y'); ?></span>
+    </li>
+<?php for ($k=1; $k <= $datos->list_students->numbers_students; $k++):
+$student = $datos->list_students->students->$k; ?>
+    <li class="collection-item avatar">
+        <img src="<?php echo $student->photo ?>" alt="" class="circle">
+        <span class="title">
+            <?php echo $student->last_name; ?>
+            <div class="switch right">
+                <label>
+                    <input id="absences_<?php echo $k ?>" type="checkbox" <?php echo ($student->absence_day == '0') ? 'checked="checked"' : '' ?> onclick="updateList(<?php echo $k ?>)">
+                    <span class="lever"></span>
+                </label>
+            </div>
+        </span>
+        <p>
+            <?php echo $student->first_name ?><br/>
+            <?php echo $student->number_id_student ?>
+        </p>
+
+        <script type="text/javascript">
+            absences_students_list['<?php echo $k ?>'] = {
+                id: '<?php echo $student->id ?>',
+                absence_day: 0,
+            };
+        </script>
+    </li>
+<?php endfor; ?>
+</ul>
+
+<textarea id="absences_students_data" style="display: none;"></textarea>
+<input id="type_subject" type="hidden" value="<?php echo $datos->settings->type_subject ?>">
+<input id="lapse_absences" type="hidden" value="<?php echo $datos->settings->lapse_absences ?>">
+
+<div class="fixed-action-btn second-fixed-action-btn">
+    <a class="btn-floating btn-large waves-effect waves-light green darken-4" onclick="absences_save()">
+        <i class="large material-icons">save</i>
+    </a>
+</div>
+
+<script type="text/javascript">
+    function updateList(dkey) {
+        var val = (jQuery('#absences_'+dkey).is(':checked')) ? 0 : 1;
+        absences_students_list[dkey].absence_day = val;
+        jQuery('#absences_students_data').text(JSON.stringify(absences_students_list));
+    }
+    jQuery('#absences_students_data').text(JSON.stringify(absences_students_list));
+</script>
