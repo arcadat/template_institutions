@@ -2117,6 +2117,9 @@ textarea.materialize-textarea {
   padding: 5px! important;
 }
 
+.tap-target {
+    color: #fff;
+}
 
 /*--------------------*/
 /* RESPONSIVE STYLE */
@@ -2238,8 +2241,8 @@ textarea.materialize-textarea {
 	}
 }
 
-@media(max-width:600px ){
-  .contact-map {height: 350px;margin-top: 30px;}
+@media only screen and (max-width: 600px) {
+    .contact-map {height: 350px;margin-top: 30px;}
 }
 
 @media(max-width:480px ){
