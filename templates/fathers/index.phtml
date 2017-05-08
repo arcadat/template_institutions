@@ -25,6 +25,8 @@
     <link id="switcher" href="css/theme.css.php?color_i=<?php echo urlencode($settings->color_i); ?>" type="text/css" rel="stylesheet" media="screen,projection" />
     <!-- LightGallery -->
     <link type="text/css" rel="stylesheet" href="css/lightgallery.min.css" />
+    <!-- Sweetalert -->
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
     <!-- Main css File -->
     <link href="css/style.app.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
@@ -404,7 +406,7 @@
                                             $subjects_class->name_teacher."'"
                                         ?>);
                                         <?php else: ?>
-                                        alert('<?php echo $sons->list_sons->$i->class_son->settings->msg_no_show_results_evaluations ?>')
+                                        swal({title:'Alerta', text: '<?php echo $sons->list_sons->$i->class_son->settings->msg_no_show_results_evaluations ?>', type:'warning', confirmButtonText:'ACEPTAR', confirmButtonColor: '<?php echo $settings->color_i ?>'});
                                         <?php endif ?>
                                         ">
                                             <div class="col s2">
@@ -490,9 +492,9 @@
                         <?php if ($sons->list_sons->$i->history_academic->items_stages != '0'):
                             $history_academic = $sons->list_sons->$i->history_academic; ?>
                             <div class="col s12 m4">
-                                <table>
+                                <table class="bordered">
                                     <?php for ($j=1; $j <= $history_academic->items_stages; $j++): ?>
-                                    <tr class="trselected">
+                                    <tr class="trselected <?php echo ($j == 1) ? 'selected' : ""; ?>">
                                         <td class="hoverable" style="cursor: pointer; border-left: solid 7px <?php echo $history_academic->list_stages->$j->color_stage ?>;" onclick="loadHistory(<?php echo $j ?>)">
                                             <span><?php echo $history_academic->list_stages->$j->name_stage ?></span><br/>
                                             <small>
@@ -658,6 +660,9 @@
     <!-- lightgallery plugins -->
     <script src="js/lg-thumbnail.min.js"></script>
     <script src="js/lg-fullscreen.min.js"></script>
+
+    <!-- Sweetalert plugins -->
+    <script src="js/sweetalert.min.js"></script>
 
     <script type="text/javascript">
         var d_settings  = JSON.parse('<?php echo json_encode($settings) ?>');
