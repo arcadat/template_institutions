@@ -17,10 +17,7 @@ class StudentsController extends Controller
         $this->container->logger->info("Arcadat Template 'students/home' route");
 
         $data = [
-            'option'    => '1',
-            'i_i'       => $_SESSION['idco'],
             't'         => (isset($_SESSION['token'])) ? $_SESSION['token'] : $_GET['token'],
-            'id_person' => (isset($_SESSION['idper'])) ? $_SESSION['idper'] : $_GET['idper'],
         ];
 
         $uri = $this->container->config->api->url_students . '?' . http_build_query($data);

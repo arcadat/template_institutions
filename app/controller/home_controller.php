@@ -17,15 +17,16 @@ class HomeController extends Controller
         $this->container->logger->info("Arcadat Template '/' route");
 
         if ($req->isPost()) {
-            $data = $req->getParsedBody();
-            $data = $data['id_col'];
+            $post = $req->getParsedBody();
+            $data['i_i'] = $post['id_col'];
         } else {
-            $data = (isset($_SESSION['idco'])) ? $_SESSION['idco'] : $this->container->config->api->colegioId;
+            $data['i_i'] = (isset($_SESSION['idco'])) ? $_SESSION['idco'] : $this->container->config->api->colegioId;
         }
 
-        $_SESSION['idco'] = $data;
+        $_SESSION['idco'] = $data['i_i'];
 
-        $uri = $this->container->config->api->url_basic . $data;
+        $uri = $this->container->config->api->url_basic . '?' . http_build_query($data);
+
 
         $response = Request::get($uri)->send();
 
