@@ -2121,6 +2121,10 @@ textarea.materialize-textarea {
     color: #fff;
 }
 
+.btn_social_network {
+    margin: 0 10px;
+}
+
 /*--------------------*/
 /* RESPONSIVE STYLE */
 /*--------------------*/
@@ -2186,7 +2190,7 @@ textarea.materialize-textarea {
 
 @media(max-width:767px ){
 
-  nav .brand-logo img {height: 40px; margin-top: 12px;}
+  nav .brand-logo img {height: 40px; /*margin-top: 12px;*/}
   .home-inner { padding: 10px;}
   .home-title {font-size: 35px;}
   .single-facts {padding: 15px;}
@@ -2248,7 +2252,7 @@ textarea.materialize-textarea {
 @media(max-width:480px ){
 
   nav .brand-logo { font-size: 1.1rem; }
-  nav .brand-logo img {height: 35px;margin-top: 12px;}
+  nav .brand-logo img {height: 35px;/*margin-top: 12px;*/}
   .side-nav {width: 200px; z-index: 999}
   .side-nav a {height: 45px;line-height: 50px;}
   .home-inner { padding: 0;}
@@ -2317,7 +2321,7 @@ textarea.materialize-textarea {
 
 @media(max-width:360px ){
 
-  nav .brand-logo img {height: 27px;margin-top: 16px;}
+  nav .brand-logo img {height: 27px;/*margin-top: 16px;*/}
   .resume-btn { margin-left: 0;}
   .submit-btn { margin-left: 0;}
   .prev { margin-top: 55%;}
