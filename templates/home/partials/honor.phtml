@@ -6,9 +6,9 @@
 </div>
 
             <div class="col s12">
-                <ul id="tab_honor" class="tabs">
+                <ul id="tab_honor" class="tabs tabs-fixed-width">
                 <?php for ($i=1; $i <= $datos['numbers_lapses_period'] ; $i++) : ?>
-                    <li class="tab col s3">
+                    <li class="tab">
                         <a class="<?php echo ($datos['lapse_default_show_data'] == $i) ? 'active' : ''; ?>" href="#tab_honor_<?php echo $i?>"><?php echo $datos['description_lapses_period'][$i]; ?></a>
                     </li>
                 <?php endfor; ?>
@@ -22,7 +22,7 @@
                 if ($numbers_sections > 0):
                     $list_sections_lapse_honor_roll = $lapses_honor_roll['list_sections_lapse_honor_roll']; ?>
 
-                <ul id="list_sections_collapsible" class="collapsible" data-collapsible="accordion">
+                <ul id="list_sections_collapsible_<?php echo $i ?>" class="collapsible" data-collapsible="accordion">
                     <?php for ($j=1; $j <= $numbers_sections; $j++) : ?>
                     <li>
                         <div class="collapsible-header"><i class="material-icons">group</i><?php echo $list_sections_lapse_honor_roll[$j]['descripcion_section_honor_roll']; ?></div>
@@ -97,9 +97,12 @@
                 </div>
                 <?php endif; ?>
             </div>
+
+            <script type='text/javascript'>
+                $('#list_sections_collapsible_<?php echo $i ?>').collapsible();
+            </script>
             <?php endfor; ?>
 
 <script type='text/javascript'>
     $('#tab_honor').tabs();
-    $('#list_sections_collapsible').collapsible();
 </script>
