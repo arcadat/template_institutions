@@ -28,9 +28,9 @@ $config = [
         'url_save_evaluation_plan'   => $url_api . 'save_evaluation_plan/',
         'url_import_evaluation_plan' => $url_api . 'import_evaluation_plan/',
         // ASIGNADOS
-        // 'colegioId'               => '2b13572b-e506-4bf6-b908-8d228a6cc01f',
-        // 'colegioId'               => 'e0aef592-5ed5-4f20-a8cc-29c10d9a2db2',
-        // 'colegioId'               => '07b7c9b3-2c31-42ae-9ef1-21591733f8fe',
+        // 'colegioId'               => '2b13572b-e506-4bf6-b908-8d228a6cc01f', // MATERDEI
+        // 'colegioId'               => 'e0aef592-5ed5-4f20-a8cc-29c10d9a2db2', // FREDERYCK TAYLOR
+        // 'colegioId'               => '07b7c9b3-2c31-42ae-9ef1-21591733f8fe', // NUESTRA SEÑORA DEL VALLE
         // 'colegioId'               => 'b1359b3a-9210-4d7e-a353-e8a0c3506ba0', //UNIDAD EDUCATIVA NUESTRA SEÑORA DE LA ASUNCIÓN
         'colegioId'                  => 'ccc9747b-3a46-4367-a641-46cc97f2a747', // UNIDAD EDUCATIVA COLEGIO CASTELAO
         // 'colegioId'               => '99b23e45-376b-4afd-acb1-78bda55b3968', // UNIDAD EDUCATIVA PRIVADA INSTITUTO DE EDUCACIÓN INTEGRAL
