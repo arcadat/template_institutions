@@ -131,7 +131,20 @@ jQuery('#tutorials_teacher').load('teachers/partials/tutorials_teacher', d_tutor
 jQuery('#class_teacher').load('teachers/partials/class_teacher', d_class);
 
 /* ----------------------------------------------------------- */
-/* 14. REFRESH TAB
+/* 14. Alert Message
+/* ----------------------------------------------------------- */
+function swalc(title,text,type) {
+    swal({
+        title: title,
+        text: text,
+        type: type,
+        confirmButtonColor: d_color,
+        confirmButtonText: "Aceptar"
+    });
+}
+
+/* ----------------------------------------------------------- */
+/* 15. REFRESH TAB
 /* ----------------------------------------------------------- */
 function refreshTab(tab) {
 
@@ -168,7 +181,7 @@ function refreshTab(tab) {
     }).done(function(data) {
         console.log(data);
         if (data.result.number_error != 0) {
-            Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
+            swalc(data.result.msg_error, "Error Nro. " + data.result.number_error, "error");
             return false;
         } else {
             jQuery('#'+tab).load('teachers/partials/' + tab, eval('data.' + tab));
@@ -177,7 +190,7 @@ function refreshTab(tab) {
 }
 
 /* ----------------------------------------------------------- */
-/* 15. QUERY RESOURCE
+/* 16. QUERY RESOURCE
 /* ----------------------------------------------------------- */
 
 function queryResource(action, option, name, new_name, content) {
@@ -199,7 +212,7 @@ function queryResource(action, option, name, new_name, content) {
     }).done(function(data) {
         console.log(data);
         if (data.result.number_error != 0) {
-            Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
+            swalc(data.result.msg_error, "Error Nro. " + data.result.number_error, "error");
             return false;
         }
     });
@@ -207,7 +220,7 @@ function queryResource(action, option, name, new_name, content) {
 }
 
 /* ----------------------------------------------------------- */
-/* 16. NAVIGATION RESOURCE FOLDER
+/* 17. NAVIGATION RESOURCE FOLDER
 /* ----------------------------------------------------------- */
 
 function loadFolder(id) {
@@ -231,7 +244,7 @@ function closeFolder() {
 }
 
 /* ----------------------------------------------------------- */
-/* 17. ACTION FOLDER MENU
+/* 18. ACTION FOLDER MENU
 /* ----------------------------------------------------------- */
 
 function actionFolder(action,id) {
@@ -245,6 +258,7 @@ function actionFolder(action,id) {
                     type: "input",
                     showCancelButton: true,
                     closeOnConfirm: false,
+                    confirmButtonColor: d_color,
                     animation: "slide-from-top",
                     inputPlaceholder: "Carpeta"
                 },
@@ -257,9 +271,9 @@ function actionFolder(action,id) {
                     }
 
                     if (createFolder(inputValue)) {
-                        swal("Muy bien!", "Se ha creado la carpeta: " + inputValue, "success");
+                        swalc("Muy bien!","Se ha creado la carpeta: " + inputValue,"success");
                     } else {
-                        swal("Disculpe!", "Hubo un error al intentar crear la carpeta: " + inputValue, "error");
+                        swalc("Disculpe","Hubo un error al intentar crear la carpeta: " + inputValue,"error");
                     }
                 }
             );
@@ -272,6 +286,7 @@ function actionFolder(action,id) {
                     type: "input",
                     showCancelButton: true,
                     closeOnConfirm: false,
+                    confirmButtonColor: d_color,
                     animation: "slide-from-top",
                     inputPlaceholder: name,
                     inputValue: name,
@@ -285,9 +300,9 @@ function actionFolder(action,id) {
                     }
 
                     if (updateFolder(id,name,inputValue)) {
-                        swal("Muy bien!", "Se ha actualizado el nombre de la carpeta a: " + inputValue, "success");
+                        swalc("Muy bien!", "Se ha actualizado el nombre de la carpeta a: " + inputValue, "success");
                     } else {
-                        swal("Disculpe!", "Hubo un error al intentar actualizar el nombre de la carpeta a: " + inputValue, "error");
+                        swalc("Disculpe!", "Hubo un error al intentar actualizar el nombre de la carpeta a: " + inputValue, "error");
                     }
                 }
             );
@@ -299,15 +314,16 @@ function actionFolder(action,id) {
                     text: 'La carpeta <b>"'+name+'"</b> será borrada con todo su contenido, y la información no podrá ser recuperada!',
                     html: true,
                     type: "warning",
+                    confirmButtonColor: d_color,
                     showCancelButton: true,
                     confirmButtonText: "Si, borrar!",
                     closeOnConfirm: false
                 },
                 function(){
                     if(removeFolder(id, name)) {
-                        swal("Eliminada!", "La carpeta "+name+" ha sido eliminada.", "success");
+                        swalc("Eliminada!", "La carpeta "+name+" ha sido eliminada.", "success");
                     } else {
-                        swal("Disculpe!", "La carpeta "+name+" no pudo ser eliminada.", "error");
+                        swalc("Disculpe!", "La carpeta "+name+" no pudo ser eliminada.", "error");
                     }
                 }
             );
@@ -316,7 +332,7 @@ function actionFolder(action,id) {
 }
 
 /* ----------------------------------------------------------- */
-/* 18. CREATE FOLDER
+/* 19. CREATE FOLDER
 /* ----------------------------------------------------------- */
 
 function createFolder(folder) {
@@ -359,7 +375,7 @@ function createFolder(folder) {
 }
 
 /* ----------------------------------------------------------- */
-/* 18. UPDATE FOLDER
+/* 20. UPDATE FOLDER
 /* ----------------------------------------------------------- */
 
 function updateFolder(id, name, new_name) {
@@ -372,7 +388,7 @@ function updateFolder(id, name, new_name) {
 }
 
 /* ----------------------------------------------------------- */
-/* 19. REMOVE FOLDER
+/* 21. REMOVE FOLDER
 /* ----------------------------------------------------------- */
 
 function removeFolder(id, name) {
@@ -386,7 +402,7 @@ function removeFolder(id, name) {
 }
 
 /* ----------------------------------------------------------- */
-/* 20. ACTION RESOURCE MENU
+/* 22. ACTION RESOURCE MENU
 /* ----------------------------------------------------------- */
 
 function actionResource(action, id_folder, id_resource, code) {
@@ -399,6 +415,7 @@ function actionResource(action, id_folder, id_resource, code) {
                     text: "En su navegador, seleccione y copie el codigo del enlace del video que desea agregar, como se muestra en la figura de ejemplo<br/><img class='responsive-img' src='http://www.arcadat.com/screen_guide/copy_code_video_youtube.png'/><br/>Código del video de enlace de youtube:",
                     type: "input",
                     html: true,
+                    confirmButtonColor: d_color,
                     showCancelButton: true,
                     closeOnConfirm: false,
                     animation: "slide-from-top",
@@ -413,9 +430,9 @@ function actionResource(action, id_folder, id_resource, code) {
                     }
 
                     if (createResource(d_id_folder,name,inputValue)) {
-                        swal("Muy bien!", "Se ha creado la carpeta: " + inputValue, "success");
+                        swalc("Muy bien!", "Se ha creado la carpeta: " + inputValue, "success");
                     } else {
-                        swal("Disculpe!", "Hubo un error al intentar crear la carpeta: " + inputValue, "error");
+                        swalc("Disculpe!", "Hubo un error al intentar crear la carpeta: " + inputValue, "error");
                     }
                 }
             );
@@ -427,15 +444,16 @@ function actionResource(action, id_folder, id_resource, code) {
                     text: 'El recurso será borrado, y no podrá ser recuperado!',
                     html: true,
                     type: "warning",
+                    confirmButtonColor: d_color,
                     showCancelButton: true,
                     confirmButtonText: "Si, borrar!",
                     closeOnConfirm: false
                 },
                 function(){
                     if(removeResource(id_folder, id_resource, code)) {
-                        swal("Eliminado!", "El recurso ha sido eliminado.", "success");
+                        swalc("Eliminado!", "El recurso ha sido eliminado.", "success");
                     } else {
-                        swal("Disculpe!", "El recurso no pudo ser eliminado.", "error");
+                        swalc("Disculpe!", "El recurso no pudo ser eliminado.", "error");
                     }
                 }
             );
@@ -444,7 +462,7 @@ function actionResource(action, id_folder, id_resource, code) {
 }
 
 /* ----------------------------------------------------------- */
-/* 21. CREATE RESOURCE
+/* 23. CREATE RESOURCE
 /* ----------------------------------------------------------- */
 
 function createResource(id_folder, folder, code) {
@@ -481,7 +499,7 @@ function createResource(id_folder, folder, code) {
 }
 
 /* ----------------------------------------------------------- */
-/* 22. REMOVE RESOURCE
+/* 24. REMOVE RESOURCE
 /* ----------------------------------------------------------- */
 
 function removeResource(id_folder, id_resource, code) {
@@ -495,7 +513,7 @@ function removeResource(id_folder, id_resource, code) {
 }
 
 /* ----------------------------------------------------------- */
-/* 23. NAVIGATION CLASS APP
+/* 25. NAVIGATION CLASS APP
 /* ----------------------------------------------------------- */
 
 function loadClassApp(opt, parm) {
@@ -527,9 +545,9 @@ function absences_save() {
     }).done(function(data) {
         console.log(data);
         if (data.result.number_error !== 0) {
-            swal("Error!", data.result.msg_error, "error");
+            swalc("Error!", data.result.msg_error, "error");
         } else {
-            swal("Muy bien!", data.result.msg_error, "success");
+            swalc("Muy bien!", data.result.msg_error, "success");
         }
     });
 }
@@ -551,10 +569,10 @@ function qlfs_save() {
     }).done(function(data) {
         console.log(data);
         if (data.result.number_error !== 0) {
-            swal("Error!", data.result.msg_error, "error");
+            swalc("Error!", data.result.msg_error, "error");
             return false;
         } else {
-            swal("Muy bien!", data.result.msg_error, "success");
+            swalc("Muy bien!", data.result.msg_error, "success");
             return true;
         }
     });
@@ -577,7 +595,7 @@ function evaluations_save() {
     }).done(function(data) {
         console.log(data);
         if (data.result.number_error !== 0) {
-            swal("Error!", data.result.msg_error, "error");
+            swalc("Error!", data.result.msg_error, "error");
             return false;
         } else {
             evaluations_list = {};
@@ -594,7 +612,7 @@ function evaluations_save() {
                 jQuery('#eval_desc_' + index).val(el.description);
                 jQuery('#eval_perc_' + index).val(Number(el.percent).toFixed(2)).removeAttr('disabled');
             });
-            swal("Muy bien!", data.result.msg_error, "success");
+            swalc("Muy bien!", data.result.msg_error, "success");
             return true;
         }
     });
@@ -624,7 +642,7 @@ function importEvaluation (option,lapse,id_section,id_turn,id_detail,id_subject)
     }).done(function(data) {
         console.log(data);
         if (data.result.number_error !== 0) {
-            swal("Error!", data.result.msg_error, "error");
+            swalc("Error!", data.result.msg_error, "error");
             return false;
         } else {
             if (option == 1) {
@@ -660,7 +678,7 @@ function importEvaluation (option,lapse,id_section,id_turn,id_detail,id_subject)
                     jQuery('#eval_perc_' + index).val(Number(el.percent).toFixed(2)).removeAttr('disabled');
                 });
                 jQuery('#modal_evaluations').modal('close');
-                swal("Muy bien!", data.result.msg_error, "success");
+                swalc("Muy bien!", data.result.msg_error, "success");
             }
             return true;
         }

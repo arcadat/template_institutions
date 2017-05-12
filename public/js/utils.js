@@ -1,3 +1,16 @@
+/* ----------------------------------------------------------- */
+/* 14. Alert Message
+/* ----------------------------------------------------------- */
+function swalc(title,text,type) {
+    swal({
+        title: title,
+        text: text,
+        type: type,
+        confirmButtonColor: d_color,
+        confirmButtonText: "Aceptar"
+    });
+}
+
 function ajaxSigin() {
     ++try_numbers;
     var formData = {
@@ -28,11 +41,11 @@ function ajaxSigin() {
             $('#login_pass').removeAttr('disabled');
             $('#login_check').removeAttr('disabled');
             $('#btnsubmit').removeClass('disabled').html('INICIAR SESIÓN');
-            Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
+            swalc(data.result.msg_error, "Error Nro. " + data.result.number_error, "error");
             $('#login_pass').focus();
         } else {
             $('ul.tabs li').removeClass('disabled');
-            Materialize.toast('Bienvenido<br/> ' + data.person.first_name, 5000, 'rounded');
+            swalc(data.person.first_name,"Bienvenido","success");
             $('#userInfo').load('partials/user', data.person);
             $('#appmenu').load('partials/appmenu', {
                 "person": data.person,
@@ -81,7 +94,7 @@ function ajaxContact() {
         $('input[name=send_to]').removeAttr('disabled');
         $('#contact-btn').removeClass('disabled').html('ENVIAR MENSAJE');
         if (data.result.number_error != 0) {
-            Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
+            swalc(data.result.msg_error,"Error Nro. " + data.result.number_error,"error");
             $('#contact-name').focus();
         } else {
             $('#contact-name').val('');
@@ -89,7 +102,7 @@ function ajaxContact() {
             $('#contact-subject').val('').focus();
             $('#contact-message').val('').focus();
             $('#contact-name').focus();
-            Materialize.toast(data.result.msg_error, 5000, 'rounded');
+            swalc(data.result.msg_error,"Bienvenido","success");
         }
         grecaptcha.reset(contact_reCaptcha);
     });
@@ -115,7 +128,7 @@ function ajaxRecovery() {
         $('#recovery_email').removeAttr('disabled');
         $('#recovery_btn').removeClass('disabled').html('ENVIAR MENSAJE');
         if (data.result.number_error != 0) {
-            Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
+            swalc(data.result.msg_error,"Error Nro. " + data.result.number_error,"error");
             $('#recovery_email').focus();
         } else {
             $('#recovery-content').hide('slow');
@@ -150,7 +163,7 @@ function ajaxRegister() {
         $('#register_date').removeAttr('disabled');
         $('#register_btn').removeClass('disabled').html('ENVIAR MENSAJE');
         if (data.result.number_error != 0) {
-            Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
+            swalc(data.result.msg_error,"Error Nro. " + data.result.number_error,"error");
             $('#register_nip').focus();
         } else {
             $('#modal_process').load('partials/register2', data.data_person);
@@ -185,7 +198,7 @@ function ajaxRegister2() {
         $('#register2_pass1').removeAttr('disabled');
         $('#register2_btn').removeClass('disabled').html('ENVIAR MENSAJE');
         if (data.result.number_error != 0) {
-            Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
+            swalc(data.result.msg_error,"Error Nro. " + data.result.number_error,"error");
             $('#register2_email').focus();
         } else {
             $('#register2-content').hide('slow');
