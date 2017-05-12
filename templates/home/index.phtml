@@ -25,6 +25,8 @@
     <link id="switcher" href="css/theme.css.php?color_i=<?php echo urlencode($main_data->color_i); ?>" type="text/css" rel="stylesheet" media="screen,projection" />
     <!-- LightGallery -->
     <link type="text/css" rel="stylesheet" href="css/lightgallery.min.css" />
+    <!-- Sweetalert -->
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
     <!-- Main css File -->
     <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
 
@@ -143,13 +145,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="col s12">
-                                        <ul class="tabs">
-                                            <li class="tab col s2"><a class="tooltipped active" href="#tab_institucion" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab1 ?>"><i class="material-icons">business</i></a></li>
-                                            <li class="tab col s2 disabled"><a href="#tab_authorities" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab2 ?>"><i class="material-icons">gavel</i></a></li>
-                                            <li class="tab col s2 disabled"><a href="#tab_teachers" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab3 ?>"><i class="material-icons">school</i></a></li>
-                                            <li class="tab col s2 disabled"><a href="#tab_administrative_staff" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab4 ?>"><i class="material-icons">folder_shared</i></a></li>
-                                            <li class="tab col s2 disabled"><a href="#tab_birthdays_week" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab5 ?>"><i class="material-icons">cake</i></a></li>
-                                            <li class="tab col s2 disabled"><a href="#tab_honor_roll" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab6 ?>"><i class="material-icons">grade</i></a></li>
+                                        <ul class="tabs tabs-fixed-width">
+                                            <li class="tab"><a class="tooltipped active" href="#tab_institucion" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab1 ?>"><i class="material-icons">business</i></a></li>
+                                            <li class="tab disabled"><a href="#tab_authorities" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab2 ?>"><i class="material-icons">gavel</i></a></li>
+                                            <li class="tab disabled"><a href="#tab_teachers" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab3 ?>"><i class="material-icons">school</i></a></li>
+                                            <li class="tab disabled"><a href="#tab_administrative_staff" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab4 ?>"><i class="material-icons">folder_shared</i></a></li>
+                                            <li class="tab disabled"><a href="#tab_birthdays_week" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab5 ?>"><i class="material-icons">cake</i></a></li>
+                                            <li class="tab disabled"><a href="#tab_honor_roll" class="tooltipped" data-position="top" data-delay="50" data-tooltip="<?php echo $main_data->label_tab6 ?>"><i class="material-icons">grade</i></a></li>
                                         </ul>
                                     </div>
                                     <div class="col s12 m12 l12" id="tab_institucion">
@@ -174,21 +176,21 @@
                                                 </li>
                                                 <?php if (!empty($main_data->url_blog) || !empty($main_data->facebook_account) || !empty($main_data->instagram_account) || !empty($main_data->twitter_account) ): ?>
 
-                                                <li><span>Redes Sociales : </span>
+                                                <li class="center-align">
                                                     <?php if (!empty($main_data->facebook_account)): ?>
-                                                    <a class="btn" href="https://facebook.com/<?php echo $main_data->facebook_account ?>"><i class="fa fa-facebook-official fa-2x" aria-hidden="true"></i></a>
+                                                    <a class="btn_social_network" target="_blank" href="https://facebook.com/<?php echo $main_data->facebook_account ?>"><img src="<?php echo $main_data->icon_facebook ?>" height="30" class="hoverable" alt="facebook"></a>
                                                     <?php endif ?>
 
                                                     <?php if (!empty($main_data->twitter_account)): ?>
-                                                    <a class="btn" href="https://twitter.com/<?php echo $main_data->twitter_account ?>"><i class="fa fa-twitter fa-2x" aria-hidden="true"></i></a>
+                                                    <a class="btn_social_network" target="_blank" href="https://twitter.com/<?php echo $main_data->twitter_account ?>"><img src="<?php echo $main_data->icon_twitter ?>" height="30" class="hoverable" alt="twitter"></a>
                                                     <?php endif ?>
 
                                                     <?php if (!empty($main_data->instagram_account)): ?>
-                                                    <a class="btn" href="https://instagram.com/<?php echo $main_data->instagram_account ?>"><i class="fa fa-instagram fa-2x" aria-hidden="true"></i></a>
+                                                    <a class="btn_social_network" target="_blank" href="https://instagram.com/<?php echo $main_data->instagram_account ?>"><img src="<?php echo $main_data->icon_instagram ?>" height="30" class="hoverable" alt="instagram"></a>
                                                     <?php endif ?>
 
                                                     <?php if (!empty($main_data->url_blog)): ?>
-                                                    <a class="btn" href="<?php echo $main_data->url_blog ?>"><i class="fa fa-rss-square fa-2x" aria-hidden="true"></i></a>
+                                                    <a class="btn_social_network" target="_blank" href="<?php echo $main_data->url_blog ?>"><img src="<?php echo $main_data->icon_blogger ?>" height="30" class="hoverable" alt="blogger"></i></a>
                                                     <?php endif ?>
                                                 </li>
                                                 <?php endif ?>
@@ -438,6 +440,9 @@
     <script src="js/lg-thumbnail.min.js"></script>
     <script src="js/lg-fullscreen.min.js"></script>
 
+    <!-- Sweetalert plugins -->
+    <script src="js/sweetalert.min.js"></script>
+
     <!-- Custom Js -->
     <script type="text/javascript" src="js/utils.js"></script>
 
@@ -447,6 +452,7 @@
         var try_numbers = 0;
         var contact_reCaptcha;
         var signin_reCaptcha;
+        var d_color = '<?php echo $main_data->color_i ?>';
         var siteKey = '<?php echo $recaptcha_sitekey ?>';
         var myCallBack = function() {
             contact_reCaptcha = grecaptcha.render('contact_reCaptcha', {

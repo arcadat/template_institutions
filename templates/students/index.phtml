@@ -143,13 +143,13 @@
                     </div>
                 </div>
                 <div class="col s12 m10">
-                    <ul class="tabs">
-                        <li class="tab col s2"><a href="#tab_0" class="tooltipped active" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab0 ?>"><i class="fa fa-id-card fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab0 ?></span></a></li>
-                        <li class="tab col s2"><a href="#tab_1" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab1 ?>"><i class="fa fa-bullhorn fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab1 ?></span></a></li>
-                        <li class="tab col s2"><a href="#tab_2" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab2 ?>"><i class="fa fa-file-text fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab2 ?></span></a></li>
-                        <li class="tab col s2"><a href="#tab_3" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab3 ?>"><i class="fa fa-exclamation-circle fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab3 ?></span></a></li>
-                        <li class="tab col s2"><a href="#tab_4" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab4 ?>"><i class="fa fa-book fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab4 ?></span></a></li>
-                        <li class="tab col s2"><a href="#tab_5" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab5 ?>"><i class="fa fa-history fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab5 ?></span></a></li>
+                    <ul class="tabs tabs-fixed-width">
+                        <li class="tab"><a href="#tab_0" class="tooltipped active" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab0 ?>"><i class="fa fa-id-card fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab0 ?></span></a></li>
+                        <li class="tab"><a href="#tab_1" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab1 ?>"><i class="fa fa-bullhorn fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab1 ?></span></a></li>
+                        <li class="tab"><a href="#tab_2" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab2 ?>"><i class="fa fa-file-text fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab2 ?></span></a></li>
+                        <li class="tab"><a href="#tab_3" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab3 ?>"><i class="fa fa-exclamation-circle fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab3 ?></span></a></li>
+                        <li class="tab"><a href="#tab_4" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab4 ?>"><i class="fa fa-book fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab4 ?></span></a></li>
+                        <li class="tab"><a href="#tab_5" class="tooltipped" data-position="button" data-delay="50" data-tooltip="<?php echo $settings->title_label_tab5 ?>"><i class="fa fa-history fa-2x hide-on-large-only" aria-hidden="true"></i><span class="hide-on-med-and-down"><?php echo $settings->short_name_label_tab5 ?></span></a></li>
                     </ul>
                 </div>
 
@@ -602,6 +602,7 @@
 
     <script type="text/javascript">
         var d_settings  = JSON.parse('<?php echo json_encode($settings) ?>');
+        var d_color = '<?php echo $settings->color_i ?>';
         var d_person    = {
             'photo_person': '<?php echo $student->data_student->photo_profile_student ?>',
             'first_name': '<?php echo $student->data_student->first_name_student ?>',
@@ -646,7 +647,7 @@
             }).done(function(data) {
                 console.log(data);
                 if (data.result.number_error != 0) {
-                    Materialize.toast('Error<br/> ' + data.result.msg_error, 5000, 'rounded');
+                    swal('Error',data.result.msg_error, 'error');
                     $('#login_pass').focus();
                 } else {
                     $('#reports_evaluations').hide();
