@@ -1,7 +1,7 @@
 <nav id="absence_nav_menu" class="grey lighten-5">
     <div class="nav-wrapper">
         <ul class="left">
-            <li><a href="#!" class="breadcrumb resourceMenu" onclick="closeClassApp();"><i class="material-icons">arrow_back</i> Regresar</a></li>
+            <li><a href="#!" class="breadcrumb resourceMenu" onclick="goBack();"><i class="material-icons">arrow_back</i> Regresar</a></li>
         </ul>
     </div>
 </nav>
@@ -30,7 +30,7 @@
 
 <ul class="collection">
     <li class="collection-item grey lighten-4 center-align">
-        <span>Registro de asistencias del día:</span><br/>
+        <span>Registro de inasistencias del día:</span><br/>
         <span class="title"><?php echo date('d-m-Y'); ?></span>
     </li>
 <?php for ($k=1; $k <= $datos->list_students->numbers_students; $k++):
@@ -72,10 +72,19 @@ $student = $datos->list_students->students->$k; ?>
 </div>
 
 <script type="text/javascript">
+    var absencesChange = false;
     function updateList(dkey) {
         var val = (jQuery('#absences_'+dkey).is(':checked')) ? 0 : 1;
         absences_students_list[dkey].absence_day = val;
         jQuery('#absences_students_data').text(JSON.stringify(absences_students_list));
+        absencesChange = true;
+    }
+    function goBack() {
+        if (absencesChange == true) {
+            swalc('Cambios detectados','Debe guardar los cambios antes de salir','warning');
+        } else {
+            closeClassApp();
+        }
     }
     jQuery('#absences_students_data').text(JSON.stringify(absences_students_list));
 </script>

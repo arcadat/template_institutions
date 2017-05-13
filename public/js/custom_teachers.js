@@ -555,6 +555,7 @@ function absences_save() {
         if (data.result.number_error !== 0) {
             swalc("Error!", data.result.msg_error, "error");
         } else {
+            absencesChange = false;
             swalc("Muy bien!", data.result.msg_error, "success");
         }
     });
