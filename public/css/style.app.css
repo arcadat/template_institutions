@@ -107,6 +107,15 @@ main {
     margin-bottom: 0;
 }
 
+.profile-img-nav-mov {
+    max-height: 110px;
+    padding: 5px;
+}
+
+.side-nav li > a{
+    padding: 0px 10px;;
+}
+
 #resource-list .mix a {
     display: block;
     position: relative;
