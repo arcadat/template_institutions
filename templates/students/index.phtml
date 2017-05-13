@@ -443,7 +443,7 @@
                         <div class="col s12 m4">
                             <table>
                                 <?php for ($j=1; $j <= $history_academic->items_stages; $j++): ?>
-                                <tr class="trselected <?php echo ($i == 1) ? 'selected' : ""; ?>">
+                                <tr class="trselected <?php echo ($j == 1) ? 'selected' : ""; ?>">
                                     <td class="hoverable" style="cursor: pointer; border-left: solid 7px <?php echo $history_academic->list_stages->$j->color_stage ?>;" onclick="loadHistory(<?php echo $j ?>)">
                                         <span><?php echo $history_academic->list_stages->$j->name_stage ?></span><br/>
                                         <small>
