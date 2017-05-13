@@ -289,6 +289,7 @@ nav .brand-logo img {
 .tabs {
     margin-bottom: 30px;
     background-color: #fafafa;
+    overflow: hidden;
 }
 
 #userInfo>h3 {
