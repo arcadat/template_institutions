@@ -106,7 +106,7 @@ class TeachersController extends Controller
         }
 
 
-        $uri = $this->container->config->api->url_results . '?' . http_build_query($data);
+        $uri = $this->container->config->api->url_results_reg . '?' . http_build_query($data);
 
         $response = Request::get($uri)->send();
 
@@ -202,7 +202,7 @@ class TeachersController extends Controller
                 $file = 'teachers/classapp/absences.phtml';
                 $data['params']['date'] = date('d-m-Y');
                 break;
-            case 'results':
+            case 'results_reg':
                 $file = 'teachers/classapp/results.phtml';
                 break;
             case 'evaluations':

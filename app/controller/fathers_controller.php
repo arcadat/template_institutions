@@ -92,7 +92,7 @@ class FathersController extends Controller
         }
 
 
-        $uri = $this->container->config->api->url_results . '?' . http_build_query($data);
+        $uri = $this->container->config->api->url_results_eval . '?' . http_build_query($data);
 
         $response = Request::get($uri)->send();
 
