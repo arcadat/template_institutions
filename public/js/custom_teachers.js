@@ -254,10 +254,12 @@ function actionFolder(action,id) {
             swal(
                 {
                     title: "Crear Carpeta!",
-                    text: "Nombre de la Carpeta:",
+                    text: "Nombre de la Carpeta",
                     type: "input",
                     showCancelButton: true,
                     closeOnConfirm: false,
+                    confirmButtonText: "Guardar",
+                    cancelButtonText: "Cancelar",
                     confirmButtonColor: d_color,
                     animation: "slide-from-top",
                     inputPlaceholder: "Carpeta"
@@ -282,11 +284,13 @@ function actionFolder(action,id) {
             swal(
                 {
                     title: "Actualizar Carpeta!",
-                    text: "Nombre de la Carpeta:",
+                    text: "Nombre de la Carpeta",
                     type: "input",
                     showCancelButton: true,
                     closeOnConfirm: false,
                     confirmButtonColor: d_color,
+                    confirmButtonText: "Actualizar",
+                    cancelButtonText: "Cancelar",
                     animation: "slide-from-top",
                     inputPlaceholder: name,
                     inputValue: name,
@@ -316,7 +320,8 @@ function actionFolder(action,id) {
                     type: "warning",
                     confirmButtonColor: d_color,
                     showCancelButton: true,
-                    confirmButtonText: "Si, borrar!",
+                    confirmButtonText: "Si, Borrar!",
+                    cancelButtonText: "Cancelar",
                     closeOnConfirm: false
                 },
                 function(){
@@ -417,6 +422,8 @@ function actionResource(action, id_folder, id_resource, code) {
                     html: true,
                     confirmButtonColor: d_color,
                     showCancelButton: true,
+                    confirmButtonText: "Guardar",
+                    cancelButtonText: "Cancelar",
                     closeOnConfirm: false,
                     animation: "slide-from-top",
                     inputPlaceholder: "Código"
@@ -447,6 +454,7 @@ function actionResource(action, id_folder, id_resource, code) {
                     confirmButtonColor: d_color,
                     showCancelButton: true,
                     confirmButtonText: "Si, borrar!",
+                    cancelButtonText: "Cancelar",
                     closeOnConfirm: false
                 },
                 function(){
