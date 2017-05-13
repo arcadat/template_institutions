@@ -52,7 +52,31 @@
     </div>
     <!-- END PRELOADER -->
     <header id="header" role="banner">
-        <div class="navbar-fixed">
+
+        <!-- For Mobile View -->
+        <ul id="slide-out" class="side-nav menu-scroll">
+            <li>
+                <div class="userView">
+                    <span class="white-text title">ESTUDIANTE</span>
+                </div>
+            </li>
+        <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
+            <li>
+                <a href="#" onclick="loadInfo('<?php echo $i ?>');">
+                <img src="<?php echo $sons->list_sons->$i->photo_student ?>" alt="" class="circle profile-img-nav">
+                <span><?php echo $sons->list_sons->$i->first_name_son ?></span>
+                </a>
+            </li>
+            <li class="divider"/>
+        <?php endfor; ?>
+            <li>
+                <div class="userView">
+                    <span class="white-text title">MENÚ</span>
+                </div>
+            </li>
+            <li><a href="#modal_reports">Reportes</a></li>
+            <li><a href="#modal_download">Descargas</a></li>
+        </ul>
 
             <!-- For dropdown_sons_debt -->
             <ul class="dropdown-content" id="dropdown_sons_debt">
@@ -99,6 +123,7 @@
             <?php endfor; ?>
             </ul>
 
+        <div class="navbar-fixed">
             <nav>
                 <div class="nav-wrapper">
 
@@ -126,18 +151,6 @@
                     </ul>
                     <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
                 </div>
-                <!-- For Mobile View -->
-                <ul id="slide-out" class="side-nav menu-scroll">
-                    <li class="title">Estudiantes:</li>
-                <?php for ($i=1; $i <= $sons->numbers_sons; $i++): ?>
-                    <li>
-                        <a href="#" onclick="loadInfo('<?php echo $i ?>');">
-                        <img src="<?php echo $sons->list_sons->$i->photo_student ?>" alt="" class="circle profile-img-nav">
-                        <span><?php echo $sons->list_sons->$i->first_name_son ?></span>
-                        </a>
-                    </li>
-                <?php endfor; ?>
-                </ul>
             </nav>
         </div>
     </header>
@@ -157,22 +170,24 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hide-on-med-and-up">
-                            <div class="col s4">
-                                <img src="<?php echo $sons->list_sons->$i->photo_student ?>" alt="" class="circle responsive-img">
+                        <div class="card horizontal hide-on-med-and-up">
+                            <div>
+                                <img src="<?php echo $sons->list_sons->$i->photo_student ?>" alt="" class="circle profile-img-nav-mov">
                             </div>
-                            <div class="col s8">
-                                <p>
-                                    <span class="title"><?php echo $sons->list_sons->$i->first_name_son ?></span><br>
-                                    <small><?php echo $sons->list_sons->$i->last_level_inscription_academic ?>
-                                    <?php if ($sons->list_sons->$i->expired_debt_son): ?>
-                                        <br><span class="red-text text-darken-4">Deuda vencida: <?php echo $utility->formatNumber($sons->list_sons->$i->expired_debt_son, true) ?></span>
-                                    <?php endif ?>
-                                    <?php if ($sons->list_sons->$i->unexpired_debt_son): ?>
-                                        <br><span class="deep-orange-text text-lighten-1">Deuda no vencida: <?php echo $utility->formatNumber($sons->list_sons->$i->unexpired_debt_son, true) ?></span>
-                                    <?php endif ?>
-                                    </small>
-                                </p>
+                            <div class="card-stacked">
+                                <div class="card-content">
+                                    <p>
+                                        <span class="title"><?php echo $sons->list_sons->$i->first_name_son ?></span><br>
+                                        <small><?php echo $sons->list_sons->$i->last_level_inscription_academic ?>
+                                        <?php if ($sons->list_sons->$i->expired_debt_son): ?>
+                                            <br><span class="red-text text-darken-4">Deuda vencida: <?php echo $utility->formatNumber($sons->list_sons->$i->expired_debt_son, true) ?></span>
+                                        <?php endif ?>
+                                        <?php if ($sons->list_sons->$i->unexpired_debt_son): ?>
+                                            <br><span class="deep-orange-text text-lighten-1">Deuda no vencida: <?php echo $utility->formatNumber($sons->list_sons->$i->unexpired_debt_son, true) ?></span>
+                                        <?php endif ?>
+                                        </small>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -376,7 +391,7 @@
                                     <p><b><?php echo $sons->list_sons->$i->class_son->settings->label_teacher_guide; ?></b></p>
                                 </div>
                             </div>
-                            <div class="grey lighten-3 col s12 hide-on-large-only">
+                            <div class="grey lighten-3 col s12 hide-on-large-only" style="padding:10px;">
                                 <div class="col s3">
                                     <img src="<?php echo $sons->list_sons->$i->class_son->settings->photo_teacher_guide; ?>" alt="" class="circle responsive-img">
                                 </div>
@@ -413,13 +428,13 @@
                                                 <img src="<?php echo $subjects_class->photo_teacher; ?>" alt="" class="circle responsive-img" />
                                             </div>
                                             <div class="col s10">
-                                                <div class="col s9">
+                                                <div class="col s8">
                                                     <b><?php echo $subjects_class->name_subject; ?></b><br/>
                                                     <?php echo $subjects_class->level_section; ?><br/>
                                                     <?php echo $subjects_class->name_teacher; ?>
                                                 </div>
-                                                <div class="col s3">
-                                                    <div class="col s6">
+                                                <div class="col s4">
+                                                    <div class="col s6 right-align">
                                                         <?php for ($k=1; $k <= $sons->list_sons->$i->class_son->settings->lapses; $k++) {
                                                             echo ($k==1) ? $k .'º' : '<br/>'. $k .'º';
                                                         } ?>
@@ -453,10 +468,10 @@
                                                         ?>
                                                     </div>
                                                 </div>
-                                                <div class="col s9">
+                                                <div class="col s8">
                                                     <?php echo $subjects_class->label_qlf_acumulated ?>
                                                 </div>
-                                                <div class="col s3 right-align">
+                                                <div class="col s4 right-align">
                                                     <div class="col s6"></div>
                                                     <div class="col s6 right-align">
                                                     <?php
