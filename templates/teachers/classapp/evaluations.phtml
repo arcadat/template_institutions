@@ -1,12 +1,12 @@
 <nav id="absence_nav_menu" class="grey lighten-5">
     <div class="nav-wrapper">
         <ul class="left">
-            <li><a href="#!" class="breadcrumb resourceMenu" onclick="closeClassApp();"><i class="material-icons">arrow_back</i> Regresar</a></li>
+            <li><a href="#!" class="breadcrumb resourceMenu" onclick="btnAction('goback');"><i class="material-icons">arrow_back</i> Regresar</a></li>
         </ul>
         <?php if ($datos->list_evaluations->numbers_evaluations != 0 || $datos->settings->section_close === false): ?>
         <ul class="right">
-            <li><a href="#!" class="resourceMenu tooltipped" data-position="top" data-delay="50" data-tooltip="Importar Plan de Evaluacion" onclick="btnImportEval();"><i class="material-icons">import_export</i></a></li>
-            <li><a href="<?php echo $datos->settings->root_print_plan_evaluation ?>" class="resourceMenu tooltipped" target="_blank" data-position="top" data-delay="50" data-tooltip="Imprimir Plan de Evaluacion"><i class="material-icons">print</i></a></li>
+            <li><a href="#!" class="resourceMenu tooltipped" data-position="top" data-delay="50" data-tooltip="Importar Plan de Evaluacion" onclick="btnAction('importEval');"><i class="material-icons">import_export</i></a></li>
+            <li><a href="<?php echo $datos->settings->root_print_plan_evaluation ?>" class="resourceMenu tooltipped" target="_blank" data-position="top" data-delay="50" data-tooltip="Imprimir Plan de Evaluacion" onclick="return btnAction('printEval');"><i class="material-icons">print</i></a></li>
         </ul>
         <?php endif; ?>
     </div>
@@ -160,6 +160,7 @@
                 delete evaluations_list[dkey];
             }
             jQuery('#evaluations_data').text(JSON.stringify(evaluations_list));
+            evalChange = true;
             checkPercent();
         }
 
@@ -172,7 +173,8 @@
             });
             jQuery('#total_percent').html('<b>'+percent_evl+'%</b>');
             if (percent_evl > percent_lap) {
-                swal('Valor Incorrecto','La suma de <?php echo $datos->settings->label_percents ?> excede el permitido','error')
+                swal('Valor Incorrecto','La suma de <?php echo $datos->settings->label_percents ?> excede el permitido','error');
+                jQuery('#evaluations_btn_save').addClass('disabled');
                 return false;
             } else {
                 if (count > 0) {
@@ -185,6 +187,7 @@
         function btnSave() {
             if (evaluations_save() != false) {
                 jQuery('#evaluations_data').text(JSON.stringify(evaluations_list));
+                evalChange = false;
             }
         }
 
@@ -219,8 +222,30 @@
     <div class="card-panel hoverable yellow accent-1 col s12">
         <div class="skill-inner center-align">
             <p><?php
-            echo ($datos->settings->section_close === true) ? $datos->settings->msg_section_close : $datos->list_evaluations->msg_error_config
+            echo ($datos->settings->section_close === true) ? $datos->settings->msg_section_close : $datos->list_evaluations->msg_error_config;
             ?></p>
         </div>
     </div>
-<?php endif ?>
+<?php endif; ?>
+
+<script type="text/javascript">
+    var evalChange = false;
+    function btnAction(action) {
+        if (evalChange === true) {
+            swalc('Cambios detectados','Debe guardar los cambios antes de salir','warning');
+            return false;
+        } else {
+            switch (action) {
+                case 'goback':
+                    closeClassApp();
+                    break;
+                case 'importEval':
+                    btnImportEval();
+                    break;
+                case 'printEval':
+                    return true;
+                    break;
+            }
+        }
+    }
+</script>
